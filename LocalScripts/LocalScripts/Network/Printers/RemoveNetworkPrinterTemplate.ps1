@@ -1,0 +1,1 @@
+Remove-Printer -Name "\\ServerName\PrinterName"

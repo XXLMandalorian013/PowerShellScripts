@@ -1,0 +1,1 @@
+Remove-SmbMapping -RemotePath "\\ServerName\ShareName" -Force

@@ -1,0 +1,1 @@
+Get-CimInstance Win32_OperatingSystem | Select-Object CurrentTimeZone, LocalDateTime

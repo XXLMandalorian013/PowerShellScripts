@@ -1,0 +1,1 @@
+Get-Command -Module Microsoft*,Cim*,PS* | Get-Random | Get-Help -ShowWindow
