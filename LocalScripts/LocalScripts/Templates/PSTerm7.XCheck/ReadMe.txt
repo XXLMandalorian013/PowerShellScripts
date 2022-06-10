@@ -1,1 +1,0 @@
-Checks to see if the script is running in a PS Terminal Version 7.X.X
