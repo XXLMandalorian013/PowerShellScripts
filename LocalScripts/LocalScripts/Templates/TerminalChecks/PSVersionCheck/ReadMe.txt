@@ -1,0 +1,1 @@
+Checks to see what Ver. of PS the script is running in Terminal Version.

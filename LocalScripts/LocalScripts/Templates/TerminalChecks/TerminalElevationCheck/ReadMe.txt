@@ -1,0 +1,1 @@
+Checks to see if the Terminal is running a script as elevated or not.
