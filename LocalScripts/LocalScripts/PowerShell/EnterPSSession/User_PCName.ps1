@@ -1,0 +1,1 @@
+Enter-PSSession -ComputerName PCName -Credential XYZ@domain.com
