@@ -1,0 +1,1 @@
+Get-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol"  |Select-Object FeatureName, State, RestartRequired
