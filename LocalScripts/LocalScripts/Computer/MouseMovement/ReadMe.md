@@ -1,0 +1,1 @@
+#Detects to see if the mouse is moving on a PC.
