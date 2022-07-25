@@ -3,4 +3,3 @@
 ### Gets mobile Outlook info
 
 
-## **[Links]** (https://www.markdownguide.org/basic-syntax/#overview)
