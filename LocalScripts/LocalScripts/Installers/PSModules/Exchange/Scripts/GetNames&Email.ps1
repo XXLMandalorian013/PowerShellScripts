@@ -1,0 +1,1 @@
+Get-EXOMailbox | Select-Object 'DisplayName', 'UserPrincipalName', 'RecipientType' | Format-List
