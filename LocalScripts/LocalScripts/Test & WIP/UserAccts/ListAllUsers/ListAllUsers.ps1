@@ -1,0 +1,1 @@
+Get-CimInstance -Class 'Win32_UserProfile' | Select-Object 'LastUseTime', 'LocalPath', 'SID'
