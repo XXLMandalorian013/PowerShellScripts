@@ -1,2 +1,0 @@
-#Reverts the change made from the OldWin10ContextMenu.ps1 back to the defualt Win 11 "show more options" context menu.
-    reg delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f
