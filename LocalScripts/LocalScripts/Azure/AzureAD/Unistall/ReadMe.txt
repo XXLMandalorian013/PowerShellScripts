@@ -1,0 +1,1 @@
+# Uninstall Azure A/D Module.

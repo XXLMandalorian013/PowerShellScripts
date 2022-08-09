@@ -1,0 +1,1 @@
+# Uninstall Azure AZ Module.
