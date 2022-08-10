@@ -1,0 +1,1 @@
+# Search for a users in Azure AD.

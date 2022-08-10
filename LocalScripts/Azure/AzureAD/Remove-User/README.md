@@ -1,1 +1,1 @@
-# Remove AD user.
+## Remove Azure AD/MS365 user.

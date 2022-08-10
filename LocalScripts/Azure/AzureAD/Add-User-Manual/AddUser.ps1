@@ -69,3 +69,5 @@
     $PasswordProfile.Password = "$Password"
     
     New-AzureADUser -DisplayName "$DisplayName" -PasswordProfile $PasswordProfile -UserPrincipalName "$UserPrincipalName" -AccountEnabled $true -MailNickName "$MailNickname" -CompanyName "$CompanyName" -UserType "$UserType" -City "$City" -StreetAddress "$StreetAddress" -PhysicalDeliveryOfficeName "$PhysicalDeliveryOfficeName" -Department "$Department" -JobTitle $JobTitle -Mobile "$Mobile" -TelephoneNumber "$TelephoneNumber"
+
+    

@@ -1,0 +1,1 @@
+# Get all users in Azure AD.
