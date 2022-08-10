@@ -38,15 +38,15 @@
 
     Write-Host "Please enter the fallowing for the new user being added"
 
-    $DisplayName = Read-Host 'DisplayName' #Is required
+    $DisplayName = Read-Host 'Display Name' #Is required
 
     $Password = Read-Host 'Password' -AsSecureString #Is required
 
-    $UserPrincipalName = Read-Host 'UserPrincipalName' #Is required
+    $UserPrincipalName = Read-Host 'User Principal Name' #Is required
 
-    $MailNickname = Read-Host 'MailNickname: Same as UserPrincipalName w/out the domain ' #Is required
+    $MailNickname = Read-Host 'Mail Nickname: Same as UserPrincipalName w/out the domain ' #Is required
 
-    $CompanyName = Read-Host 'CompanyName' #Is required
+    $CompanyName = Read-Host 'Company Name' #Is required
 
     $UserType = Read-Host 'UserType: YourOrg = Member External = Guest'
 
@@ -58,6 +58,8 @@
 
     $Department = Read-Host 'Department'
 
+    $JobTitle = Read-Host 'Job Title'
+
     $Mobile = Read-Host 'Mobile or Home Number'
 
     $TelephoneNumber = Read-Host 'Office Number'
@@ -66,4 +68,4 @@
     $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
     $PasswordProfile.Password = "$Password"
     
-    New-AzureADUser -DisplayName "$DisplayName" -PasswordProfile $PasswordProfile -UserPrincipalName "$UserPrincipalName" -AccountEnabled $true -MailNickName "$MailNickname" -CompanyName "$CompanyName" -UserType "$UserType" -City "$City" -StreetAddress "$StreetAddress" -PhysicalDeliveryOfficeName "$PhysicalDeliveryOfficeName" -Department "$Department" -Mobile "$Mobile" -TelephoneNumber "$TelephoneNumber"
+    New-AzureADUser -DisplayName "$DisplayName" -PasswordProfile $PasswordProfile -UserPrincipalName "$UserPrincipalName" -AccountEnabled $true -MailNickName "$MailNickname" -CompanyName "$CompanyName" -UserType "$UserType" -City "$City" -StreetAddress "$StreetAddress" -PhysicalDeliveryOfficeName "$PhysicalDeliveryOfficeName" -Department "$Department" -JobTitle $JobTitle -Mobile "$Mobile" -TelephoneNumber "$TelephoneNumber"
