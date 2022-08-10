@@ -5,4 +5,6 @@
 
         $Search = Read-Host "Search for a Object ID, DisplayName or UserPrincipalName"
 
-        Get-AzureADUser -SearchString "$Search"
+        Get-AzureADUser -SearchString "$Search" 
+
+        
