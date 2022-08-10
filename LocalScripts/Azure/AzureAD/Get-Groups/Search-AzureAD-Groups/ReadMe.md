@@ -1,0 +1,1 @@
+# Search for a group in Azure AD.

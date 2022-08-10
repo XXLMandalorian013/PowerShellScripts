@@ -1,0 +1,1 @@
+# Get all groups in Azure AD.
