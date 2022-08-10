@@ -33,11 +33,11 @@
 		
 		        Write-Host "This script is running in $($PSVersionTable.PSVersion)."
 
-                        Import-Module -Name AzureAD -UseWindowsPowerShell
+                Import-Module -Name AzureAD -UseWindowsPowerShell
 
-                        Connect-AzureAD
+                Connect-AzureAD
 	
-	        } else {
+	        }else {
 	
                         Write-Host "This script is running in PS V 5.1 or earlier"
 
