@@ -1,0 +1,1 @@
+# Gets users AzureAD memberships.
