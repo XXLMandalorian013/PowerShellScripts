@@ -6,7 +6,7 @@
     
     #https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.2
         
-        $ADGroupsDescription = Get-AzureADGroup | Select-Object DisplayName, Description
+    $ADGroupsDescription = Get-AzureADGroup | Select-Object DisplayName, Description
 
-        $ADGroupsDescription -match 'Distribution-List'
-        
+    $ADGroupsDescription -match 'Distribution-List'
+    
