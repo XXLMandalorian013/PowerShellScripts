@@ -1,20 +1,57 @@
+    #ReadMe
+<#
+    
+    .SYNOPSIS
+
+        Adds a user to Azure AD.
+
+
+    .DESCRIPTION
+        
+        Prompts for imput to be enter for new user. All required imputs are noted by #Is required.
+
+
+    .OUTPUTS
+        
+        ObjectId                             DisplayName  UserPrincipalName  UserType
+        --------                             -----------  -----------------  --------
+        1232Sc2-6sac-111-b2b2-d07e889344543s Test A. User  TAUser@domain.com   Member
+
+
+    .LINK
+        
+        #https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2
+
+        #https://docs.microsoft.com/en-us/powershell/module/azuread/new-azureaduser?view=azureadps-2.0
+
+#>
+
+#Script
+
+
 #Checks to see if the code is being ran "As Admin".
-            Write-Host "Checking for elevated permissions..."
-            if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
-            [Security.Principal.WindowsBuiltInRole] "Administrator")) {
-            Write-Warning "This Terminal is not running as Admin, open a Terminal console as an administrator and run this script again."
-            Break
-            }
-            else {
-            Write-Host "The Terminal is running in a administrator...Running Code" -ForegroundColor Green
-            }  
+
+Write-Host "Checking for elevated permissions..."
+
+if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
+
+[Security.Principal.WindowsBuiltInRole] "Administrator")) {
+
+ Write-Warning "This Terminal is not running as Admin, open a Terminal console as an administrator and run this script again."
+
+Break
+
+}
+
+else {
+
+ Write-Host "The Terminal is running in a administrator...Running Code" -ForegroundColor Green
+
+}  
 
 #Checks the PS terminal version this is ran in 5.X.X.
 
-	##https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2
-
-	#Thanks to dotnVO for the help w/ this
-
+#Thanks to dotnVO for the help w/ this
 
 #AzureAD only works in PS 5.1 atm.
 	
@@ -32,42 +69,30 @@
 
 #Adds a user to Azuer A/D.
 
-    #https://docs.microsoft.com/en-us/powershell/module/azuread/new-azureaduser?view=azureadps-2.0
+Write-Host "Please provide the fallowing for Azure AD"
 
-                                        # -AccountEnabled $true is required
+$DisplayName = Read-Host 'Full A. Name' #Is required
 
-    Write-Host "Please enter the fallowing for the new user being added"
+$Password = Read-Host 'Password' -AsSecureString #Is required
 
-    $DisplayName = Read-Host 'Display Name' #Is required
+$UserPrincipalName = Read-Host 'Email' #Is required
 
-    $Password = Read-Host 'Password' -AsSecureString #Is required
+$MailNickname = Read-Host 'Initials' #Is required
 
-    $UserPrincipalName = Read-Host 'User Principal Name' #Is required
+$CompanyName = Read-Host 'Company Name' #Is required
 
-    $MailNickname = Read-Host 'Mail Nickname: Same as UserPrincipalName w/out the domain ' #Is required
+$UserType = Read-Host 'UserType: YourOrg = Member External = Guest'
 
-    $CompanyName = Read-Host 'Company Name' #Is required
+$Department = Read-Host 'Department'
 
-    $UserType = Read-Host 'UserType: YourOrg = Member External = Guest'
+$JobTitle = Read-Host 'Job Title'
 
-    $City = Read-Host 'City'
+$PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
 
-    $StreetAddress = Read-Host 'Full Address'
+$PasswordProfile.Password = "$Password"
+ 
+# -AccountEnabled $true peramiter #Is required.
 
-    $PhysicalDeliveryOfficeName = Read-Host 'PhysicalDeliveryOfficeName'
-
-    $Department = Read-Host 'Department'
-
-    $JobTitle = Read-Host 'Job Title'
-
-    $Mobile = Read-Host 'Mobile or Home Number'
-
-    $TelephoneNumber = Read-Host 'Office Number'
-
-
-    $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
-    $PasswordProfile.Password = "$Password"
-    
-    New-AzureADUser -DisplayName "$DisplayName" -PasswordProfile $PasswordProfile -UserPrincipalName "$UserPrincipalName" -AccountEnabled $true -MailNickName "$MailNickname" -CompanyName "$CompanyName" -UserType "$UserType" -City "$City" -StreetAddress "$StreetAddress" -PhysicalDeliveryOfficeName "$PhysicalDeliveryOfficeName" -Department "$Department" -JobTitle $JobTitle -Mobile "$Mobile" -TelephoneNumber "$TelephoneNumber"
+New-AzureADUser -DisplayName "$DisplayName" -PasswordProfile $PasswordProfile -UserPrincipalName "$UserPrincipalName" -AccountEnabled $true -MailNickName "$MailNickname" -CompanyName "$CompanyName" -UserType "$UserType" -Department "$Department" -JobTitle $JobTitle
 
     

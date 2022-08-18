@@ -52,3 +52,5 @@
 $ADGroupsDescription = Get-AzureADGroup | Select-Object DisplayName, Description
 
 $ADGroupsDescription -match 'Distribution-List'
+
+
