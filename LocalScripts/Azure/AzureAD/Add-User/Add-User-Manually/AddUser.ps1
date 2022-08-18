@@ -41,9 +41,7 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 Break
 
-}
-
-else {
+} else {
 
  Write-Host "The Terminal is running in a administrator...Running Code" -ForegroundColor Green
 
@@ -56,16 +54,17 @@ else {
 #AzureAD only works in PS 5.1 atm.
 	
 
-	if ($PSVersionTable.PSVersion.Major -eq 5) {
+if ($PSVersionTable.PSVersion.Major -eq 5) {
 		
-		Write-Host "This script is running in $($PSVersionTable.PSVersion)."
+	Write-Host "This script is running in $($PSVersionTable.PSVersion)."
 	
-	} else {
+} else {
 		
-		Write-Warning "This script is running in PowerShell $($PSVersionTable.PSVersion)...Please run this script in PowerShell  Version 5.X.X...Ending Script" -WarningAction Inquire
+	Write-Warning "This script is running in PowerShell $($PSVersionTable.PSVersion)...Please run this script in PowerShell  Version 5.X.X...Ending Script" -WarningAction Inquire
 		
-		Exit
-	}
+	Exit
+
+}
 
 #Adds a user to Azuer A/D.
 
