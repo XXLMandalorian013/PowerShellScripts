@@ -6,7 +6,7 @@
 
 #    .DESCRIPTION
         
-##        Prompts for imput to be enter for new user. All required imputs are noted by #Is required.
+##        Prompts for imput to be enter for a new user. All required imputs are noted by #Is required.
 
 
 #    .OUTPUTS
