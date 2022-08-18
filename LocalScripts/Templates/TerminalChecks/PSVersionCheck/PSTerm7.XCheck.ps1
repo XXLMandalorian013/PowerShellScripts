@@ -13,5 +13,7 @@
 		
 		Write-Warning "This script is running in PowerShell $($PSVersionTable.PSVersion)...Please run this script in PowerShell  Version 7.X.X...Ending Script" -WarningAction Inquire
 		
+		Start-Sleep -Seconds 3
+
 		Exit
 	}
