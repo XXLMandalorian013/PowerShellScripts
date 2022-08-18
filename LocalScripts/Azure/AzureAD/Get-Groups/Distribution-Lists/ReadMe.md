@@ -1,16 +1,13 @@
-# Get all distrobution lists in AzureAD.
-
-
-##        .SYNOPSIS
+#        .SYNOPSIS
 
 ##         Grabs a list of all distro list.
 
 
-##         .DESCRIPTION
+#         .DESCRIPTION
 
-###         In the MAC I have added Distribution-List as the description of all of our distro lists. Make sure to add that descript for every new distro list made.
+##         In the MAC I have added Distribution-List as the description of all of our distro lists. Make sure to add that descript for every new distro list made.
 
-##            .OUTPUTS
+#            .OUTPUTS
 
 ###         DisplayName             Description
 ###         -----------             -----------
