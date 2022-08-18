@@ -60,9 +60,11 @@ if ($PSVersionTable.PSVersion.Major -eq 5) {
 	
 } else {
 		
-	Write-Warning "This script is running in PowerShell $($PSVersionTable.PSVersion)...Please run this script in PowerShell  Version 5.X.X...Ending Script" -WarningAction Inquire
-		
-	Exit
+    Write-Warning "This script is running in PowerShell $($PSVersionTable.PSVersion)...Please run this script in PowerShell  Version 5.X.X...Ending Script" -WarningAction Inquire
+	
+    Start-Sleep -Seconds 3
+    
+    Exit
 
 }
 
