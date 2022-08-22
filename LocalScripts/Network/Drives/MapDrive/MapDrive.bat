@@ -1,1 +1,0 @@
-net use Q: \\ServerName\ServerShare /Persistent:Yes
