@@ -15,7 +15,7 @@
         
         PowerShell credential request
         Enter your credentials.
-        Password for user \DAM: ********
+        Password for user \DAM: ************
         
 
     .LINK
