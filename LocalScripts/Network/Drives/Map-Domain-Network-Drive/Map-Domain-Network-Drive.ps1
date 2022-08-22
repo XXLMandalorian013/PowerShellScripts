@@ -27,7 +27,7 @@
 #Script
 
 
-$Domain = 'domain.com' -ErrorAction SilentlyContinue
+$Domain = 'domain.com'
 
 $UserName = $env:UserName
 
