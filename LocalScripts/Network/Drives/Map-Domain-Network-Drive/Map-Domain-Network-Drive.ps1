@@ -3,7 +3,7 @@
     
     .SYNOPSIS
 
-        Mapps a domain network drive.
+    Maps a domain network drive.
 
 
     .INPUTS

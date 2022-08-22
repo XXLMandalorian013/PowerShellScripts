@@ -1,5 +1,5 @@
  
-#        __.SYNOPSIS__
+#        .SYNOPSIS
 ##        Adds a file name extension to a supplied name.
 
 #        .DESCRIPTION
