@@ -16,6 +16,9 @@
         PowerShell credential request
         Enter your credentials.
         Password for user \DAM: ************
+        Name           Used (GB)     Free (GB) Provider      Root                                               CurrentLocation
+         ----           ---------     --------- --------      ----                                               ---------------
+         q                2672.54        119.21 FileSystem    \\Server\Folder
         
 
     .LINK
@@ -26,10 +29,14 @@
 
 #Script
 
+# Prejoined domain and domain profile added use only     $Domain = [System.DirectoryServices.ActiveDirectory.Domain]::GetComputerDomain() | Select-Object 'Forest'
+
 $Domain = 'domain.com'
 
 $UserName = $env:UserName
 
 $Cred = Get-Credential -Credential $Domain\$UserName
 
-New-PSDrive -name 'Q' -psprovider 'FileSystem' -root '\\Server\Folder' -Credential $Cred -Persist
+$DriveLetter = Read-Host 'Enter driver letter you wish to map.'
+
+New-PSDrive -name "$DriveLetter" -psprovider 'FileSystem' -root '\\Server\Folder' -Credential $Cred -Persist
