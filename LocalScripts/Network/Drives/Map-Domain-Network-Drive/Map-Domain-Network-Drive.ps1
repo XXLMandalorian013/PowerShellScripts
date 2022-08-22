@@ -26,7 +26,6 @@
 
 #Script
 
-
 $Domain = 'domain.com'
 
 $UserName = $env:UserName
