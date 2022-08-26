@@ -39,18 +39,30 @@
 
     .LINK
         
-        #https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/select-object?view=powershell-7.2
+        https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/select-object?view=powershell-7.2
     
-        #https://docs.microsoft.com/en-us/powershell/module/azuread/get-azureadgroup?view=azureadps-2.0
+        https://docs.microsoft.com/en-us/powershell/module/azuread/get-azureadgroup?view=azureadps-2.0
     
-        #https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.2
+        https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.2
+
+        https://docs.microsoft.com/en-us/powershell/module/azuread/add-azureadgroupmember?view=azureadps-2.0
 
 #>
 
 #Script
   
-$ADGroupsDescription = Get-AzureADGroup | Select-Object DisplayName, Description
+$ADGroupsDescription = Get-AzureADGroup | Select-Object DisplayName, Description, ObjectId
 
 $ADGroupsDescription -match 'Distribution-List'
+
+
+Write-Host 'Above is our Distribution List'
+
+
+$DistList = Read-Host "Please Enter a Distribution List"
+
+$ObjectID = Read-Host "Please enter a ObjectID"
+
+Add-AzureADGroupMember -ObjectId "$DistList" -RefObjectId "$ObjectID"
 
 
