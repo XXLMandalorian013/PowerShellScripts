@@ -14,3 +14,5 @@
         $UserMembership = Get-AzureADUserMembership -ObjectID $ObjectID
 
         $UserMembership | Select-Object DisplayName
+        
+        Get-AzureADUser | Format-List
