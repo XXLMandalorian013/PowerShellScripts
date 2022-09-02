@@ -3,43 +3,23 @@
     
     .SYNOPSIS
 
-        Adds a file name extension to a supplied name.
-
-
-    .DESCRIPTION
-        Adds a file name extension to a supplied name.
-        Takes any strings for the file name or extension.
-    
-
-    .PARAMETER Name
-        
-        Specifies the file name.
-
-    
-    .PARAMETER Extension
-        
-        Specifies the extension. "Txt" is the default.
-
-
-    .INPUTS
-        
-        None. You cannot pipe objects to Add-Extension.
+        Gets all Restore Points.
 
 
     .OUTPUTS
         
-        System.String. Add-Extension returns a string with the extension or file name.
-
-
-    .EXAMPLE
-        
-        PS> extension "File" "doc"
-        File.doc
+        CreationTime           Description                    SequenceNumber    EventType         RestorePointType
+        ------------           -----------                    --------------    ---------         ----------------
+        8/31/2022 10:00:02 PM  Windows Backup                 129               BEGIN_SYSTEM_C... 15
+        9/1/2022 7:17:12 AM    ACAD broke, Post ACAD fix      130               BEGIN_SYSTEM_C... 16
+        9/1/2022 10:00:02 PM   Windows Backup                 131               BEGIN_SYSTEM_C... 15
 
 
     .LINK
         
-        #https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2
+        https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2
+
+        https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerrestorepoint?source=recommendations&view=powershell-5.1
 
 #>
 
