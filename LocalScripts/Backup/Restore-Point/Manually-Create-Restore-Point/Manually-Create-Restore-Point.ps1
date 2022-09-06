@@ -12,8 +12,9 @@
 
     .Notes
 
-        CMDlet does not work in 7.X.X. 
-        A (Win7) File backup creates a restore point in tandeum so you may see,
+        1. CMDlet does not work in 7.X.X. 
+        
+        2. A (Win7) File backup creates a restore point in tandeum so you may see,
 
         WARNING: A new system restore point cannot be created because one has already been created within the past 1440
         minutes. The frequency of restore point creation can be changed by creating the DWORD valuel
@@ -35,7 +36,9 @@
 
     .LINK
         
-        Online version: http://www.fabrikam.com/extension.html
+        https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/checkpoint-computer?view=powershell-5.1
+
+        https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2
 
 #>
 
@@ -43,7 +46,7 @@
 
 #Checks the PS terminal version this is ran in 5.X.X.
 
-	##https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2
+	
 
 	#Thanks to dotnVO for the help w/ this
 	
@@ -62,5 +65,7 @@ if ($PSVersionTable.PSVersion.Major -eq 5) {
 
 	}
 
-Checkpoint-Computer -Description "Manual Sys Image"
+$Description = Read-Host "Please type what this restore point should be called?"
+
+Checkpoint-Computer -Description "$Description"
 
