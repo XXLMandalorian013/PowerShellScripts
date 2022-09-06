@@ -268,8 +268,8 @@
 
 
 # RELATED LINKS
-    [Online Version:](URL "https://docs.microsoft.com/powershell/module/microsoft.powershell.management/test-path?v
-    iew=powershell-7.2&WT.mc_id=ps-gethelp")
+    [https://docs.microsoft.com/powershell/module/microsoft.powershell.management/test-path?v
+    iew=powershell-7.2&WT.mc_id=ps-gethelp](URL "Online Version:")
     Convert-Path
     Join-Path
     Resolve-Path
