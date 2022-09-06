@@ -84,7 +84,7 @@
         than one system restore point each day. If you try to create a new restore point before the
         24-hour period has elapsed, Windows PowerShell generates the following error:
 
-        
+# Examples       
 
     ----------- Example 1: Create a system restore point -----------
 

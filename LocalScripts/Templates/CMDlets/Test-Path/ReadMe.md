@@ -171,6 +171,8 @@
         available in your session, type `Get-PSProvider`. For more information, see about_Providers
         (../Microsoft.PowerShell.Core/About/about_Providers.md).
 
+# Examples
+
     -------------------- Example 1: Test a path --------------------
 
     Test-Path -Path "C:\Documents and Settings\DavidC"
