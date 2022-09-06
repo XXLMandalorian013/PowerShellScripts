@@ -5,6 +5,10 @@
 
         Gets all Restore Points.
 
+    .Notes
+
+        CMDlet does not work in 7.X.X.
+
 
     .OUTPUTS
         
@@ -26,8 +30,6 @@
 #Script
 
 #Checks the PS terminal version this is ran in 5.X.X.
-
-#https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2
 
 #Thanks to dotnVO for the help w/ this
 	

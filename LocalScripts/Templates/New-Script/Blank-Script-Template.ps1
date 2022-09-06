@@ -7,8 +7,13 @@
 
 
     .DESCRIPTION
-        Adds a file name extension to a supplied name.
-        Takes any strings for the file name or extension.
+        
+        Adds a file name extension to a supplied name.  
+    
+    
+    .Notes
+
+        Notes here.
     
 
     .PARAMETER Name

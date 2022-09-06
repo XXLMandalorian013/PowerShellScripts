@@ -10,16 +10,21 @@
 
         Prompts for a description of the restore pooint and then creates a Restore Point.
 
+    .Notes
 
-    .OUTPUTS
-    
-        1.
+        CMDlet does not work in 7.X.X. 
+        A (Win7) File backup creates a restore point in tandeum so you may see,
 
         WARNING: A new system restore point cannot be created because one has already been created within the past 1440
-        minutes. The frequency of restore point creation can be changed by creating the DWORD value
+        minutes. The frequency of restore point creation can be changed by creating the DWORD valuel
         'SystemRestorePointCreationFrequency' under the registry key 'HKLM\Software\Microsoft\Windows
         NT\CurrentVersion\SystemRestore'. The value of this registry key indicates the necessary time interval (in minutes)
         between two restore point creation. The default value is 1440 minutes (24 hours).
+
+
+    .OUTPUTS
+    
+        
 
 
     .EXAMPLE
@@ -57,6 +62,5 @@ if ($PSVersionTable.PSVersion.Major -eq 5) {
 
 	}
 
-$Description = Read-Host "Please type what you wish to call this Restore Point..."
+Checkpoint-Computer -Description "Manual Sys Image"
 
-Checkpoint-Computer -Description "$Description"  
