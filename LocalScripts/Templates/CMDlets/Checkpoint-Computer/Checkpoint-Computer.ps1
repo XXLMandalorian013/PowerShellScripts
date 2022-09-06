@@ -106,5 +106,3 @@ RELATED LINKS
 
 #>
 
-#Script
-
