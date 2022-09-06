@@ -94,4 +94,4 @@
     This command creates a MODIFY_SETTINGS system restore point called "ChangeNetSettings".
 
 # RELATED LINKS
-    [https://docs.microsoft.com/powershell/module/microsoft.powershell.management/checkpoint-computer?view=powershell-5.1&WT.mc_id=ps-gethelp](URL "Online Version:")
+[https://docs.microsoft.com/powershell/module/microsoft.powershell.management/checkpoint-computer?view=powershell-5.1&WT.mc_id=ps-gethelp](URL "Online Version:")
