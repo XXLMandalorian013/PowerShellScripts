@@ -28,6 +28,7 @@
         You cannot pipe objects to `Checkpoint-Computer`.
 
     .OUTPUTS
+        
         None
         This cmdlet does not generate any output.
         
@@ -53,9 +54,7 @@
 
 #Checks the PS terminal version this is ran in 5.X.X.
 
-	
-
-	#Thanks to dotnVO for the help w/ this
+#Thanks to dotnVO for the help w/ this
 	
 
 if ($PSVersionTable.PSVersion.Major -eq 5) {

@@ -83,7 +83,8 @@ $UserName = $env:UserName
 
 #New-ScheduledTaskAction: https://docs.microsoft.com/en-us/powershell/module/scheduledtasks/new-scheduledtaskaction?view=windowsserver2022-ps
 # -Execuite is the program to be ran and -Argument is the file to be ran ie a .ps1
-$TSActions = New-ScheduledTaskAction -Execute "powershell.exe" -Argument '"\\ServerName\Folder\Automated-Restore-Point.ps1"'
+#Make sure to keep a set of ' ' between the file path's set of " ".
+$TSActions = New-ScheduledTaskAction -Execute "powershell.exe" -Argument '"\\ServerName\Folder\Automated-Restore-Point\User\Script-Check\Auto-Resto-Point-Check.ps1"'
 
 #New-ScheduledTaskSettings: https://docs.microsoft.com/en-us/powershell/module/scheduledtasks/new-scheduledtasksettingsset?view=windowsserver2022-ps
 $TSSettings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Compatibility Win7 -DontStopOnIdleEnd -RunOnlyIfNetworkAvailable -WakeToRun -StartWhenAvailable  
@@ -95,6 +96,6 @@ $TSTriggers = New-ScheduledTaskTrigger -Weekly -WeeksInterval 1 -DaysOfWeek Tues
 $TSPrincipal = New-ScheduledTaskPrincipal -User $Domain\$UserName -RunLevel Highest
 
 #Register-ScheduledTask: https://docs.microsoft.com/en-us/powershell/module/scheduledtasks/register-scheduledtask?view=windowsserver2022-ps
-Register-ScheduledTask -Action $TSActions -Trigger $TSTriggers -Settings $TSSettings -Principal $TSPrincipal -TaskName "Automated Restore Point" -Description "Created an automated Restore Point on a Scheule"
+Register-ScheduledTask -Action $TSActions -Trigger $TSTriggers -Settings $TSSettings -Principal $TSPrincipal -TaskName "Automated Restore Point Check" -Description "Checks if the an automated Restore Point script Ran"
 
 

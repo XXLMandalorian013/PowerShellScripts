@@ -83,7 +83,8 @@ $UserName = $env:UserName
 
 #New-ScheduledTaskAction: https://docs.microsoft.com/en-us/powershell/module/scheduledtasks/new-scheduledtaskaction?view=windowsserver2022-ps
 # -Execuite is the program to be ran and -Argument is the file to be ran ie a .ps1
-$TSActions = New-ScheduledTaskAction -Execute "powershell.exe" -Argument '"\\ServerName\Folder\Automated-Restore-Point.ps1"'
+#Make sure to keep a set of ' ' between the file path's set of " ".
+$TSActions = New-ScheduledTaskAction -Execute "powershell.exe" -Argument '"\\ServerName\Folder\Automated-Restore-Point\User\Automated-Restore-Point.ps1"'
 
 #New-ScheduledTaskSettings: https://docs.microsoft.com/en-us/powershell/module/scheduledtasks/new-scheduledtasksettingsset?view=windowsserver2022-ps
 $TSSettings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Compatibility Win7 -DontStopOnIdleEnd -RunOnlyIfNetworkAvailable -WakeToRun -StartWhenAvailable  
