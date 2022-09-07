@@ -26,6 +26,6 @@
         PS> extension -name "File" -extension "doc"
         File.doc
 
-#        .LINK
-        https://knowledge.autodesk.com/support/revit/troubleshooting/caas/CloudHelp/cloudhelp/2021/ENU/Revit-Troubleshooting/files/GUID-3562A7E7-7112-4B6D-97F6-D922BACC0CDF-htm.html
+# RELATED LINKS
+[https://docs.microsoft.com/powershell/module/microsoft.powershell.management/checkpoint-computer?view=powershell-5.1&WT.mc_id=ps-gethelp](URL "Online Version:")
     

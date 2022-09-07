@@ -44,9 +44,7 @@
 
 #Checks the PS terminal version this is ran in 5.X.X.
 
-	
-
-	#Thanks to dotnVO for the help w/ this
+#Thanks to dotnVO for the help w/ this
 	
 
 if ($PSVersionTable.PSVersion.Major -eq 5) {
@@ -97,6 +95,6 @@ $TSTriggers = New-ScheduledTaskTrigger -Weekly -WeeksInterval 1 -DaysOfWeek Tues
 $TSPrincipal = New-ScheduledTaskPrincipal -User $Domain\$UserName -RunLevel Highest
 
 #Register-ScheduledTask: https://docs.microsoft.com/en-us/powershell/module/scheduledtasks/register-scheduledtask?view=windowsserver2022-ps
-Register-ScheduledTask -Action $TSActions -Trigger $TSTriggers -Settings $TSSettings -Principal $TSPrincipal -TaskName "Automated Restore Point" -Description "Created an automated Restore Point on a Scheule"
+Register-ScheduledTask -Action $TSActions -Trigger $TSTriggers -Settings $TSSettings -Principal $TSPrincipal -TaskName "Automated-Restore-Point" -Description "Created an automated Restore Point on a Scheule"
 
 

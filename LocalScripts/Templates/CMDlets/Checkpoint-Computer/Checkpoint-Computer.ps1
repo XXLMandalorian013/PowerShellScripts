@@ -84,6 +84,7 @@ NOTES
         NT\CurrentVersion\SystemRestore'. The value of this registry key indicates the necessary time interval (in
         minutes) between two restore point creation. The default value is 1440 minutes (24 hours).
 
+Examples
     ----------- Example 1: Create a system restore point -----------
 
     Checkpoint-Computer -Description "Install MyApp"
@@ -106,3 +107,6 @@ RELATED LINKS
 
 #>
 
+#Script
+
+Checkpoint-Computer -Description "Backup Test"

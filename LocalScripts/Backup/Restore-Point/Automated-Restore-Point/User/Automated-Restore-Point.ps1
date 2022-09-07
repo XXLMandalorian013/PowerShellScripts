@@ -21,17 +21,24 @@
         'SystemRestorePointCreationFrequency' under the registry key 'HKLM\Software\Microsoft\Windows
         NT\CurrentVersion\SystemRestore'. The value of this registry key indicates the necessary time interval (in minutes)
         between two restore point creation. The default value is 1440 minutes (24 hours).
+    
+    .INPUTS
 
+        None
+        You cannot pipe objects to `Checkpoint-Computer`.
 
     .OUTPUTS
-    
+        None
+        This cmdlet does not generate any output.
         
 
 
     .EXAMPLE
         
-        PS> extension "File" "doc"
-        File.doc
+        Checkpoint-Computer -Description "Install MyApp"
+
+        This command creates a system restore point called Install MyApp. It uses the default
+        APPLICATION_INSTALL restore point type.
 
 
     .LINK
