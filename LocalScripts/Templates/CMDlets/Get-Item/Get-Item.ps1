@@ -13,3 +13,7 @@ Links
 
 Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore'
 
+#Double quotes used here due to variable.
+Get-Item -Path "$env:TEM\UnlimitedSystemRestorePoints.reg"
+
+
