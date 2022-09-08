@@ -62,6 +62,7 @@
 
     Accept wildcard characters?  false
 
+
     -Credential <System.Management.Automation.PSCredential>
 
     > [!NOTE] > This parameter isn't supported by any providers installed with PowerShell. > To impersonate
@@ -80,6 +81,7 @@
 
     Accept wildcard characters?  false
 
+
     -Destination <System.String>
 
     Specifies the path to the new location. The default is the current directory.
@@ -95,6 +97,7 @@
     Accept pipeline input?       True (ByPropertyName)
 
     Accept wildcard characters?  false
+
 
     -Exclude <System.String[]>
 
@@ -117,6 +120,7 @@
     Accept pipeline input?       False
 
     Accept wildcard characters?  true
+
 
     -Filter <System.String>
 
@@ -142,6 +146,7 @@
 
     Accept wildcard characters?  true
 
+
     -Force <System.Management.Automation.SwitchParameter>
 
     Indicates that this cmdlet copies items that can't otherwise be changed, such as copying over a read-only file
@@ -158,6 +163,7 @@
 
     Accept wildcard characters?  false
 
+
     -FromSession <System.Management.Automation.Runspaces.PSSession>
 
     Specifies the PSSession object from which a remote file is being copied. When you use this parameter, the Path
@@ -173,6 +179,7 @@
     Accept pipeline input?       False
 
     Accept wildcard characters?  false
+
 
     -Include <System.String[]>
 
@@ -196,6 +203,7 @@
 
     Accept wildcard characters?  true
 
+
     -LiteralPath <System.String[]>
 
     Specifies a path to one or more locations. The value of LiteralPath is used exactly as it's typed. No
@@ -216,6 +224,7 @@
 
     Accept wildcard characters?  false
 
+
     -PassThru <System.Management.Automation.SwitchParameter>
 
     Returns an object that represents the item with which you're working. By default, this cmdlet doesn't generate
@@ -232,6 +241,7 @@
 
     Accept wildcard characters?  false
 
+
     -Path <System.String[]>
 
     Specifies, as a string array, the path to the items to copy. Wildcard characters are permitted.
@@ -246,6 +256,7 @@
 
     Accept wildcard characters?  true
 
+
     -Recurse <System.Management.Automation.SwitchParameter>
 
     Indicates that this cmdlet does a recursive copy.
@@ -259,6 +270,7 @@
     Accept pipeline input?       False
 
     Accept wildcard characters?  false
+
 
     -ToSession <System.Management.Automation.Runspaces.PSSession>
 
@@ -275,6 +287,7 @@
     Accept pipeline input?       False
 
     Accept wildcard characters?  false
+
 
     -UseTransaction <System.Management.Automation.SwitchParameter>
 
@@ -294,6 +307,7 @@
 
     Accept wildcard characters?  false
 
+
     -Confirm <System.Management.Automation.SwitchParameter>
 
     Prompts you for confirmation before running the cmdlet.
@@ -308,6 +322,7 @@
 
     Accept wildcard characters?  false
 
+
     -WhatIf <System.Management.Automation.SwitchParameter>
 
     Shows what would happen if the cmdlet runs. The cmdlet isn't run.
@@ -321,6 +336,7 @@
     Accept pipeline input?       False
 
     Accept wildcard characters?  false
+
 
     `<CommonParameters>`
 
@@ -360,6 +376,7 @@
 
     Copy-Item "C:\Wabash\Logfiles\mar1604.log.txt" -Destination "C:\Presentation"
 
+
     - Example 2: Copy directory contents to an existing directory -
 
     Copy-Item -Path "C:\Logfiles\*" -Destination "C:\Drawings" -Recurse
@@ -367,6 +384,7 @@
     > [!NOTE] > If the path`C:\Drawings` doesn't exist the cmdlet copies all the files from the `Logfiles` > folder
 
     into a single file`C:\Drawings`.
+
 
     -- Example 3: Copy directory and contents to a new directory --
 
@@ -378,9 +396,11 @@
 
     "C:\Drawings\Logs" -Recurse`
 
+
     Example 4: Copy a file to the specified directory and rename the file
 
     Copy-Item "\\Server01\Share\Get-Widget.ps1" -Destination "\\Server12\ScriptArchive\Get-Widget.ps1.txt"
+
 
     --------- Example 5: Copy a file to a remote computer ---------
 
@@ -388,19 +408,22 @@
 
     Copy-Item "D:\Folder001\test.log" -Destination "C:\Folder001_Copy\" -ToSession $Session
 
+
     -------- Example 6: Copy a folder to a remote computer --------
 
     $Session = New-PSSession -ComputerName "Server02" -Credential "Contoso\User01"
 
     Copy-Item "D:\Folder002\" -Destination "C:\Folder002_Copy\" -ToSession $Session
 
-    Example 7: Recursively copy the entire contents of a folder to a remote computer
+
+   --------- Example 7: Recursively copy the entire contents of a folder to a remote computer
 
     $Session = New-PSSession -ComputerName "Server04" -Credential "Contoso\User01"
 
     Copy-Item "D:\Folder003\" -Destination "C:\Folder003_Copy\" -ToSession $Session -Recurse
 
-    Example 8: Copy a file to a remote computer and then rename the file
+
+   ----------- Example 8: Copy a file to a remote computer and then rename the file
 
     $Session = New-PSSession -ComputerName "Server04" -Credential "Contoso\User01"
 
@@ -408,11 +431,13 @@
 
     -ToSession $Session
 
+
     ----- Example 9: Copy a remote file to the local computer -----
 
     $Session = New-PSSession -ComputerName "Server01" -Credential "Contoso\User01"
 
     Copy-Item "C:\MyRemoteData\test.log" -Destination "D:\MyLocalData\" -FromSession $Session
+
 
     Example 10: Copy the entire contents of a remote folder to the local computer
 
@@ -420,11 +445,13 @@
 
     Copy-Item "C:\MyRemoteData\scripts" -Destination "D:\MyLocalData\" -FromSession $Session
 
+
     Example 11: Recursively copy the entire contents of a remote folder to the local computer
 
     $Session = New-PSSession -ComputerName "Server01" -Credential "Contoso\User01"
 
     Copy-Item "C:\MyRemoteData\scripts" -Destination "D:\MyLocalData\scripts" -FromSession $Session -Recurse
+
 
     Example 12: Recursively copy files from a folder tree into the current folder
 
@@ -478,6 +505,7 @@
 
     the destination folder.
 
+
     -- Example 13: Using filters to copy items without recursion --
 
     PS D:\temp\test\out> Copy-Item -Path D:\temp\tree\* -Include ex*
@@ -493,6 +521,7 @@
     The Include parameter is applied to the contents of`D:\temp\tree` folder to copy all items that match `ex*`.
 
     Notice that, without recursion, the`D:\temp\out\examples` folder is copied, but none of its contents are copied.
+
 
     ---- Example 15: Using filters to copy items with recursion ----
 
