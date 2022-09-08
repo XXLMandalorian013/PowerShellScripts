@@ -362,4 +362,4 @@ REMARKS
 
 # RELATED LINKS
 
-[https://go.microsoft.com/fwlink/?LinkID=113319https://go.microsoft.com/fwlink/?LinkID=113319https://docs.microsoft.com/powershell/module/microsoft.powershell.management/checkpoint-computer?view=powershell-5.1&amp;WT.mc_id=ps-gethe](URL "Online Version:")
+[https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-item?view=powershell-7.2&viewFallbackFrom=powershell-6](URL "Online Version:")
