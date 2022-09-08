@@ -11,5 +11,5 @@ Links
 
 #Script
 
-Get-Item 
+Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore'
 
