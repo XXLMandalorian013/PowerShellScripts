@@ -34,6 +34,8 @@
 
         https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.2
 
+        https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/restart-computer?view=powershell-7.2
+
 #>
 
 #Script
@@ -67,6 +69,11 @@ if ( $PS2State -match 'Disabled' )
     Enable-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2Root
 
     Get-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2Root | Select-Object 'State'
+
+    Write-Warning "A restart is require for this change to take effect... "
+
+    Restart-Computer -Confirm
+
 }
 
 else
