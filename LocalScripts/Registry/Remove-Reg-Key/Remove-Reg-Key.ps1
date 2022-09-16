@@ -15,12 +15,6 @@
         None
 
 
-    .EXAMPLE
-        
-        PS> extension "File" "doc"
-        File.doc
-
-
     .LINK
         
         Online version: https://docs.microsoft.com/en-us/powershell/scripting/samples/working-with-registry-keys?view=powershell-7.2
