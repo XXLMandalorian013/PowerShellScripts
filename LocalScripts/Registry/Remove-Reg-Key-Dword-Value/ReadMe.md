@@ -1,12 +1,12 @@
-#DESCRIPTION
+# .DESCRIPTION
 
     Removes Reg Key Value.
 
-#Notes
+# .Notes
 
     Works in 5.1 and later.
 
-#LINK
+# .LINK
 
     Online version: https://docs.microsoft.com/en-us/powershell/scripting/samples/working-with-registry-keys?view=powershell-7.2
 
