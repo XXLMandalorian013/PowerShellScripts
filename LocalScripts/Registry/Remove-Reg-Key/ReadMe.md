@@ -1,31 +1,17 @@
- 
-#        .SYNOPSIS
-        Adds a file name extension to a supplied name.
+# .DESCRIPTION
 
-#        .DESCRIPTION
-        Adds a file name extension to a supplied name.
-        Takes any strings for the file name or extension.
+    Removes a Reg key.
 
-#        .PARAMETER Name
-        Specifies the file name.
+# .Notes
 
-#        .PARAMETER Extension
-        Specifies the extension. "Txt" is the default.
+    5.1 and newer.
 
-#        .INPUTS
-        None. You cannot pipe objects to Add-Extension.
+#.OUTPUTS
 
-#        .OUTPUTS
-        System.String. Add-Extension returns a string with the extension or file name.
+    None
 
-#        .EXAMPLE
-        PS> extension -name "File"
-        File.txt
+# .LINK
 
-#        .EXAMPLE
-        PS> extension -name "File" -extension "doc"
-        File.doc
+    [working-with-registry-keysOnline versio]: https://docs.microsoft.com/en-us/powershell/scripting/samples/working-with-registry-keys?view=powershell-7.2
 
-#        .LINK
-        https://knowledge.autodesk.com/support/revit/troubleshooting/caas/CloudHelp/cloudhelp/2021/ENU/Revit-Troubleshooting/files/GUID-3562A7E7-7112-4B6D-97F6-D922BACC0CDF-htm.html
-    
+    Online version: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item?view=powershell-7.2
