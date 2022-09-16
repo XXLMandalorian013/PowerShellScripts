@@ -31,6 +31,24 @@
 
 #Script
 
+Write-Host "Checking for elevated permissions..."
+
+if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
+[Security.Principal.WindowsBuiltInRole] "Administrator")) {
+
+Write-Warning "This Terminal is not running as Admin, open a Terminal console as an administrator and run this script again."
+Break
+}
+
+else 
+{
+
+Write-Host "The Terminal is running in a administrator...Running Code" -ForegroundColor Green
+
+}
+
+#Reg changes require elevated terminal. 
+
 #Make sure to keep the Registry:: before the actual Reg key.
 
-Remove-Item -Path 'Registry::HKEY_CURRENT_USER\TestKey' –Force
+Remove-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SYSTEM\TEST' –Force

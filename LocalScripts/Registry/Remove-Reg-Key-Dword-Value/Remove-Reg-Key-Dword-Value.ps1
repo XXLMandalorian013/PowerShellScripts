@@ -30,17 +30,13 @@
 
     .EXAMPLE
         
-        PS C:\Users\MEFP\Documents> Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore'
+        Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore' -Name 'SystemRestorePointCreationFrequency'
 
-        RPSessionInterval              : 1
-        FirstRun                       : 0
-        LastIndex                      : 142
-        SRInitDone                     : 1
-        LastMainenanceTaskRunTimeStamp : 133068616886618662
-        PSPath                         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\SystemRestore
-        PSParentPath                   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion
-        PSChildName                    : SystemRestore
-        PSProvider                     : Microsoft.PowerShell.Core\Registry
+        SystemRestorePointCreationFrequency : 0
+        PSPath                              : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore
+        PSParentPath                        : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion
+        PSChildName                         : SystemRestore
+        PSProvider                          : Microsoft.PowerShell.Core\Registry
 
     .LINK
         
@@ -70,4 +66,4 @@ Write-Host "The Terminal is running in a administrator...Running Code" -Foregrou
 
 #Make sure to keep the Registry:: before the actual Reg key.
 
-Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore'
+Remove-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SYSTEM\TEST' -Name 'TestDW' -Force
