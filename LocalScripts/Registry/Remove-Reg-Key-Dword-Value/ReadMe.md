@@ -1,6 +1,6 @@
 # .DESCRIPTION
 
-    Removes Reg Key Value.
+    Removes Reg Key DWORD Value.
 
 # .Notes
 

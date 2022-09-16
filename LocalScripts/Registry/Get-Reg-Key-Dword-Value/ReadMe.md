@@ -1,30 +1,12 @@
-    #ReadMe
-
-<#
-
-    .DESCRIPTION
+# .DESCRIPTION
 
     Gets Reg Key Value.
 
-    .Notes
+# .Notes
 
-    .PARAMETERName
+    Works in 5.1 or later
 
-    Specifies the file name.
-
-    .PARAMETERExtension
-
-    Specifies the extension. "Txt" is the default.
-
-    .INPUTS
-
-    None. You cannot pipe objects to Add-Extension.
-
-    .OUTPUTS
-
-    System.String. Add-Extension returns a string with the extension or file name.
-
-    .EXAMPLE
+# .EXAMPLE
 
     PS C:\Users\MEFP\Documents> Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore'
 
@@ -46,6 +28,8 @@
 
     PSProvider                     : Microsoft.PowerShell.Core\Registry
 
-    .LINK
+# .LINK
 
     [OnlineVersion](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-itemproperty?view=powershell-7.2)
+
+    [Online version] (https://docs.microsoft.com/en-us/powershell/scripting/samples/working-with-registry-keys?view=powershell-7.2)

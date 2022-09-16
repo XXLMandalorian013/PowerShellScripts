@@ -3,7 +3,7 @@
     
     .DESCRIPTION
         
-        Gets Reg Key Value.
+        Gets Reg Key Value DWORD.
     
     
     .Notes
