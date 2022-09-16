@@ -72,7 +72,7 @@ if ( $PS2State -match 'Disabled' )
 
     Write-Warning "A restart is require for this change to take effect... "
 
-    Restart-Computer -Confirm
+    Restart-Computer -Force -Confirm
 
 }
 
