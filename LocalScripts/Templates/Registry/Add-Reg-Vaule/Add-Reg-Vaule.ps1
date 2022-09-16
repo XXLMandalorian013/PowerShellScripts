@@ -12,4 +12,6 @@ Name
 
 #Script
 
+#Make sure to keep the Registry:: before the actual Reg key.
+
 New-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore' -Name  'SystemRestorePointCreationFrequency' -Value '0' -Type 'DWORD' –Force

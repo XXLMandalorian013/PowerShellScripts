@@ -11,4 +11,8 @@ Get-ItemProperty
 
 #Script
 
+#Get Reg Key
+
+#When working w/ the Reg, make sure to keep the Registry:: before the actual Reg key.
+
 Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore'
