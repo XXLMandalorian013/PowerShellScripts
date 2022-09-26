@@ -39,13 +39,9 @@
 
 #Connect to Exchange Online V2 w/ Modern Auth and MFA enabled w/ module check.
 
-$ModuleName = 'ExchangeOnlineManagement'
-
-$Module = Get-InstalledModule -Name "$ModuleName" | Select-Object 'Name'
-
-if ( $Module -eq $Module )
+if (Get-InstalledModule -Name 'ExchangeOnlineManagement' | Select-Object 'Name' -ErrorAction SilentlyContinue)
 {
-    Write-Host "$Module installed" -BackgroundColor Green
+    Write-Host "$Module is installed" -BackgroundColor Green
 
     $Email = Read-Host 'Enter UserPrincialName'
 
@@ -55,5 +51,11 @@ if ( $Module -eq $Module )
 else
 {
     Write-Host "$Module is not installed"
+
+    Install-Module -Name ExchangeOnlineManagement -MinimumVersion 2.0.5
+
+    $Email = Read-Host 'Enter UserPrincialName'
+
+    Connect-ExchangeOnline -UserPrincipalName $Email
 }
 
