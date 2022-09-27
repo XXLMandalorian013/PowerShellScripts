@@ -2,6 +2,10 @@
 
 Connects to Exchange Online V2.
 
+# .DESCRIPTION
+
+First this script checks if exchange is up, then it looks to see if you already have an active connection. If not, it connects while making sure the V2 module is installed. If its not, the script installs it.
+
 # Notes
 
 V2 works in PS 7.X.X.
