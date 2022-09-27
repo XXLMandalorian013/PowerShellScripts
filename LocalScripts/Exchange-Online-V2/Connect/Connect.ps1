@@ -71,16 +71,14 @@ else
 
 $PSSessionsName = Get-PSSession | Select-Object -Property "Name"
 
-$PSSessionsState = Get-PSSession | Select-Object -Property "State"
-
-if ("$PSSessionsName" -eq "$PSSessionsState") 
+if ("$PSSessionsName" -match 'ExchangeOnlineInternalSession') 
 {
-    Write-Host "Starting Conection to $PSSessionsName"
+    Throw "Your are already connected to $PSSessionsName"
 }   
 else
 {
-    Throw "Your are already connected to $PSSessionsName"
-}
+    Write-Host 'Starting connection to ExchangeOnlineInternalSession'
+}   
 
 #Connect to exchange/module install check
 

@@ -14,16 +14,27 @@
 
     **No issues**
 
-UserPrincialName:
+UserPrincipalName: email@domain.com
+Network connection confirmed!
 outlook.office365.com is up!
-Starting Conection to
-ExchangeOnlineManagement is installed
+Starting Connection to ExchangeOnlineInternalSession
+ExchangeOnlineManagement Module is installed
+
+ State Name
+ ----- ----
+Opened ExchangeOnlineInternalSession_
+
+    **Exchange module not installed**
 
 @{Name=ExchangeOnlineManagement} is not installed
 
     **Already Connected to Exchange**
 
-Your are already connected to @{Name=ExchangeOnlineInternalSession_2}
+Exception:
+Line |
+   8 |      Throw "Your are already connected to $PSSessionsName"
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Your are already connected to @{Name=ExchangeOnlineInternalSession
 
     **Network Issues**
 
