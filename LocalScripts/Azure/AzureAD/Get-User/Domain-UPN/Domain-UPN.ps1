@@ -32,7 +32,7 @@
 
 #Script
 
-$AllUsers = Get-AzureADUser -top 999999 | Select-Object UserPrincipalName
+$AllUsers = Get-AzureADUser | Select-Object UserPrincipalName
 
-$AllUsers -match 'domainhere' #Change to your Org
+$AllUsers -match 'domainhere.com' #Change to your Org
 
