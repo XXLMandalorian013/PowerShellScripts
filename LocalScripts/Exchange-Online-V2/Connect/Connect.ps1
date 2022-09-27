@@ -91,14 +91,18 @@ $Module = $ModuleName.Name
 if ($Module | Select-Object -Property 'Name', 'Version' -erroraction silentlycontinue)
 {
     Write-Host "$Module Module is installed"
+
+    Connect-ExchangeOnline -UserPrincipalName $UserPrincipalName
+
+    Get-PSSession | Select-Object -Property State, Name
 }
 else
 {
     Write-Host "ExchangeOnlineManagement is not installed...Installing"
 
     Install-Module -Name ExchangeOnlineManagement -MinimumVersion 2.0.5
+
+    Connect-ExchangeOnline -UserPrincipalName $UserPrincipalName
+
+    Get-PSSession | Select-Object -Property State, Name
 }
-
-Connect-ExchangeOnline -UserPrincipalName $UserPrincipalName
-
-Get-PSSession | Select-Object -Property State, Name
