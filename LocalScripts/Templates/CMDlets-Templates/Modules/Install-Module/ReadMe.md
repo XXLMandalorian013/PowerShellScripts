@@ -1,6 +1,4 @@
-# Name
-
-Install-Module
+# Install-Module
 
 ## Links
 
