@@ -37,9 +37,6 @@
 
 #Script
 
-#Connect to Exchange Online V2 w/ Modern Auth and MFA enabled w/ module check.
-
-
 [CmdletBinding()]
 param (
     [Parameter(Mandatory,HelpMessage='Enter a UserPrincical Name/Email')]
