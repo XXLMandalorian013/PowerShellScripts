@@ -4,7 +4,10 @@ Connects to Exchange Online V2.
 
 # .DESCRIPTION
 
-First this script checks if exchange is up, then it looks to see if you already have an active connection. If not, it connects while making sure the V2 module is installed. If its not, the script installs it.
+1. Checks your network connection.
+2. Verifies if exchange is up.
+3. Looks to see if you already have an active connection, If not it connects while making sure the V2 module is installed.
+4. If ExchangeOnline module it not installed, the script installs it.
 
 # Notes
 
@@ -69,6 +72,6 @@ outlook.office365.com is down...see https://portal.office.com/adminportal/home?#
 
 [Connect-ExchangeOnline OnlineVersion](https://learn.microsoft.com/en-us/powershell/module/exchange/connect-exchangeonline?view=exchange-ps)
 
-[Everything you wanted to know about the if OnlineVersion](https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2)
+[Everything you wanted to know about if OnlineVersion](https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2)
 
 [about_Operators OnlineVersion](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.2)
