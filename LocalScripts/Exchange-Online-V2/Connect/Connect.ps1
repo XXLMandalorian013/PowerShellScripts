@@ -106,3 +106,4 @@ else
 
     Get-PSSession | Select-Object -Property State, Name
 }
+
