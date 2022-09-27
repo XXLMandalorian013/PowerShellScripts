@@ -1,16 +1,16 @@
-# .SYNOPSIS
+# SYNOPSIS
 
     Connects to Exchange Online V2.
 
-# .Notes
+# Notes
 
     V2 works in PS 7.X.X.
 
-# .INPUTS
+# INPUTS
 
     String (UserPrincialName)
 
-# .OUTPUTS
+# OUTPUTS
 
     @{Name=ExchangeOnlineManagement} installed
 
@@ -18,7 +18,7 @@
 
     @{Name=ExchangeOnlineManagement} is not installed
 
-# .LINK
+# LINKS
 
     [Connect-ExchangeOnline OnlineVersion](https://learn.microsoft.com/en-us/powershell/module/exchange/connect-exchangeonline?view=exchange-ps)
 
