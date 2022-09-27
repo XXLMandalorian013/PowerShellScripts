@@ -5,16 +5,17 @@
 
         Connects to Exchange Online V2.
 
+    .DESCRIPTION
+
+        First this script checks if exchange is up, then it looks to see if you already have an active connection. If not, it connects while making sure the V2 module is installed. If its not, the script installs it.
+
     .Notes
 
-        V2 works in PS 7.X.X.
-    
-
+        V2 only works in PS 7.X.X.
 
     .INPUTS
         
         String (UserPrincialName)
-
 
     .OUTPUTS
         
@@ -23,7 +24,6 @@
         Enter UserPrincialName:
 
         @{Name=ExchangeOnlineManagement} is not installed
-
 
     .LINK
         
@@ -39,23 +39,60 @@
 
 #Connect to Exchange Online V2 w/ Modern Auth and MFA enabled w/ module check.
 
-if (Get-InstalledModule -Name 'ExchangeOnlineManagement' | Select-Object 'Name' -ErrorAction SilentlyContinue)
+
+[CmdletBinding()]
+param (
+    [Parameter(Mandatory,HelpMessage='Enter a UserPrincical Name/Email')]
+    [string]$UserPrincipalName
+)
+
+#Is Exchange down?
+
+if (Test-Connection -TargetName outlook.office365.com -ErrorAction SilentlyContinue)
 {
-    Write-Host "$Module is installed" -BackgroundColor Green
-
-    $Email = Read-Host 'Enter UserPrincialName'
-
-    Connect-ExchangeOnline -UserPrincipalName $Email
-
+    Write-Host "outlook.office365.com is up!"
 }
 else
 {
-    Write-Host "$Module is not installed"
+    Throw "outlook.office365.com is down...see https://portal.office.com/adminportal/home?#/servicehealth"
+}
+
+#Am I already connected to ExchangeOnline?
+
+$PSSessionsName = Get-PSSession | Select-Object -Property "Name"
+
+$PSSessionsState = Get-PSSession | Select-Object -Property "State"
+
+if ("$PSSessionsName" -ne "$PSSessionsState") {
+    Throw "Your are already connected to $PSSessionsName"
+}   
+else
+{
+    Write-Host "Starting Conection to $PSSessionsName"
+}
+
+#Connect to exchange/module install check
+
+$ModuleName = Get-InstalledModule -Name 'ExchangeOnlineManagement'
+
+$Module = $ModuleName.Name
+
+if ( "$Module -ErrorAction SilentlyContinue")
+{
+    Write-Host "$Module is installed"
+
+    Connect-ExchangeOnline -UserPrincipalName $UserPrincipalName
+
+    Get-PSSession | Select-Object -Property State, Name
+}
+else
+{
+    Write-Host "$Module is not installed...Installing"
 
     Install-Module -Name ExchangeOnlineManagement -MinimumVersion 2.0.5
 
-    $Email = Read-Host 'Enter UserPrincialName'
-
-    Connect-ExchangeOnline -UserPrincipalName $Email
+    Connect-ExchangeOnline -UserPrincipalName $UserPrincipalName
+    
+    Get-PSSession | Select-Object -Property State, Name
 }
 
