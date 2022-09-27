@@ -36,7 +36,17 @@ Line |
 
 ## **Network Issues**
 
-No Network connection or outlook.office365.com is down...see https://portal.office.com/adminportal/home?#/servicehealth
+WARNING: Name resolution of internetbeacon.msedge.net failed
+Exception:
+Line |
+  56 |      Throw "Check network connection"
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Check network connection
+
+## **outlook.office365.com is down**
+
+outlook.office365.com is down...see https://portal.office.com/adminportal/home?#/servicehealth
+
 
 # LINKS
 
