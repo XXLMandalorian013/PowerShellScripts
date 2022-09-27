@@ -20,11 +20,9 @@ outlook.office365.com is up!
 Starting Connection to ExchangeOnlineInternalSession
 ExchangeOnlineManagement Module is installed
 
- State Name
+ State    Name
 
----
-
-Opened ExchangeOnlineInternalSession_
+Opened    ExchangeOnlineInternalSession_
 
 ## **Exchange module not installed**
 
