@@ -24,7 +24,20 @@ Opened    ExchangeOnlineInternalSession_
 
 ## **Exchange module not installed**
 
-@{Name=ExchangeOnlineManagement} is not installed
+UserPrincipalName: email@domain.com
+Network connection confirmed!
+outlook.office365.com is up!
+Starting connection to ExchangeOnlineInternalSession
+Get-Package: No match was found for the specified search criteria and module names 'ExchangeOnlineManagement'.
+
+ExchangeOnlineManagement is not installed...Installing
+
+Untrusted repository
+You are installing the modules from an untrusted repository. If you trust this repository, change its
+InstallationPolicy value by running the Set-PSRepository cmdlet. Are you sure you want to install the modules from
+'PSGallery'?
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "N"): y
+
 
 ## **Already Connected to Exchange**
 

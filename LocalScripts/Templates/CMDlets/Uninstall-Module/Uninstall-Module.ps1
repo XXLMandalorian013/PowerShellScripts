@@ -22,3 +22,5 @@
 #Uninstall-Module
 
 Uninstall-Module -Name 'ExchangeOnlineManagement'
+
+#Checks if module is installed, if so it uninstalls it.
