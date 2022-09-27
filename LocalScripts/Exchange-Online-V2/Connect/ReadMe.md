@@ -12,7 +12,7 @@
 
 # OUTPUTS
 
-    **No issues**
+## **No issues**
 
 UserPrincipalName: email@domain.com
 Network connection confirmed!
@@ -21,14 +21,16 @@ Starting Connection to ExchangeOnlineInternalSession
 ExchangeOnlineManagement Module is installed
 
  State Name
- ----- ----
+
+---
+
 Opened ExchangeOnlineInternalSession_
 
-    **Exchange module not installed**
+## **Exchange module not installed**
 
 @{Name=ExchangeOnlineManagement} is not installed
 
-    **Already Connected to Exchange**
+## **Already Connected to Exchange**
 
 Exception:
 Line |
@@ -36,11 +38,9 @@ Line |
      |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      | Your are already connected to @{Name=ExchangeOnlineInternalSession
 
-    **Network Issues**
+## **Network Issues**
 
 No Network connection or outlook.office365.com is down...see https://portal.office.com/adminportal/home?#/servicehealth
-
-
 
 # LINKS
 
