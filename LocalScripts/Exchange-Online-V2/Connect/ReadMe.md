@@ -12,11 +12,24 @@
 
 # OUTPUTS
 
-    @{Name=ExchangeOnlineManagement} installed
+    **No issues**
 
-    Enter UserPrincialName:
+UserPrincialName:
+outlook.office365.com is up!
+Starting Conection to
+ExchangeOnlineManagement is installed
 
-    @{Name=ExchangeOnlineManagement} is not installed
+@{Name=ExchangeOnlineManagement} is not installed
+
+    **Already Connected to Exchange**
+
+Your are already connected to @{Name=ExchangeOnlineInternalSession_2}
+
+    **Network Issues**
+
+No Network connection or outlook.office365.com is down...see https://portal.office.com/adminportal/home?#/servicehealth
+
+
 
 # LINKS
 

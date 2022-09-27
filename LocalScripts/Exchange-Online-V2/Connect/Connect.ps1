@@ -43,6 +43,19 @@ param (
     [string]$UserPrincipalName
 )
 
+#Can I dial out?
+
+$NetworkConnectionPing = $NetworkConnection = Test-NetConnection | Select-Object 'PingSucceeded'
+
+if ($NetworkConnectionPing -match 'True')
+{
+    Write-Host "Network connection confirmed!"
+}
+else
+{
+    Throw "Check network connection"
+}
+
 #Is Exchange down?
 
 if (Test-Connection -TargetName outlook.office365.com -ErrorAction SilentlyContinue)
@@ -51,7 +64,7 @@ if (Test-Connection -TargetName outlook.office365.com -ErrorAction SilentlyConti
 }
 else
 {
-    Throw "outlook.office365.com is down...see https://portal.office.com/adminportal/home?#/servicehealth"
+    Throw "No Network connection or outlook.office365.com is down...see https://portal.office.com/adminportal/home?#/servicehealth"
 }
 
 #Am I already connected to ExchangeOnline?
@@ -60,12 +73,13 @@ $PSSessionsName = Get-PSSession | Select-Object -Property "Name"
 
 $PSSessionsState = Get-PSSession | Select-Object -Property "State"
 
-if ("$PSSessionsName" -ne "$PSSessionsState") {
-    Throw "Your are already connected to $PSSessionsName"
+if ("$PSSessionsName" -eq "$PSSessionsState") 
+{
+    Write-Host "Starting Conection to $PSSessionsName"
 }   
 else
 {
-    Write-Host "Starting Conection to $PSSessionsName"
+    Throw "Your are already connected to $PSSessionsName"
 }
 
 #Connect to exchange/module install check
@@ -76,7 +90,7 @@ $Module = $ModuleName.Name
 
 if ( "$Module -ErrorAction SilentlyContinue")
 {
-    Write-Host "$Module is installed"
+    Write-Host "$Module Module is installed"
 
     Connect-ExchangeOnline -UserPrincipalName $UserPrincipalName
 
