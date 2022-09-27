@@ -45,9 +45,9 @@ param (
 
 #Can I dial out?
 
-$NetworkConnectionPing = $NetworkConnection = Test-NetConnection | Select-Object 'PingSucceeded'
+$NetworkConnection = Test-NetConnection | Select-Object 'PingSucceeded'
 
-if ($NetworkConnectionPing -match 'True')
+if ($NetworkConnection -match 'True')
 {
     Write-Host "Network connection confirmed!"
 }
