@@ -7,7 +7,10 @@
 
     .DESCRIPTION
 
-        First this script checks if exchange is up, then it looks to see if you already have an active connection. If not, it connects while making sure the V2 module is installed. If its not, the script installs it.
+        1. Checks your network connection.
+        2. Verifies if exchange is up.
+        3. Looks to see if you already have an active connection, If not it connects while making sure the V2 module is installed.
+        4. If ExchangeOnline module it not installed, the script installs it.
 
     .Notes
 
