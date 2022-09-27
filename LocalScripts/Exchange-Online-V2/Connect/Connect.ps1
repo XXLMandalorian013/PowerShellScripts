@@ -36,6 +36,12 @@
 
         [about_Operators OnlineVersion](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.2)
 
+        [Get-PSSession OnlineVersion](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-pssession?view=powershell-7.2)
+
+        [Test-NetConnection OnlineVersion](https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection?view=windowsserver2022-ps)
+
+        [Test-Connection Online](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-connection?view=powershell-7.2)
+
 #>
 
 #Script
