@@ -37,6 +37,12 @@
 
 #Script
 
+[CmdletBinding()]
+param (
+    [Parameter(Mandatory,HelpMessage='Enter a UserPrincical Name/Email')]
+    [string]$UserPrincipalName
+)
+
 #Can I dial out?
 
 $NetworkConnection = Test-NetConnection | Select-Object 'PingSucceeded'
@@ -86,7 +92,7 @@ if ($Module | Select-Object -Property 'Name', 'Version' -erroraction silentlycon
 {
     Write-Host "$Module Module is installed"
 
-    Connect-ExchangeOnline
+    Connect-ExchangeOnline -UserPrincipalName $UserPrincipalName
 
     Get-PSSession | Select-Object -Property State, Name
 }
@@ -96,7 +102,7 @@ else
 
     Install-Module -Name ExchangeOnlineManagement -MinimumVersion 2.0.5
 
-    Connect-ExchangeOnline
+    Connect-ExchangeOnline -UserPrincipalName $UserPrincipalName
 
     Get-PSSession | Select-Object -Property State, Name
 }
