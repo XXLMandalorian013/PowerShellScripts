@@ -73,7 +73,7 @@ if (Test-Connection -TargetName outlook.office365.com -ErrorAction SilentlyConti
 }
 else
 {
-    Throw "No Network connection or outlook.office365.com is down...see https://portal.office.com/adminportal/home?#/servicehealth"
+    Throw "outlook.office365.com is down...see https://portal.office.com/adminportal/home?#/servicehealth"
 }
 
 #Am I already connected to ExchangeOnline?
