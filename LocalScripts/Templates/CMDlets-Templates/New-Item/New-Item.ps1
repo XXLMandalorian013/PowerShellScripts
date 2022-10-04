@@ -9,9 +9,19 @@ New-Item
 
 #Script
 
+
+
 #Add Reg Key
 
 #Make sure to keep the Registry:: before the actual Reg key.
 
 New-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SYSTEM\TestKey' –Force
+
+
+#New Folder/Dir
+
+#Creates a folder called "LogFiles" in the C:\ folder.
+
+New-Item -Path "c:\" -Name "logfiles" -ItemType "directory"
+
 
