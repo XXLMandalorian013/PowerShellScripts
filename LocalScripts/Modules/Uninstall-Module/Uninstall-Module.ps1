@@ -12,7 +12,7 @@
 
 #Uninstall Module by name
 
-Uninstall-Module -Name 'ExchangeOnline'
+Uninstall-Module -Name 'ExchangeOnlineManagement'
 
 #Uninstall Module if installed
 
