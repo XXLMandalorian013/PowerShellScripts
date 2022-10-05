@@ -51,11 +51,26 @@
 #Script
 
 
-[CmdletBinding()]
 param (
     [Parameter(Mandatory,HelpMessage='Type the email you wish to check')]
-    [string]$Identity    
+    [string]$Identity)
+
+    $ParamArray = @(
+    
+  "Name"
+  "CreationTime"
+  "LastModifiedTime"
+  "FolderPath"
+  "FolderType"
+  "VisibleItemsInFolder"
+  "FolderSize"
+  "ItemsInFolderAndSubfolders"
+  "FolderAndSubfolderSize"
+  
 )
 
-Get-EXOMailboxFolderStatistics -Identity $Identity | Select-Object 'Name', 'CreationTime', 'LastModifiedTime', 'FolderPath', 'FolderType', 'VisibleItemsInFolder', 'FolderSize', 'ItemsInFolderAndSubfolders', 'FolderAndSubfolderSize'
+Get-EXOMailboxFolderStatistics -Identity $Identity | Select-Object $ParamArray
+
+
+
 
