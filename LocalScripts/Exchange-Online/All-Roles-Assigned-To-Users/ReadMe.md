@@ -1,4 +1,4 @@
-# All-Users-Assigned-Roles
+# All-Roles-Assigned-To-Users
 
 ## DESCRIPTION
 
@@ -20,14 +20,13 @@ System.String.
 
 Role                                   RoleAssignee                   RoleAssigneeType
 
-----                                   ------------                   ----------------
+---
 
 Retention Management                   Organization Management        RoleGroup
 
 My Custom Apps                         Organization Management        RoleGroup
 
 Recipient Policies                     Organization Management        RoleGroup
-
 
 # LINK
 
