@@ -47,5 +47,5 @@ $ParamArray = @(
   
   )
   
-Get-ManagementRoleAssignment -Role "*" - | Format-Table $ParamArray
+Get-ManagementRoleAssignment -Role "*" | Format-Table $ParamArray
   
