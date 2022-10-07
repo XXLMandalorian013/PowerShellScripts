@@ -1,8 +1,8 @@
-# All-Roles-Assigned-To-Users
+# All-Roles
 
 ## DESCRIPTION
 
-Gets all Admin Users Exchange Roles
+Gets all Roles
 
 ## Notes
 
@@ -10,7 +10,7 @@ ExchangeOnlineManagment Module only workin in PS 7.X.X.
 
 ## INPUTS
 
-An Email of the Admin you wish to check.
+None.
 
 ## OUTPUTS
 

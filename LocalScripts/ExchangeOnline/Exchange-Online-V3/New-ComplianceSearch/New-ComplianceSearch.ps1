@@ -44,10 +44,14 @@
 
 .LINK
         
-    CMDLet Online version: http://www.fabrikam.com/extension.html
+    https://learn.microsoft.com/en-us/powershell/module/exchange/get-managementrole?view=exchange-ps
+
+    https://learn.microsoft.com/en-us/powershell/module/exchange/new-compliancesearch?view=exchange-ps
+
 
 #>
 
 #Script
 
 
+New-ComplianceSearch -Name "TestSearch1" -ExchangeLocation "damcclellan@hawainc.com" -ContentMatchQuery "Test"
