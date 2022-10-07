@@ -54,4 +54,5 @@
 #Script
 
 
-New-ComplianceSearch -Name "TestSearch1" -ExchangeLocation "damcclellan@hawainc.com" -ContentMatchQuery "Test"
+New-ComplianceSearch -Name "TestSearch1" -ExchangeLocation "email@doamin.com" -ContentMatchQuery (c:c)(senderauthor="user@domain.com")
+

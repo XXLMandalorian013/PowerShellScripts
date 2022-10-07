@@ -12,15 +12,6 @@
 
 #Script
 
-#Install Module
-
-Install-Module -Name ExchangeOnlineManagement 
-
-
-#Install Module w/ version minimum
-
-Install-Module -Name ExchangeOnlineManagement -RequiredVersion 2.0.5
-
 
 #Module install check.
 
@@ -38,7 +29,7 @@ else
 {
     Write-Host "ExampleModule is not installed...Installing"
 
-    Install-Module -Name ExchangeOnlineManagement -RequiredVersion 2.0.5
+    Install-Module -Name ExchangeOnlineManagement -RequiredVersion 3.0.0
 }
 
 
