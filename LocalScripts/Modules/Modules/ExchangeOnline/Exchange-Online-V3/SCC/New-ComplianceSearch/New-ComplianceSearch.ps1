@@ -66,23 +66,29 @@
 
     https://learn.microsoft.com/en-us/powershell/module/exchange/get-compliancecase?view=exchange-ps
 
+    https://learn.microsoft.com/en-us/powershell/module/exchange/get-compliancesearchaction?view=exchange-ps
+
 
 #>
 
-#Script
+#Script  
 
 
+
+param (
 [Parameter(Mandatory,HelpMessage='Enter a UserPrincical Name/Email')]
-[string]$UserPrincipalName
+[string]$UserPrincipalName,
+
 
 [Parameter(Mandatory,HelpMessage='Name the search.')]
-[string]$SearchName
+[string]$SearchName,
+
 
 [Parameter(Mandatory,HelpMessage='Type an email address or email subject.')]
-[string]$EXLocation
+[string]$EXLocation,
 
-[Parameter(Mandatory,HelpMessage='Type an email address or email subject.')]
-[string]$ContentMatchQuery
+
+)
 
 
 #Am I connected to ExchangeOnlinehe?
@@ -117,7 +123,7 @@ else
 
 #Create Compliance Search peramiters
 
-New-ComplianceSearch -Name "$SearchName" -ExchangeLocation "$EXLocation" -ContentMatchQuery "$ContentMatchQuery"
+New-ComplianceSearch -Name "$SearchName" -ExchangeLocation "$EXLocation"
 
 
 #Runs the New-ComplianceSearch CMDLet.
@@ -133,6 +139,13 @@ Get-ComplianceSearch -Identity "$SearchName"
 #Start Exporting the Compliance Search
 
 New-ComplianceSearchAction "$SearchName" -Export -Format Fxstream
+
+
+#Opens the URl to the MS Compliance Center in Edge as ClickOnce is required to download w/ the MS export tool upon first download and use.
+
+Start-Process -FilePath "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ArgumentList "https://compliance.microsoft.com/contentsearchv2?viewid=export"
+
+
 
 
 
