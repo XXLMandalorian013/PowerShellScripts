@@ -74,7 +74,6 @@
 #Script  
 
 
-
 param (
 [Parameter(Mandatory,HelpMessage='Enter a UserPrincical Name/Email')]
 [string]$UserPrincipalName,
@@ -85,23 +84,43 @@ param (
 
 
 [Parameter(Mandatory,HelpMessage='Type an email address or email subject.')]
-[string]$EXLocation,
-
+[string]$EXLocation
 
 )
 
 
-#Am I connected to ExchangeOnlinehe?
+#Exchange Online module 2.0.5 (V2) and newer requires PS 7.X.X.
+
+
+if ($PSVersionTable.PSVersion.Major -eq 7) {
+		
+	Write-Host "This script is running in $($PSVersionTable.PSVersion)."
+	
+} 
+
+else {
+	
+    Write-Warning "This script is running in PowerShell $($PSVersionTable.PSVersion)...Please run this script in PowerShell  Version 7.X.X...Ending Script" -WarningAction Inquire
+		
+	Start-Sleep -Seconds 3
+
+	Exit
+}
+
+
+#Am I connected to ExchangeOnlinehe? Its required to be connected to the EXO before connecting to the SCC.
 
 $PSSessionsName = Get-ConnectionInformation | Select-Object -Property "Name"
 
 if ("$PSSessionsName" -match 'ExchangeOnline') 
 {
-    
+
 }   
 else
 {
     Throw "Your are not connected to ExchangeOnline"
+    
+    Connect-ExchangeOnline
 } 
 
 
@@ -117,7 +136,7 @@ else
 {
     Write-Host "Your are not connected to the SCC...Connecting"
 
-    Connect-IPPSSession -UserPrincipalName "$UserPrincipalName"
+    Connect-IPPSSession
 }
 
 
@@ -131,19 +150,29 @@ New-ComplianceSearch -Name "$SearchName" -ExchangeLocation "$EXLocation"
 Start-ComplianceSearch -Identity "$SearchName"
 
 
-#Check if Compliance Search is done.
-
-Get-ComplianceSearch -Identity "$SearchName"
-
-
 #Start Exporting the Compliance Search
 
 New-ComplianceSearchAction "$SearchName" -Export -Format Fxstream
 
 
-#Opens the URl to the MS Compliance Center in Edge as ClickOnce is required to download w/ the MS export tool upon first download and use.
+#Check if Compliance Search is done and if so, it opens the URl to the MS Compliance Center in Edge as ClickOnce is required to download w/ the MS export tool upon first download and use.
 
-Start-Process -FilePath "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ArgumentList "https://compliance.microsoft.com/contentsearchv2?viewid=export"
+$SearchStatus = (Get-ComplianceSearch -Identity $SearchName).Status
+
+if ($SearchStatus -ne "Completed") {
+
+    Start-Process -FilePath "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ArgumentList "https://compliance.microsoft.com/contentsearchv2?viewid=export"
+
+
+}
+
+
+
+
+
+
+
+
 
 
 

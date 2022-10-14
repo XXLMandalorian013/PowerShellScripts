@@ -15,12 +15,6 @@ If-ElseIf-Else
 
 #if
 
-$Path = C:\
-if (Test-Path -Path $Path)
-
-
-#iff
-
 if ( $process = Get-Process Notepad* )
 {
     $process | Stop-Process
@@ -48,21 +42,36 @@ else
 
 #Nested if
 
-$Path = C:\
-
-if ( Test-Path -Path $Path -PathType Leaf )
+if ($PSMainFolder -eq 'True')
 {
-    Move-Item -Path $Path -Destination C:\Users
-}
-else
-{
-    if ( Test-Path -Path $Path )
+    Write-Host "C:\PS Exsists..."
+    
+    if ($PSCoreFolder -eq 'True')
     {
-        Write-Warning "A file was required but a directory was found instead."
+        Write-Host "C:\PS\PSCore Exsists..."
     }
     else
     {
-        Write-Warning "$path could not be found."
+        Write-Host "C:\PS\PSCore not found, creating..."
+        New-Item -Path "c:\PS\" -Name "PSCore" -ItemType "directory"
+
+    }
+   
+}
+else
+{
+    Write-Host "C:\PS not found, creating..."
+    New-Item -Path "c:\" -Name "PS" -ItemType "directory"
+
+    if ($PSCoreFolder -eq 'True')
+    {
+        Write-Host "C:\PS\PSCore Exsists..."
+    }
+    else
+    {
+        Write-Host "C:\PS\PSCore not found, creating..."
+        New-Item -Path "c:\PS\" -Name "PSCore" -ItemType "directory"
+
     }
 }
 

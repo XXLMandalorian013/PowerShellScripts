@@ -46,11 +46,6 @@
 
 #Script
 
-[CmdletBinding()]
-param (
-    [Parameter(Mandatory,HelpMessage='Enter a UserPrincical Name/Email')]
-    [string]$UserPrincipalName
-)
 
 #Can I dial out?
 
@@ -101,7 +96,7 @@ if ($Module | Select-Object -Property 'Name', 'Version' -erroraction silentlycon
 {
     Write-Host "$Module Module is installed"
 
-    Connect-ExchangeOnline -UserPrincipalName $UserPrincipalName
+    Connect-ExchangeOnline
 
     Get-PSSession | Select-Object -Property State, Name
 }
@@ -111,7 +106,7 @@ else
 
     Install-Module -Name ExchangeOnlineManagement -MinimumVersion 3.0.0
 
-    Connect-ExchangeOnline -UserPrincipalName $UserPrincipalName
+    Connect-ExchangeOnline
 
     Get-PSSession | Select-Object -Property State, Name
 }

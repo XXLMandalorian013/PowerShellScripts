@@ -64,3 +64,6 @@ Set-Location -Path "C:\Program Files\PowerShell\7"
 
 .\InstallPSCorePolicyDefinitions.ps1
 
+
+#Folder Creation for PS Transcripts
+  
