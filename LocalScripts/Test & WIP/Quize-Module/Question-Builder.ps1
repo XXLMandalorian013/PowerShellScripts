@@ -51,37 +51,36 @@
 #Script
 
 
-[Parameter(Mandatory,HelpMessage='Enter a Quiz Header Name')]
-[string]$QuizHeader,
+$QuizHeader = (Read-Host "Enter a Quiz Header Name.")
 
-[Parameter(Mandatory,HelpMessage='Type the Question.')]
-[string]$Question,
+$Question = (Read-Host "Type the Question.")
 
-[Parameter(Mandatory,HelpMessage='Type answer 1.')]
-[string]$Answer1,
+$Answer1 = (Read-Host "Type answer 1.")
 
-[Parameter(Mandatory,HelpMessage='Type answer 2.')]
-[string]$Answer2,
+$Answer2 = (Read-Host "Type answer 2.")
 
-[Parameter(Mandatory,HelpMessage='Type answer 3.')]
-[string]$Answer3,
+$Answer3 = (Read-Host "Type answer 3.")
 
-[Parameter(Mandatory,HelpMessage='Type answer 4.')]
-[string]$Answer4,
+$Answer4 = (Read-Host "Type answer 4.")
 
-[Parameter(Mandatory,HelpMessage='Type answer 5.')]
-[string]$Answer5,
+$Answer5 = (Read-Host "Type answer 5.")
 
-[Parameter(Mandatory,HelpMessage='Type answer 6.')]
-[string]$Answer6
+$Answer6 = (Read-Host "Type answer 6.")
 
- 
-$QuizHeader = Read-Host "Type a Quiz Header Name"
-$Question = Read-Host "Type the Question"
-$Answer1 = Read-Host "Type answer 1."
-$Answer2 = Read-Host "Type answer 2."
-$Answer3 = Read-Host "Type answer 3."
-$Answer4 = Read-Host "Type answer 4."
-$Answer5 = Read-Host "Type answer 5."
-$Answer6 = Read-Host "Type answer 6."
+$Answer = (Read-Host "Type correct answer.")
+
+$QuizOutLocation = (Read-Host "Type a Dir to save this Quiz to.")
+
+$OutFileName = (Read-Host "Type a Name for the .ps1")
+
+$QuestionTemplate = $QuizHeader + $Question + $Answer1 + $Answer2 + $Answer3 + $Answer4 + $Answer5 + $Answer6 + $Answer
+
+$QuestionTemplate | Out-File -NoClobber -FilePath (Join-Path -Path "$QuizOutLocation" -ChildPath "$OutFileName.ps1")
+
+
+
+
+
+
+
 
