@@ -73,7 +73,7 @@ $QuizOutLocation = (Read-Host "Type a Dir to save this Quiz to.")
 
 $OutFileName = (Read-Host "Type a Name for the .ps1")
 
-$QuestionTemplate = $QuizHeader + $Question + $Answer1 + $Answer2 + $Answer3 + $Answer4 + $Answer5 + $Answer6 + $Answer
+$QuestionTemplate = @("$QuizHeader",'Oranges','Bananas')
 
 $QuestionTemplate | Out-File -NoClobber -FilePath (Join-Path -Path "$QuizOutLocation" -ChildPath "$OutFileName.ps1")
 
