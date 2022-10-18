@@ -46,7 +46,7 @@ if ("$PSSessionsName" -match 'ExchangeOnline')
 }   
 else
 {
-    Throw "Your are not connected to ExchangeOnline"
+    Write-Host "Your are not connected to ExchangeOnline...Connecting"
     
     Connect-ExchangeOnline
 } 
