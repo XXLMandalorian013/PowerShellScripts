@@ -148,16 +148,11 @@ New-ComplianceSearch -Name "$SearchName" -ExchangeLocation "$EXLocation"
 Start-ComplianceSearch -Identity "$SearchName"
 
 
-#Start Exporting the Compliance Search
-
-New-ComplianceSearchAction "$SearchName" -Export -Format Fxstream
-
-
 #Check if Compliance Search is done and if so, it starts exporting it.
 
 do { 
     Start-Sleep -Seconds 60
-    $CSStatus = (Get-ComplianceSearch -Identity $SearchName).Status
+    $CSStatus = (Get-ComplianceSearch -Identity "$SearchName").Status
     if ($CSStatus -ne "Completed") {
         Write-Output "Status for $SearchName is $CSStatus. Checking again in 1 minute..."
     }
@@ -175,7 +170,7 @@ New-ComplianceSearchAction "$SearchName" -Export -Format Fxstream
 
 do { 
     Start-Sleep -Seconds 60
-    $CAStatus = (Get-ComplianceSearchAction -Identity $SearchName).Status
+    $CAStatus = (Get-ComplianceSearchAction -Identity "$SearchName").Status
     if ($CAStatus -ne "Completed") {
         Write-Output "Status for $SearchName is $CAStatus. Checking again in 1 minute..."
     }
