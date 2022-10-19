@@ -1,8 +1,8 @@
-# WinGet OneDrive Installer
+# WinGet OneDrive Uninstaller
 
 ## DESCRIPTION
 
-Installs OneDrive silently.
+Uninstalls OneDrive silently.
 
 ## Notes
 
@@ -16,12 +16,11 @@ None.
 
 System.String :
 
-Successfully verified installer hash
 
-Starting package install...
+Starting package uninstall...
 
-Successfully installed.
+Successfully uninstalled
 
 ## LINK
 
-[WinGet Install Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/install)
+[WinGet Uninstall Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall) 

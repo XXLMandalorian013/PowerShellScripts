@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Installs MS 365 Office products (Word, Excel, Outlook, Publisher, PowerPoint, OneNote, and Access) silently. Sign-in is required post install of a licened acct. 
+    Uninstalls MS 365 Office products (Word, Excel, Outlook, Publisher, PowerPoint, OneNote, and Access) silently.
     
     
 .Notes
@@ -18,17 +18,14 @@
 .OUTPUTS
         
 System.String :
-    
-Successfully verified installer hash
 
-Starting package install...
+Starting package uninstall...
 
-Successfully installed.
-
+Successfully uninstalled
 
 .LINK
         
-    https://learn.microsoft.com/en-us/windows/package-manager/winget/install
+    [WinGet Uninstall Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall) 
 
 #>
 
@@ -53,4 +50,4 @@ else {
 	Exit
 }
 
-winget install --id Microsoft.Office --accept-source-agreements --Scope Machine
+winget uninstall --id Microsoft.Office

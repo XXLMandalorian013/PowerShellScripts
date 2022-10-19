@@ -1,8 +1,8 @@
-# WinGet MS365 Installer
+# WinGet MS365 Uninstaller
 
 ## DESCRIPTION
 
-Installs MS 365 Office products (Word, Excel, Outlook, Publisher, PowerPoint, OneNote, and Access) silently. Sign-in is required post install of a licened acct.
+Uninstalls MS 365 Office products (Word, Excel, Outlook, Publisher, PowerPoint, OneNote, and Access) silently.
 
 ## Notes
 
@@ -16,12 +16,10 @@ None.
 
 System.String :
 
-Successfully verified installer hash
+Starting package uninstall...
 
-Starting package install...
-
-Successfully installed.
+Successfully uninstalled
 
 ## LINK
 
-[WinGet Install Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/install)
+[WinGet Uninstall Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall)

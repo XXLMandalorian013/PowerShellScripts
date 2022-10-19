@@ -1,8 +1,8 @@
-# WinGet Chrome Installer
+# WinGet Chrome Uninstaller
 
 ## DESCRIPTION
 
-Installs Chrome silently.
+Uninstalls Chrome silently.
 
 ## Notes
 
@@ -16,12 +16,10 @@ None.
 
 System.String :
 
-Successfully verified installer hash
+Starting package uninstall...
 
-Starting package install...
-
-Successfully installed.
+Successfully uninstalled
 
 ## LINK
 
-[WinGet Install Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/install)
+[WinGet Uninstall Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall)

@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Installs Chrome Silently. 
+    Uninstalls Chrome Silently. 
     
     
 .Notes
@@ -19,16 +19,14 @@
         
 System.String :
     
-Successfully verified installer hash
+Starting package uninstall...
 
-Starting package install...
-
-Successfully installed.
+Successfully uninstalled
 
 
 .LINK
         
-    https://learn.microsoft.com/en-us/windows/package-manager/winget/install
+    [WinGet Uninstall Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall)
 
 #>
 
@@ -58,4 +56,4 @@ else {
 }
 
 
-winget install --id Google.Chrome --accept-source-agreements --Scope Machine
+winget uninstall --id Google.Chrome
