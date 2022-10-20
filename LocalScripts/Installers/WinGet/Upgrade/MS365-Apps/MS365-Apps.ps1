@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Upgrade Chrome Silently. 
+    Installs MS 365 Office products (Word, Excel, Outlook, Publisher, PowerPoint, OneNote, and Access) silently. Sign-in is required post install of a licened acct. 
     
     
 .Notes
@@ -19,28 +19,24 @@
         
 System.String :
     
-Starting package uninstall...
+Successfully verified installer hash
 
-Successfully uninstalled
+Starting package install...
+
+Successfully installed.
 
 
 .LINK
-    
-    [WinGet Upgrade Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/info)
-
-    [WinGet Upgrade Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade)
+        
+    https://learn.microsoft.com/en-us/windows/package-manager/winget/install
 
 #>
 
 #Script
 
-
 #Checks the PS terminal version this is ran in 7.X.X.
 
-#https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2
 
-	
-	
 
 if ($PSVersionTable.PSVersion.Major -eq 7) {
 		
@@ -57,5 +53,4 @@ else {
 	Exit
 }
 
-
-winget uninstall --id Google.Chrome
+winget install --id Microsoft.Office --accept-source-agreements --Scope Machine

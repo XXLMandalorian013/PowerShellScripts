@@ -1,1 +1,1 @@
-# WinGet Installers
+# WinGet Uninstallers

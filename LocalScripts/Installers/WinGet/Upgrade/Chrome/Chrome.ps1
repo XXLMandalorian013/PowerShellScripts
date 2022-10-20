@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Upgrade Chrome Silently. 
+    Upgrades Chrome Silently. 
     
     
 .Notes
@@ -19,17 +19,16 @@
         
 System.String :
     
-Starting package uninstall...
 
-Successfully uninstalled
 
 
 .LINK
     
-    [WinGet Upgrade Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/info)
+    [WinGet Install Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/list)
 
-    [WinGet Upgrade Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade)
+    [WinGet Install Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/install)
 
+    
 #>
 
 #Script
@@ -57,5 +56,14 @@ else {
 	Exit
 }
 
+$Package = 'Google.Chrome'
 
-winget uninstall --id Google.Chrome
+$Version = winget list "$Package"
+
+if (condition) {
+    Installs
+}
+else {
+    <# Action when all if and elseif conditions are false #>
+}
+

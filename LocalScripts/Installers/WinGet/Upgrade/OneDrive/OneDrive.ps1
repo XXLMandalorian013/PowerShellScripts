@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Upgrade Chrome Silently. 
+    Installs OneDrive silently. 
     
     
 .Notes
@@ -19,16 +19,16 @@
         
 System.String :
     
-Starting package uninstall...
+Successfully verified installer hash
 
-Successfully uninstalled
+Starting package install...
+
+Successfully installed.
 
 
 .LINK
-    
-    [WinGet Upgrade Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/info)
-
-    [WinGet Upgrade Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade)
+        
+    https://learn.microsoft.com/en-us/windows/package-manager/winget/install
 
 #>
 
@@ -58,4 +58,4 @@ else {
 }
 
 
-winget uninstall --id Google.Chrome
+winget install --id Microsoft.OneDrive --accept-source-agreements --Scope Machine
