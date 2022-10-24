@@ -201,7 +201,7 @@ Write-Host "$SearchName is $CAStatus, getting download ready."
 #Checks if the .pst is reaedy to be downloaded, if so it opens the URl to the MS Compliance Center in Edge as ClickOnce is required to download w/ the MS export tool upon first download and use.
 
 do { 
-    Start-Sleep -Seconds 60
+    Start-Sleep -Seconds 300
     
     $TodaysDate = Get-Date -Format "yyyy-MM-dd"
 
@@ -209,7 +209,7 @@ do {
 
     if ("$CASName" -ne "$TodaysDate") {
     
-        Write-Host 'Export data is being prepared for download...Please wait.  Checking again in 1 minute...'
+        Write-Host 'Export data is being prepared for download...Please wait.  Checking again in 5 minute...'
 
     }
 }
