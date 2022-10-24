@@ -91,9 +91,12 @@ $JobTitle = Read-Host 'Job Title'
 $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
 
 $PasswordProfile.Password = "$Password"
- 
+
 # -AccountEnabled $true peramiter #Is required.
 
 New-AzureADUser -DisplayName "$DisplayName" -PasswordProfile $PasswordProfile -UserPrincipalName "$UserPrincipalName" -AccountEnabled $true -MailNickName "$MailNickname" -CompanyName "$CompanyName" -UserType "$UserType" -Department "$Department" -JobTitle $JobTitle
 
     
+
+
+

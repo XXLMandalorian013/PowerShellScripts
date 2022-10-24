@@ -47,17 +47,15 @@
 
         https://docs.microsoft.com/en-us/powershell/module/azuread/add-azureadgroupmember?view=azureadps-2.0
 
+        https://docs.microsoft.com/en-us/powershell/module/azuread/get-azureaduser?view=azureadps-2.0
+
 #>
 
 #Script
-  
-$ADGroupsDescription = Get-AzureADGroup | Select-Object DisplayName, Description, ObjectId
 
-$ADGroupsDescription -match 'Distribution-List'
+$UserIDGrab = Read-Host "Type Users Display Name"
 
-
-Write-Host 'Above is our Distribution List'
-
+Get-AzureADUser -Filter "userPrincipalName eq '$UserIDGrab'" | Select-Object 'ObjectId', 'DisplayName'
 
 $DistList = Read-Host "Please Enter a Distribution List"
 
