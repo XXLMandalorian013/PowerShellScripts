@@ -79,6 +79,8 @@ https://learn.microsoft.com/en-us/powershell/module/exchange/get-compliancesearc
 
 https://learn.microsoft.com/en-us/powershell/module/exchange/new-compliancesearchaction?view=exchange-ps
 
+https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.2
+
 #>
 
 
