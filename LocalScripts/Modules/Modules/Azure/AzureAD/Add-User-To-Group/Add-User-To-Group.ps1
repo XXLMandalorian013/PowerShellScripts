@@ -53,13 +53,15 @@
 
 #Script
 
-$UserIDGrab = Read-Host "Type Users Display Name"
+Write-Host "Type the Users email you wish to add to a group."
+
+$UserIDGrab = Read-Host 'Type Users Display Name'
 
 Get-AzureADUser -Filter "userPrincipalName eq '$UserIDGrab'" | Select-Object 'ObjectId', 'DisplayName'
 
-$DistList = Read-Host "Please Enter a Distribution List"
+$DistList = Read-Host 'Please Enter a Distribution Lists object ID'
 
-$ObjectID = Read-Host "Please enter a ObjectID"
+$ObjectID = Read-Host 'Please enter a ObjectID of the user'
 
 Add-AzureADGroupMember -ObjectId "$DistList" -RefObjectId "$ObjectID"
 
