@@ -79,7 +79,7 @@ https://learn.microsoft.com/en-us/powershell/module/exchange/get-compliancesearc
 
 https://learn.microsoft.com/en-us/powershell/module/exchange/new-compliancesearchaction?view=exchange-ps
 
-https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.2
+https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operator_precedence?view=powershell-7.2
 
 #>
 
@@ -207,15 +207,17 @@ do {
     
     $TodaysDate = Get-Date -Format "MM-dd-yyyy"
 
-    Get-ComplianceSearchAction -Identity "$CASName" | Select-Object 'JobEndTime'
+    $CASJobEndTime = Get-ComplianceSearchAction -Identity "$CASName" | Select-Object 'JobEndTime'
 
-    if ("$CASName" -ne "$TodaysDate") {
+    if ("$CASJobEndTime" -match "$TodaysDate") {
     
         Write-Host 'Export data is being prepared for download...Please wait.  Checking again in 5 minute...'
 
+        $TodaysDate = Get-Date -Format "MM/dd/yyyy"
+        
     }
 }
-Until ("$CASName" -eq "$TodaysDate")
+Until ($CASJobEndTime -match "$TodaysDate")
 
 Start-Sleep -Seconds 10
 
@@ -224,19 +226,5 @@ Write-Host "$SearchName is ready for downloading, opening the SCC Export URL in 
 Write-Host "If this is the first time running this, you will be prompted to download the eDescovery Export Tool."
 
 Start-Process -FilePath "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ArgumentList "https://compliance.microsoft.com/contentsearchv2?viewid=export"
-
-
-
-
-
-
-   
- 
-
-
-
-
-
-
 
 
