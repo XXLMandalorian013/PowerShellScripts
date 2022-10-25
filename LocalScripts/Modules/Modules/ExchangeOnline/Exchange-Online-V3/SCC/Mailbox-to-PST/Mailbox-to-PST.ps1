@@ -152,6 +152,8 @@ else
 
 #Create Compliance Search peramiters
 
+Write-Host "Starting Mailbox to .pst backup...please wait..."
+
 New-ComplianceSearch -Name "$SearchName" -ExchangeLocation "$EXLocation"
 
 
@@ -166,12 +168,12 @@ do {
     Start-Sleep -Seconds 60
     $CSStatus = (Get-ComplianceSearch -Identity "$SearchName").Status
     if ($CSStatus -ne "Completed") {
-        Write-Output "Status for $SearchName is $CSStatus. Checking again in 1 minute..."
+        Write-Output "Gathering users data for $SearchName is $CSStatus...Please wait. Checking again in 1 minute..."
     }
 } 
 Until ($CSStatus -eq "Completed")
 
-Write-Output "$SearchName completed...Starting Export"
+Write-Output "ComplianceSearch $SearchName completed...Starting Export"
 
 Start-Sleep -Seconds 10
 
@@ -189,13 +191,13 @@ do {
     
     if ($CAStatus -ne "Completed" ) {
         
-        Write-Host "Status for $SearchName is $CAStatus. Checking again in 1 minute..."
+        Write-Host "Scheduling for $SearchName is $CAStatus...Please wait. Checking again in 1 minute..."
 
     }
 } 
 Until ($CAStatus -eq "Completed")
 
-Write-Host "$SearchName is $CAStatus, getting download ready."
+Write-Host "Scheduling for $SearchName is $CAStatus, getting the download ready."
 
 
 #Checks if the .pst is reaedy to be downloaded, if so it opens the URl to the MS Compliance Center in Edge as ClickOnce is required to download w/ the MS export tool upon first download and use.
@@ -203,7 +205,7 @@ Write-Host "$SearchName is $CAStatus, getting download ready."
 do { 
     Start-Sleep -Seconds 300
     
-    $TodaysDate = Get-Date -Format "yyyy-MM-dd"
+    $TodaysDate = Get-Date -Format "MM-dd-yyyy"
 
     Get-ComplianceSearchAction -Identity "$CASName" | Select-Object 'JobEndTime'
 
