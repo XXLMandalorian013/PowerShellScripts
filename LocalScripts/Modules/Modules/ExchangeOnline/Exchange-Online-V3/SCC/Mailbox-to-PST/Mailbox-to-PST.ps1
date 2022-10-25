@@ -165,10 +165,10 @@ Start-ComplianceSearch -Identity "$SearchName"
 #Check if Compliance Search is done and if so, it starts exporting it.
 
 do { 
-    Start-Sleep -Seconds 60
+    Start-Sleep -Seconds 180
     $CSStatus = (Get-ComplianceSearch -Identity "$SearchName").Status
     if ($CSStatus -ne "Completed") {
-        Write-Output "Gathering users data for $SearchName is $CSStatus...Please wait. Checking again in 1 minute..."
+        Write-Output "Gathering users data for $SearchName is $CSStatus...Please wait. Checking again in 3 minutes..."
     }
 } 
 Until ($CSStatus -eq "Completed")
@@ -183,21 +183,21 @@ New-ComplianceSearchAction "$SearchName" -Export -Format Fxstream
 #Check if Compliance Search Action exporting is done, if so it moves onto if the .pst is ready for download.
 
 do { 
-    Start-Sleep -Seconds 60
+    Start-Sleep -Seconds 180
     
     $CASName = Get-ComplianceSearchAction | Select-Object -ExpandProperty Name -Last 1
     
     $CAStatus = (Get-ComplianceSearchAction -Identity "$CASName").Status 
     
-    if ($CAStatus -ne "Completed" ) {
+    if ($CAStatus -ne "Completed") {
         
-        Write-Host "Scheduling for $SearchName is $CAStatus...Please wait. Checking again in 1 minute..."
+        Write-Host "Scheduling for $SearchName is $CAStatus...Please wait. Checking again in 3 minutes..."
 
     }
 } 
 Until ($CAStatus -eq "Completed")
 
-Write-Host "Scheduling for $SearchName is $CAStatus, getting the download ready."
+Write-Host "Scheduling for $SearchName is $CAStatus, and the export key has been generated...Getting the download ready."
 
 
 #Checks if the .pst is reaedy to be downloaded, if so it opens the URl to the MS Compliance Center in Edge as ClickOnce is required to download w/ the MS export tool upon first download and use.
@@ -205,15 +205,13 @@ Write-Host "Scheduling for $SearchName is $CAStatus, getting the download ready.
 do { 
     Start-Sleep -Seconds 300
     
-    $TodaysDate = Get-Date -Format "MM-dd-yyyy"
+    $TodaysDate = Get-Date -Format "MM/dd/yyyy"
 
     $CASJobEndTime = Get-ComplianceSearchAction -Identity "$CASName" | Select-Object 'JobEndTime'
 
-    if ("$CASJobEndTime" -match "$TodaysDate") {
+    if ("$CASJobEndTime" -ne "$TodaysDate") {
     
         Write-Host 'Export data is being prepared for download...Please wait.  Checking again in 5 minute...'
-
-        $TodaysDate = Get-Date -Format "MM/dd/yyyy"
         
     }
 }
