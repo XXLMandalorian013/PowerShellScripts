@@ -60,4 +60,5 @@ else {
 	Exit
 }
 
-winget install --id Microsoft.Office --accept-source-agreements --Scope Machine --silent
+winget install --id Microsoft.Office --accept-source-agreements --Scope Machine
+
