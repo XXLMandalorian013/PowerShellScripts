@@ -34,6 +34,13 @@ Successfully installed.
 
 #Script
 
+
+if (! ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
+{
+    Write-Error "This script requires Administrator rights. To run this cmdlet, start PowerShell with the `"Run as administrator`" option."
+    return
+}
+
 #Checks the PS terminal version this is ran in 7.X.X.
 
 
@@ -53,4 +60,4 @@ else {
 	Exit
 }
 
-winget install --id Microsoft.Office --accept-source-agreements --Scope Machine
+winget install --id Microsoft.Office --accept-source-agreements --Scope Machine ----silent
