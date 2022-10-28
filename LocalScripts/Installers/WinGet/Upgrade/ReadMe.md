@@ -1,1 +1,0 @@
-# WinGet Upgraders
