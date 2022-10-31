@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Uninstalls MS 365 Office products (Word, Excel, Outlook, Publisher, PowerPoint, OneNote, and Access) silently.
+    Uninstalls MS 365 Office products (Word, Excel, Outlook, Publisher, PowerPoint, OneNote, and Access).
     
     
 .Notes

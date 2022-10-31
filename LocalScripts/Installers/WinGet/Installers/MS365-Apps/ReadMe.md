@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-Installs MS 365 Office products (Word, Excel, Outlook, Publisher, PowerPoint, OneNote, and Access) silently. Sign-in is required post install of a licened acct.
+Installs MS 365 Office products (Word, Excel, Outlook, Publisher, PowerPoint, OneNote, and Access). Sign-in is required post install of a licened acct.
 
 ## Notes
 

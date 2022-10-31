@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Installs OneDrive silently. 
+    Installs OneDrive. 
     
     
 .Notes

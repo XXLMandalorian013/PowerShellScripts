@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-Uninstalls Zoom silently.
+Uninstalls Zoom.
 
 ## Notes
 

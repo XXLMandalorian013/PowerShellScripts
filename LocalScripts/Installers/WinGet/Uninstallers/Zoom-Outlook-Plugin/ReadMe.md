@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-Uninstalls Zoom OutlookPlugin silently.
+Uninstalls Zoom OutlookPlugin.
 
 ## Notes
 
@@ -16,7 +16,6 @@ None.
 
 System.String :
 
-
 WARNING: Outlook needs to be closed...Preparing to Taskkill Outlook.exe
 
 Confirm
@@ -24,7 +23,6 @@ Confirm
 Continue with this operation?
 
 [Y] Yes  [A] Yes to All  [H] Halt Command  [S] Suspend  [?] Help (default is "Y"): Y
-
 
 Starting package uninstall...
 

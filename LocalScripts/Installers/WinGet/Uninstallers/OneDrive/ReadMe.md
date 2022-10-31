@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-Uninstalls OneDrive silently.
+Uninstalls OneDrive.
 
 ## Notes
 
@@ -16,11 +16,10 @@ None.
 
 System.String :
 
-
 Starting package uninstall...
 
 Successfully uninstalled
 
 ## LINK
 
-[WinGet Uninstall Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall) 
+[WinGet Uninstall Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall)

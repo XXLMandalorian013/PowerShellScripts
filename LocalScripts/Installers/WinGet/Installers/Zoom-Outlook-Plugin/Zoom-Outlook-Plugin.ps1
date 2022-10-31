@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Installs Zoom OutlookPlugin Silently. 
+    Installs Zoom OutlookPlugin. 
     
     
 .Notes

@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Installs Chrome Silently. 
+    Installs Chrome. 
     
     
 .Notes

@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Upgrade Zoom Silently. 
+    Upgrade Zoom. 
     
     
 .Notes

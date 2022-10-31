@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Upgrade Zoom OutlookPlugin Silently. 
+    Upgrade Zoom OutlookPlugin. 
     
     
 .Notes

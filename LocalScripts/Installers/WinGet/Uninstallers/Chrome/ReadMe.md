@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-Uninstalls Chrome silently.
+Uninstalls Chrome.
 
 ## Notes
 

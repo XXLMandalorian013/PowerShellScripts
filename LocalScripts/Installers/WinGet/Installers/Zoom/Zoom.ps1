@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Installs Zoom Silently. 
+    Installs Zoom. 
     
     
 .Notes

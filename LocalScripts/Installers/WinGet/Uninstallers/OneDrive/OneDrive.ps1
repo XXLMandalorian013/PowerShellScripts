@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Uninstalls OneDrive silently. 
+    Uninstalls OneDrive. 
     
     
 .Notes

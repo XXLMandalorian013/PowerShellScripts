@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-Installs Chrome silently.
+Installs Chrome.
 
 ## Notes
 
