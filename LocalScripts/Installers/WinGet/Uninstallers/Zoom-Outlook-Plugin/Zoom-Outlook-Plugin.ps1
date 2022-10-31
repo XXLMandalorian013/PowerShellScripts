@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Upgrade Chrome Silently. 
+    Upgrade Zoom OutlookPlugin Silently. 
     
     
 .Notes
@@ -18,6 +18,12 @@
 .OUTPUTS
         
 System.String :
+
+WARNING: Outlook needs to be closed...Preparing to Taskkill Outlook.exe
+
+Confirm
+Continue with this operation?
+[Y] Yes  [A] Yes to All  [H] Halt Command  [S] Suspend  [?] Help (default is "Y"): Y
     
 Starting package uninstall...
 
@@ -28,6 +34,7 @@ Successfully uninstalled
     
     [WinGet Uninstall Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall)
 
+    
 #>
 
 #Script
@@ -61,6 +68,9 @@ else {
 	Exit
 }
 
+Write-Warning "Outlook needs to be closed...Preparing to Taskkill Outlook.exe" -WarningAction Inquire
 
-winget uninstall --id Google.Chrome
+taskkill /f /im Outlook.exe
+
+winget uninstall --id Zoom.ZoomOutlookPlugin
 

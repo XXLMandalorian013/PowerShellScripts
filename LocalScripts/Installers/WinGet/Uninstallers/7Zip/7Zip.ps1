@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Upgrade Chrome Silently. 
+    Uninstalls 7-Zip. 
     
     
 .Notes
@@ -19,14 +19,16 @@
         
 System.String :
     
-Starting package uninstall...
+Successfully verified installer hash
 
-Successfully uninstalled
+Starting package install...
+
+Successfully installed.
 
 
 .LINK
-    
-    [WinGet Uninstall Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall)
+        
+    https://learn.microsoft.com/en-us/windows/package-manager/winget/install
 
 #>
 
@@ -38,6 +40,7 @@ if (! ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity
     Write-Error "This script requires Administrator rights. To run this cmdlet, start PowerShell with the `"Run as administrator`" option."
     return
 }
+
 
 #Checks the PS terminal version this is ran in 7.X.X.
 
@@ -62,5 +65,7 @@ else {
 }
 
 
-winget uninstall --id Google.Chrome
+winget uninstall --id 7zip.7zip
+
+
 

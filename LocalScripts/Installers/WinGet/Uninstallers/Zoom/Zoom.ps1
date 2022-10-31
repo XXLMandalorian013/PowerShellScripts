@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Upgrade Chrome Silently. 
+    Upgrade Zoom Silently. 
     
     
 .Notes
@@ -28,6 +28,7 @@ Successfully uninstalled
     
     [WinGet Uninstall Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall)
 
+    
 #>
 
 #Script
@@ -62,5 +63,5 @@ else {
 }
 
 
-winget uninstall --id Google.Chrome
+winget uninstall --id Zoom.Zoom 
 
