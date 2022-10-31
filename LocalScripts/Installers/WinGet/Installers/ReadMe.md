@@ -1,1 +1,1 @@
-# WinGet Installers
+# WinGet Installers (64 Bit)

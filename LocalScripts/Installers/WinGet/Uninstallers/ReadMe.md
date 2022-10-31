@@ -1,1 +1,1 @@
-# WinGet Uninstallers
+# WinGet Uninstallers (64 Bit)
