@@ -65,6 +65,19 @@ if ($PSVersionTable.PSVersion.Major -eq 5) {
 
 	}
 
+#RestorePoints by default can only be made once a day, to be able to make several restore any number of RP you need to make the fallowing Reg change.
+
+if (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore' -Name 'SystemRestorePointCreationFrequency' -ErrorAction SilentlyContinue) {
+		
+    Write-Host "Reg Key exsists...running backup"
+        
+ }else {
+            
+    New-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore' -Name 'SystemRestorePointCreationFrequency' -Value '0' -Type 'DWORD'
+    
+}
+
+
 $Description = Read-Host "Please type what this restore point should be called?"
 
 Checkpoint-Computer -Description "$Description"
