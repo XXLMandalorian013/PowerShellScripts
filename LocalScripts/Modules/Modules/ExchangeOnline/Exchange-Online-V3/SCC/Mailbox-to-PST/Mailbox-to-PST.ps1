@@ -63,23 +63,25 @@ If this is the first time running this, you will be prompted to download the eDe
 
 .LINK
         
-https://learn.microsoft.com/en-us/powershell/module/exchange/get-managementrole?view=exchange-ps
+[Get-ManagmentRole OnlineVersion] (https://learn.microsoft.com/en-us/powershell/module/exchange/get-managementrole?view=exchange-ps)
 
-https://learn.microsoft.com/en-us/powershell/module/exchange/new-compliancesearch?view=exchange-ps
+[If-ElseIf-Else OnlineVersion](https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2)
 
-https://learn.microsoft.com/en-us/powershell/exchange/connect-to-scc-powershell?view=exchange-ps
+[Connect-to-SCC OnlineVersion] (https://learn.microsoft.com/en-us/powershell/exchange/connect-to-scc-powershell?view=exchange-ps)
 
-https://learn.microsoft.com/en-us/powershell/module/exchange/new-compliancesearch?view=exchange-ps
+[New-ComplianceSearch] (https://learn.microsoft.com/en-us/powershell/module/exchange/new-compliancesearch?view=exchange-ps)
 
-https://learn.microsoft.com/en-us/powershell/module/exchange/start-compliancesearch?view=exchange-ps
+[Start-ComplianceSearch OnlineVersion] (https://learn.microsoft.com/en-us/powershell/module/exchange/start-compliancesearch?view=exchange-ps)
 
-https://learn.microsoft.com/en-us/powershell/module/exchange/get-compliancecase?view=exchange-ps
+[Get-ComplianceSearch OnlineVersion] (https://learn.microsoft.com/en-us/powershell/module/exchange/get-compliancecase?view=exchange-ps)
 
-https://learn.microsoft.com/en-us/powershell/module/exchange/get-compliancesearchaction?view=exchange-ps
+[Get-ComplianceSearchAction OnlineVersion] (https://learn.microsoft.com/en-us/powershell/module/exchange/get-compliancesearchaction?view=exchange-ps)
 
-https://learn.microsoft.com/en-us/powershell/module/exchange/new-compliancesearchaction?view=exchange-ps
+[New-ComplianceSearchAction OnlineVersion] (https://learn.microsoft.com/en-us/powershell/module/exchange/new-compliancesearchaction?view=exchange-ps)
 
-https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operator_precedence?view=powershell-7.2
+[About Operators OnlineVersion] (https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operator_precedence?view=powershell-7.2)
+
+[Do-Until OnlineVersion] (https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_do?view=powershell-7.2)
 
 #>
 
