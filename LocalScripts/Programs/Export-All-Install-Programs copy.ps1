@@ -52,29 +52,27 @@ File.doc
 
 [Write-Host Online Version](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-host?view=powershell-7.3)
 
+[Export-CSV Online Version](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/export-csv?view=powershell-7.3)
+
 #>
 
 
 #Script
 
 
+$PCName = $env:computername
+$UserName = $env:UserName
+
 #Gets all logged in profile installed programs from the resgistry.
 
-$CUProg = Get-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate
-
+$CUProg = (Get-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object -Property DisplayName, DisplayVersion, Publisher, InstallDate | Sort-Object "DisplayName")
 
 #Gets all machine wide installed programs from the resgistry.
 
-$LMProg = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate
+$LMProg = (Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object -Property DisplayName, DisplayVersion, Publisher, InstallDate | Sort-Object "DisplayName")
 
 
-Write-Host "***Current User Profile Installed Programs***"
+$CUProg | Export-Csv -Path (Join-Path -Path "\\hawa-col04\Support_Tools\Scripts\PS\Local Scripts\AllInstalledPrograms" -ChildPath $UserName-$PCName'-CUProg'.csv)
 
-$CUProg | Sort-Object "DisplayName" | Format-Table
-
-
-Write-Host "***Machine Wide installed Programs***"
-
-$LMProg | Sort-Object "DisplayName" | Format-Table
-
+$LMProg | Export-Csv -Path (Join-Path -Path "\\hawa-col04\Support_Tools\Scripts\PS\Local Scripts\AllInstalledPrograms" -ChildPath $UserName-$PCName'-LMProg'.csv)
 
