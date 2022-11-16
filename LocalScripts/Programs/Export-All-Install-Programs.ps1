@@ -72,7 +72,7 @@ $CUProg = (Get-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Unin
 $LMProg = (Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object -Property DisplayName, DisplayVersion, Publisher, InstallDate | Sort-Object "DisplayName")
 
 
-$CUProg | Export-Csv -Path (Join-Path -Path "\\hawa-col04\Support_Tools\Scripts\PS\Local Scripts\AllInstalledPrograms" -ChildPath $UserName-$PCName'-CUProg'.csv)
+$CUProg | Export-Csv -Path (Join-Path -Path "\\Server\Folder\Folder" -ChildPath $UserName-$PCName'-CUProg'.csv)
 
-$LMProg | Export-Csv -Path (Join-Path -Path "\\hawa-col04\Support_Tools\Scripts\PS\Local Scripts\AllInstalledPrograms" -ChildPath $UserName-$PCName'-LMProg'.csv)
+$LMProg | Export-Csv -Path (Join-Path -Path "\\Server\Folder\Folder" -ChildPath $UserName-$PCName'-LMProg'.csv)
 
