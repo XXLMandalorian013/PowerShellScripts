@@ -61,26 +61,26 @@ $ProgramName = "DesktopConnector-x64.exe"
 
 
 #TEMP Folder Check/Creation
-   
+
 if(Test-Path -Path "$TestPath")
 {
-    
-    Write-Host "$OutFilePath Exists..."
-    
+
+	Write-Host "$OutFilePath Exists..."
+
     Start-Sleep -Seconds 3
-    
+
 }
-    
-    else
-    {
-    
-        Write-Host "Creating $OutFilePath..."
-    
-        Start-Sleep -Seconds 2
-    
-        New-Item -Path "$OutFilePath" -ItemType Directory -ErrorAction Ignore
-    
-    }
+
+else
+{
+
+    Write-Host "Creating $OutFilePath..."
+
+    Start-Sleep -Seconds 2
+
+    New-Item -Path "$OutFilePath" -ItemType Directory -ErrorAction Ignore
+
+}
 
 
 #Downloads software from the web. Make sure to add the downloads .exe full name in the -outfile file path or you will get access denied.
