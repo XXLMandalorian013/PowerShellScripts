@@ -23,7 +23,7 @@ Backups a users EXO mailbox.
 
 .Notes
 
-As EXOV3 only work in PS 7.X.X this script run only in PS 7.X.X. 
+As EXOV3 only work in PS 7.X.X this script run only in PS 7.X.X. You must also be a eDescovery Manager or higher to run this script. 
 
 .INPUTS
         
@@ -64,6 +64,8 @@ If this is the first time running this, you will be prompted to download the eDe
 .LINK
         
 [Get-ManagmentRole OnlineVersion] (https://learn.microsoft.com/en-us/powershell/module/exchange/get-managementrole?view=exchange-ps)
+
+[Assign eDiscovery permissions in the compliance portal](https://learn.microsoft.com/en-us/microsoft-365/compliance/assign-ediscovery-permissions?view=o365-worldwide)
 
 [If-ElseIf-Else OnlineVersion](https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2)
 
