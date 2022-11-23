@@ -1,50 +1,33 @@
     #ReadMe
 <#
-    
-.SYNOPSIS
-
-Adds a file name extension to a supplied name.
-
 
 .DESCRIPTION
         
-Adds a file name extension to a supplied name.  
+Grabs all mapped network drives via the registry.  
     
     
 .Notes
 
-Notes here.
-    
-
-.PARAMETER Name
-        
-Specifies the file name.
-
-    
-.PARAMETER Extension
-        
-Specifies the extension. "Txt" is the default.
+Works in 5.1 or later.
 
 
 .INPUTS
         
-None. You cannot pipe objects to Add-Extension.
+None.
 
 
 .OUTPUTS
         
-System.String. Add-Extension returns a string with the extension or file name.
+System.String.
 
-
-.EXAMPLE
-        
-PS> extension "File" "doc"
-File.doc
-
-
-.LINK
-        
-[WinGet Install Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/install) 
+PSChildName
+-----------
+A
+K
+M
+Q
+R
+T
 
 #>
 
