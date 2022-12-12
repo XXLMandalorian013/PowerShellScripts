@@ -1,37 +1,28 @@
-# Title
 
-## .SYNOPSIS
+# ReadMe
 
-Adds a file name extension to a supplied name.
+## DESCRIPTION
 
-## .DESCRIPTION
+Gets all folders/files in a dir and sorts them largest to smallest and exports it to a .csv.
 
-Adds a file name extension to a supplied name.
-Takes any strings for the file name or extension.
+## Notes
 
-## .PARAMETER Name
-        
-Specifies the file name.
+Works in PS 5.1 and later.
 
-## .PARAMETER Extension
+## INPUTS
 
-Specifies the extension. "Txt" is the default.
+None.
 
-## .INPUTS
-None. You cannot pipe objects to Add-Extension.
+## OUTPUTS
 
-## .OUTPUTS
-System.String. Add-Extension returns a string with the extension or file name.
-
-## .EXAMPLE
-PS> extension -name "File"
-File.txt
-
-## .EXAMPLE
-PS> extension -name "File" -extension "doc"
-File.doc
+System.String.
 
 ## LINK
-        
-[WinGet Install Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/install) 
 
+[Get-ChildItem Online Version](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-childitem?view=powershell-7.3)
+
+[Sort-Object Online Version](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/sort-object?view=powershell-7.3)
+
+[Format-Table Online Version](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/format-table?view=powershell-7.3)
+
+[Export-CSV Online Version](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/export-csv?view=powershell-7.3)
