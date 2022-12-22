@@ -58,7 +58,7 @@ Write-Host "The Terminal is running in a administrator...Running Code" -Foregrou
 
 $FeatureState = Get-WindowsOptionalFeature -Online -FeatureName 'NetFx3' | Select-Object 'State'
 
-if ( $FeatureState.name -match 'Disabled' )
+if ($FeatureState -match 'Disabled')
 {
     Write-Host "Enabling .Net 3.5"
     
