@@ -1,8 +1,8 @@
-# WinGet Audacity Installer
+# WinGet Corsair iCue 4.X Installer
 
 ## DESCRIPTION
 
-Installs Audacity.
+Installs Corsair iCue 4.X.
 
 ## Notes
 

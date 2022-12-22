@@ -1,8 +1,8 @@
-# WinGet Audacity Installer
+# WinGet BulkRenameUtility Installer
 
 ## DESCRIPTION
 
-Installs Audacity.
+Installs BulkRenameUtility.
 
 ## Notes
 

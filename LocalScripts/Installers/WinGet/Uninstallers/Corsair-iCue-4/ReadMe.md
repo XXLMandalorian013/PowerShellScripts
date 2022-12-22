@@ -1,8 +1,8 @@
-# WinGet Audacity Installer
+# WinGet Corsair iCue 4.X Uninstaller
 
 ## DESCRIPTION
 
-Installs Audacity.
+Uninstalls Corsair iCue 4.X.
 
 ## Notes
 

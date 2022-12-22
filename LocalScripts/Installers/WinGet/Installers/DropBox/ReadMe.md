@@ -1,8 +1,8 @@
-# WinGet Audacity Installer
+# WinGet DropBox Installer
 
 ## DESCRIPTION
 
-Installs Audacity.
+Installs DropBox.
 
 ## Notes
 

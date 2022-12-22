@@ -1,8 +1,8 @@
-# WinGet Audacity Installer
+# WinGet CrystalDiskInfo Installer
 
 ## DESCRIPTION
 
-Installs Audacity.
+Installs CrystalDiskInfo.
 
 ## Notes
 

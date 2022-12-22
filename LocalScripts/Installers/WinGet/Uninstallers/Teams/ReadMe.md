@@ -1,4 +1,4 @@
-# WinGet 7-Zip Installer
+# WinGet Teams Installer
 
 ## DESCRIPTION
 

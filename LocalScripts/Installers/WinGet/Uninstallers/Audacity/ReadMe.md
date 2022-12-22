@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-Installs Teams.
+Installs Audacity.
 
 ## Notes
 
