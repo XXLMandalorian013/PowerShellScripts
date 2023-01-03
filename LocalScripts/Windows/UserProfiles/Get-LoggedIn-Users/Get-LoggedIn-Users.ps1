@@ -1,0 +1,1 @@
+query user /server:$SERVER
