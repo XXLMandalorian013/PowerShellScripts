@@ -1,12 +1,12 @@
-# WinGet Nvidia-Gforce Uninstaller
+# WinGet GoToMeeting Installer
 
 ## DESCRIPTION
 
-Uninstalls Nvidia-Gforce.
+Installs GoToMeeting.
 
 ## Notes
 
-Written for PS7.X so I dont have to install Nuget. Nuget is required for PS5.1.
+Written for PS7.X so I dont have to install Nuget. Nuget is required for PS5.1. A PC restart is required to show up.
 
 ## INPUTS
 

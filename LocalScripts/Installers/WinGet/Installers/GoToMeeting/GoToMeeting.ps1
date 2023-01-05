@@ -3,12 +3,12 @@
 
 .DESCRIPTION
         
-    Uninstalls Nvidia-Gforce. 
+    Installs GoToMeeting. 
     
     
 .Notes
 
-    Written for PS7.X so I dont have to install Nuget. Nuget is required for PS5.1.
+    Written for PS7.X so I dont have to install Nuget. Nuget is required for PS5.1. A PC restart is required to show up.
 
 .INPUTS
         
@@ -65,6 +65,6 @@ else {
 }
 
 
-winget uninstall --id Nvidia.GeForceExperience
+winget install --id LogMeIn.GoToMeeting --accept-source-agreements --Scope Machine
 
 
