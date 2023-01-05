@@ -65,6 +65,6 @@ else {
 }
 
 
-winget install --id Microsoft.PowerShell --accept-source-agreements --Scope Machine
+winget install --id Microsoft.PowerShell
 
 
