@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Installs Visual Studio Code. 
+    Uninstalls Visual Studio Code. 
     
     
 .Notes
@@ -65,6 +65,6 @@ else {
 }
 
 
-winget install --id Microsoft.VisualStudioCode --accept-source-agreements --Scope Machine
+winget uninstall --id Microsoft.VisualStudioCode
 
 
