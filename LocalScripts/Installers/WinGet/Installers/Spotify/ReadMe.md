@@ -1,8 +1,8 @@
-# WinGet 7-Zip Installer
+# WinGet Spotify Installer
 
 ## DESCRIPTION
 
-Installs 7-Zip.
+Installs Spotify.
 
 ## Notes
 
