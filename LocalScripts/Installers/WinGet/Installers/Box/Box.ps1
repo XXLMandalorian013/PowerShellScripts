@@ -3,7 +3,7 @@
 
 .DESCRIPTION
         
-    Installs Spotify. 
+    Installs Box. 
     
     
 .Notes
@@ -35,10 +35,10 @@ Successfully installed.
 #Script
 
 
-if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
+if (! ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {
-    Write-Error "This script DOES NOT requires Administrator rights. To run this script, start PowerShell unelevated."
-    $ErrorActionPreference = "Stop"
+    Write-Error "This script requires Administrator rights. To run this cmdlet, start PowerShell with the `"Run as administrator`" option."
+    return
 }
 
 
@@ -46,7 +46,8 @@ if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 
 #https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.2
 
-
+	
+	
 
 if ($PSVersionTable.PSVersion.Major -eq 7) {
 		
@@ -64,6 +65,6 @@ else {
 }
 
 
-winget install --id Spotify.Spotify
+winget install --id Box.Box
 
 

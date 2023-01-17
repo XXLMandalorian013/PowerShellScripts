@@ -1,8 +1,8 @@
-# WinGet Spotify Installer
+# WinGet Box Uninstaller
 
 ## DESCRIPTION
 
-Installs Spotify (not machine wide).
+Uninstalls Box.
 
 ## Notes
 

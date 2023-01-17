@@ -1,8 +1,8 @@
-# WinGet Spotify Installer
+# WinGet Box Installer
 
 ## DESCRIPTION
 
-Installs Spotify (not machine wide).
+Installs Box.
 
 ## Notes
 
