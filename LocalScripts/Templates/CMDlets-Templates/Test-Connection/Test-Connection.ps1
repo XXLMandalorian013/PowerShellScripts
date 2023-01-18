@@ -28,8 +28,7 @@ Test-Connection -TargetName google.com
 if (Test-Connection -TargetName outlook.office365.com -ErrorAction SilentlyContinue)
 {
     Write-Host "outlook.office365.com is up!"
-}
-else
+}else
 {
     Throw "No Network connection or outlook.office365.com is down...see https://portal.office.com/adminportal/home?#/servicehealth"
 }

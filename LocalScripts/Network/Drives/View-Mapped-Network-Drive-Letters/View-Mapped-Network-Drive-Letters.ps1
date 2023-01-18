@@ -37,7 +37,7 @@ $user = New-Object System.Security.Principal.NTAccount($env:UserName)
 $sid = $user.Translate([System.Security.Principal.SecurityIdentifier]) 
 $SIDValue = $sid.Value
 
-Get-ChildItem -Path "Registry::HKEY_USERS\$SIDValue\Network"
+Get-ChildItem -Path "Registry::HKEY_USERS\$SIDValue\Network" | Select-Object "PSChildName"
 
 
 
