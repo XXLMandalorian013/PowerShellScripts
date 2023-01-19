@@ -1,11 +1,11 @@
 #ReadMe
 <#
 
-PS 7 LTS 7.8.2 web installer
+PS 7 LTS 7.2.8 web installer
     
 .SYNOPSIS
 
-Downloads and installs PowerShell 7 LST 7.8.2 if not already installed.
+Downloads and installs PowerShell 7 LST 7.2.8 if not already installed.
 
 .PARAMETER Name
         
@@ -71,91 +71,15 @@ $URIShort = $URI.TrimStart("https://github.com/PowerShell/PowerShell/releases/do
 $OutFile = 'C:\TEMP'
 
 
-Write-Host "$ProgramPathShort install script starting...Written by DAM on 2023-01-18"
 
 
-#Checks if the terminal is runing as admin/elevated as Invoke-WebRequest will not run without it.
-
-if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    
-    Write-Error "This script requires Administrator rights. To run this script, start PowerShell with the `"Run as administrator`" option."
-    
-}
 
 
-#Checks to see if the program is already installed.
+msiexec.exe /x $OutFile
 
-$TestPath = Test-Path -Path "$ProgramPath"
-
-if ($TestPath -eq 'True') {
-
-    Throw "$ProgramPathShort is already installed..."
-
-}
-
-
-#Checks Ethernet Connection/ability to dial out.
-
-Write-Host "Checking network connection..."
-
-$NetworkConnection = Test-NetConnection | Select-Object 'PingSucceeded'
-
-if ($NetworkConnection -match 'True')
-{
-    Write-Host "Network connection confirmed!"
-}else {
-    Throw "Check network connection..."
-}
-
-
-#Check if link is broken.
-
-Write-Host "Checking download link..."
-
-$InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI"
-
-if ($InvokeWeb.StatusDescription -eq "OK") {
-    Write-Host "Download link good!"
-}else
-{
-    Throw "Check download link..."
-}
-
-
-#Downloads Program via web.
-
-Write-Host "Downloading .msi installer for $ProgramPathShort..."
-
-Invoke-WebRequest -URI "$URI" -OutFile "$OutFile"
-
-
-#Install Program from URL.
-
-Write-Host "Installing $ProgramPathShort..."
-
-msiexec.exe /i "$OutFile" /quiet
-
-
-#Post install TEMP file delete
-
-do { 
-    $TestPath = Test-Path -Path "$ProgramPath"
-    if ($TestPath -ne 'True') {
-        Write-Host "$URIShort installer is running...Please wait"
-        
-        Start-Sleep -Seconds 5
-
-    }
-} 
-Until ($TestPath -eq 'True')
-
-Write-Host "$ProgramPathShort installed!"
-
-Remove-Item "$OutFile"
-
-
-#LogFile
-
-$Error | Out-File -FilePath "$OutFile"
+$wshell = New-Object -ComObject wscript.shell;
+$wshell.AppActivate('title of the application window')
+Sleep 1
+$wshell.SendKeys('ENTER')
 
 
