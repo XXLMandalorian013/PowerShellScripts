@@ -26,7 +26,7 @@ PowerShell-7.2.8-win-x64.msi install script starting...Written by DAM on 2023-01
 Checking download link...
 Download link good!
 Downloading .msi installer for PowerShell-7.2.8-win-x64.msi...
-Installing ...
+Installing PowerShell-7.2.8-win-x64.msi...
 PowerShell-7.2.8-win-x64.msi installer is running...Please wait
 PowerShell-7.2.8-win-x64.msi installed!
 
@@ -38,12 +38,8 @@ PowerShell-7.2.8-win-x64.msi installed!
 [about_If](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_if?view=powershell-7.3)
 
 [about_Operators](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.3)
-
-[Write-Error](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-error?view=powershell-7.3)
  
 [about_Throw](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_throw?view=powershell-7.3)
-
-[Test-NetConnection](https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection?view=windowsserver2022-ps)
 
 [Invoke-WebRequest](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-webrequest?view=powershell-7.3)
 
@@ -75,11 +71,7 @@ $InstallerName = 'PowerShell-7.2.8-win-x64.msi'
 
 #Out-File location. C:\TEMP is used as C:\ will not grant you access to by default.
 
-$OutFile = 'C:\TEMP'
-
-#Changes the installers name to what it should of been. See $Outfile for why.
-
-$OutFileReName = "C:\$InstallerName"
+$OutFile = "C:\$InstallerName"
 
 
 
@@ -128,18 +120,11 @@ Write-Host "Downloading .msi installer for $InstallerName..."
 Invoke-WebRequest -URI "$URI" -OutFile "$OutFile"
 
 
-#Rename download.
-
-Rename-Item -Path "$OutFile" -NewName "$InstallerName"
-
-Start-Sleep -Seconds 3
-
-
 #Install Program from URI.
 
 Write-Host "Installing $ProgramPathShort..."
 
-msiexec.exe /i "$OutFileReName" /quiet ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 ADD_PATH=1 ENABLE_MU=1
+msiexec.exe /i "$OutFile" /quiet ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 ADD_PATH=1 ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1 ENABLE_MU=1
 
 
 #Ininstall check and TEMP file delete.
@@ -157,6 +142,6 @@ Until ($TestPath -eq 'True')
 
 Write-Host "$InstallerName installed!"
 
-Remove-Item "$OutFileReName"
+Remove-Item "$OutFile"
 
 

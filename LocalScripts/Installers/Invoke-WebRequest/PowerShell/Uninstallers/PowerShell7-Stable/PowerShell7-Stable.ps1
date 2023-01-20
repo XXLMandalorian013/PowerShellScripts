@@ -29,7 +29,7 @@ System.String,
 PowerShell-7.3.1-win-x64.msi uninstall script starting...Written by DAM on 2023-01-19
 Checking download link...
 Download link good!
-Downloading .msi installer for ...
+Downloading .msi installer for PowerShell-7.3.1-win-x64.msi...
 PowerShell-7.3.1-win-x64.msi uninstaller is running...Please wait
 PowerShell-7.3.1-win-x64.msi uninstalled!
 
@@ -41,12 +41,8 @@ PowerShell-7.3.1-win-x64.msi uninstalled!
 [about_If](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_if?view=powershell-7.3)
 
 [about_Operators](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.3)
-
-[Write-Error](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-error?view=powershell-7.3)
  
 [about_Throw](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_throw?view=powershell-7.3)
-
-[Test-NetConnection](https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection?view=windowsserver2022-ps)
 
 [Invoke-WebRequest](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-webrequest?view=powershell-7.3)
 
@@ -57,7 +53,6 @@ PowerShell-7.3.1-win-x64.msi uninstalled!
 [Remove-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item?view=powershell-7.3)
 
 #>
-
 
 #Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here. (https://github.com/PowerShell/PowerShell/issues/2138)
 
@@ -77,11 +72,7 @@ $InstallerName = 'PowerShell-7.3.1-win-x64.msi'
 
 #Out-File location. C:\TEMP is used as C:\ will not grant you access to by default.
 
-$OutFile = 'C:\TEMP'
-
-#Changes the installers name to what it should of been. See $Outfile for why.
-
-$OutFileReName = "C:\$InstallerName"
+$OutFile = "C:\$InstallerName"
 
 
 
@@ -94,9 +85,9 @@ if ($PSVersionTable.PSVersion.Major -eq 5) {
 	
 }else {
 		
-	Write-Warning "This script is running in PowerShell $($PSVersionTable.PSVersion)...Please run this script in PowerShell  Version 5.X.X...Ending Script" -WarningAction Inquire
+	Throw "This script is running in PowerShell $($PSVersionTable.PSVersion)...Please run this script in PowerShell  Version 5.X.X...Ending Script"
 		
-	}
+}
 
 
 #Checks if the terminal is running as admin.
@@ -121,7 +112,7 @@ if ($TestPath -eq "False") {
 
 #Test if the .msi is still present, if not it re-downloads it.
 
-$TestPath = Test-Path -Path "$OutfileRename"
+$TestPath = Test-Path -Path "$OutFile"
 
 if ($TestPath -eq 'False') {
 
@@ -149,18 +140,14 @@ Write-Host "Downloading .msi installer for $ProgramPathShort..."
 Invoke-WebRequest -URI "$URI" -OutFile "$OutFile"
 
 
-#Rename download.
-
-Rename-Item -Path "$OutFile" -NewName "$InstallerName"
-
-Start-Sleep -Seconds 3
-
 }
 
 
 #Uninstalls the program.
 
-MsiExec.exe /x "$OutfileRename" /quiet
+Write-Host "Uninstalling $InstallerName..."
+
+MsiExec.exe /x "$OutFile" /quiet
 
 
 #Uninstall check and TEMP file delete.
@@ -178,7 +165,7 @@ Until ($TestPath -eq 'True')
 
 Write-Host "$InstallerName uninstalled!"
 
-Remove-Item "$OutFileReName"
+Remove-Item "$OutFile"
 
 
 
