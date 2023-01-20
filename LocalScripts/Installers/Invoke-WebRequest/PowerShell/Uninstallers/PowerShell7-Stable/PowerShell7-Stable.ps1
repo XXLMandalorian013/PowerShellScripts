@@ -24,12 +24,17 @@ None. You cannot pipe objects to Add-Extension.
 
 .OUTPUTS
         
-System.String. Add-Extension returns a string with the extension or file name.
+System.String,
+
+PowerShell-7.3.1-win-x64.msi uninstall script starting...Written by DAM on 2023-01-19
+Checking download link...
+Download link good!
+Downloading .msi installer for ...
+PowerShell-7.3.1-win-x64.msi uninstaller is running...Please wait
+PowerShell-7.3.1-win-x64.msi uninstalled!
 
 
 .LINK
-        
-[String.TrimStart Method](https://learn.microsoft.com/en-us/dotnet/api/system.string.trimstart?view=net-7.0) 
 
 [Write-Host](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-host?view=powershell-7.3)
 
@@ -53,10 +58,6 @@ System.String. Add-Extension returns a string with the extension or file name.
 
 #>
 
-
-#Stops script upon any error.
-
-$ErrorActionPreference = "Stop"
 
 #Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here. (https://github.com/PowerShell/PowerShell/issues/2138)
 
@@ -82,24 +83,29 @@ $OutFile = 'C:\TEMP'
 
 $OutFileReName = "C:\$InstallerName"
 
-#Makes sure the script is being ran in PS 5.1 (Windows PS).
+
+
+Write-Host "$InstallerName uninstall script starting...Written by DAM on 2023-01-19"
+
 
 #Checks the PS terminal version this is ran in 5.X.X.
 
 if ($PSVersionTable.PSVersion.Major -eq 5) {
-		
-	Write-Host "This script is running in $($PSVersionTable.PSVersion)."
 	
-} 
-
-else {
+}else {
 		
 	Write-Warning "This script is running in PowerShell $($PSVersionTable.PSVersion)...Please run this script in PowerShell  Version 5.X.X...Ending Script" -WarningAction Inquire
 		
-	Start-Sleep -Seconds 3
-
-	Exit
 	}
+
+
+#Checks if the terminal is running as admin.
+
+if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    
+    Throw "This script requires Administrator rights. To run this script, start PowerShell with the `"Run as administrator`" option."
+
+}
 
 
 #Checks to see if the program is already uinstalled.
@@ -122,7 +128,7 @@ if ($TestPath -eq 'False') {
 }else {
 
 
-    #Check if link is broken.
+#Check if link is broken.
 
 Write-Host "Checking download link..."
 
@@ -157,12 +163,12 @@ Start-Sleep -Seconds 3
 MsiExec.exe /x "$OutfileRename" /quiet
 
 
-#Post uninstall TEMP file delete.
+#Uninstall check and TEMP file delete.
 
 do { 
     $TestPath = Test-Path -Path "$ProgramPath"
     if ($TestPath -eq 'True') {
-        Write-Host "$InstallerName unstaller is running...Please wait"
+        Write-Host "$InstallerName uninstaller is running...Please wait"
         
         Start-Sleep -Seconds 5
 

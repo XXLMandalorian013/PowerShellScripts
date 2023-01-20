@@ -1,37 +1,42 @@
-# Title
+# PS 7 LTS 7.2.8 web Uninstaller
+    
+## SYNOPSIS
 
-## .SYNOPSIS
+Downloads and installs PowerShell 7 LST 7.2.8 if not already installed.
 
-Adds a file name extension to a supplied name.
 
-## .DESCRIPTION
-
-Adds a file name extension to a supplied name.
-Takes any strings for the file name or extension.
-
-## .PARAMETER Name
+## INPUTS
         
-Specifies the file name.
+None.
 
-## .PARAMETER Extension
 
-Specifies the extension. "Txt" is the default.
-
-## .INPUTS
-None. You cannot pipe objects to Add-Extension.
-
-## .OUTPUTS
-System.String. Add-Extension returns a string with the extension or file name.
-
-## .EXAMPLE
-PS> extension -name "File"
-File.txt
-
-## .EXAMPLE
-PS> extension -name "File" -extension "doc"
-File.doc
+## OUTPUTS
+        
+PowerShell-7.2.8-win-x64.msi uninstall script starting...Written by DAM on 2023-01-19
+Checking download link...
+Download link good!
+Downloading .msi installer for PowerShell-7.2.8-win-x64.msi...
+PowerShell-7.2.8-win-x64.msi uninstaller is running...
+PowerShell-7.2.8-win-x64.msi uninstalled!
 
 ## LINK
-        
-[WinGet Install Online Version](https://learn.microsoft.com/en-us/windows/package-manager/winget/install) 
 
+[Write-Host](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-host?view=powershell-7.3)
+
+[about_If](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_if?view=powershell-7.3)
+
+[about_Operators](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.3)
+
+[Write-Error](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-error?view=powershell-7.3)
+ 
+[about_Throw](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_throw?view=powershell-7.3)
+
+[Test-NetConnection](https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection?view=windowsserver2022-ps)
+
+[Invoke-WebRequest](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-webrequest?view=powershell-7.3)
+
+[msiexec](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec)
+
+[about_Do](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_do?view=powershell-7.3)
+
+[Remove-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item?view=powershell-7.3)

@@ -7,24 +7,28 @@ PS 7 LTS 7.2.8 web installer
 
 Downloads and installs PowerShell 7 LST 7.2.8 if not already installed.
 
-.PARAMETER Name
-        
-Specifies the file name.
 
-    
-.PARAMETER Extension
-        
-Specifies the extension. "Txt" is the default.
+.Notes
 
+Though the installer will say its done and installed, it will take 5 or so seconds for the PC to show the newly installed program via the start menu recently added.
+  
 
 .INPUTS
         
-None. You cannot pipe objects to Add-Extension.
+None.
 
 
 .OUTPUTS
         
-System.String. Add-Extension returns a string with the extension or file name.
+System.String,
+
+PowerShell-7.2.8-win-x64.msi install script starting...Written by DAM on 2023-01-18
+Checking download link...
+Download link good!
+Downloading .msi installer for PowerShell-7.2.8-win-x64.msi...
+Installing ...
+PowerShell-7.2.8-win-x64.msi installer is running...Please wait
+PowerShell-7.2.8-win-x64.msi installed!
 
 
 .LINK
@@ -52,10 +56,6 @@ System.String. Add-Extension returns a string with the extension or file name.
 [Remove-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item?view=powershell-7.3)
 
 #>
-
-#Stops script upon any error.
-
-$ErrorActionPreference = "Stop"
 
 #Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here https://github.com/PowerShell/PowerShell/issues/2138
 
@@ -90,7 +90,7 @@ Write-Host "$InstallerName install script starting...Written by DAM on 2023-01-1
 
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     
-    Write-Error "This script requires Administrator rights. To run this script, start PowerShell with the `"Run as administrator`" option."
+    Throw "This script requires Administrator rights. To run this script, start PowerShell with the `"Run as administrator`" option."
     
 }
 
@@ -142,7 +142,7 @@ Write-Host "Installing $ProgramPathShort..."
 msiexec.exe /i "$OutFileReName" /quiet ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 ADD_PATH=1 ENABLE_MU=1
 
 
-#Post install TEMP file delete
+#Ininstall check and TEMP file delete.
 
 do { 
     $TestPath = Test-Path -Path "$ProgramPath"
