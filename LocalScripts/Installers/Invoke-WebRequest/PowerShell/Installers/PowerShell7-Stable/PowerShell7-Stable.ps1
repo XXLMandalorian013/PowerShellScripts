@@ -1,11 +1,11 @@
 #ReadMe
 <#
 
-PS 7 LTS 7.2.8 web installer
+PS 7 Stable 7.3.1 web installer
     
 .SYNOPSIS
 
-Downloads and installs PowerShell 7 LST 7.2.8 if not already installed.
+Downloads and installs PowerShell 7 Stable 7.3.1 if not already installed.
 
 .PARAMETER Name
         
@@ -28,8 +28,6 @@ System.String. Add-Extension returns a string with the extension or file name.
 
 
 .LINK
-        
-[String.TrimStart Method](https://learn.microsoft.com/en-us/dotnet/api/system.string.trimstart?view=net-7.0) 
 
 [Write-Host](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-host?view=powershell-7.3)
 
@@ -53,26 +51,37 @@ System.String. Add-Extension returns a string with the extension or file name.
 
 #>
 
+#Stops script upon any error.
+
 $ErrorActionPreference = "Stop"
 
+#Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here https://github.com/PowerShell/PowerShell/issues/2138
+
+$ProgressPreference = 'SilentlyContinue'
+
+#Program Path when its installed.
 
 $ProgramPath = "C:\Program Files\PowerShell\7\pwsh.exe"
 
+#Download URI
 
-$ProgramPathShort = $ProgramPath.TrimStart("C:\Program Files\PowerShell\7\")
+$URI = 'https://github.com/PowerShell/PowerShell/releases/download/v7.3.1/PowerShell-7.3.1-win-x64.msi'
 
+#Full name of the installer.
 
-$URI = 'https://github.com/PowerShell/PowerShell/releases/download/v7.2.8/PowerShell-7.2.8-win-x64.msi'
+$InstallerName = 'PowerShell-7.3.1-win-x64.msi'
 
-
-$URIShort = $URI.TrimStart("https://github.com/PowerShell/PowerShell/releases/download")
-
+#Out-File location. C:\TEMP is used as C:\ will not grant you access to by default.
 
 $OutFile = 'C:\TEMP'
 
+#Changes the installers name to what it should of been. See $Outfile for why.
+
+$OutFileReName = "C:\$InstallerName"
 
 
-Write-Host "$ProgramPathShort install script starting...Written by DAM on 2023-01-18"
+
+Write-Host "$InstallerName install script starting...Written by DAM on 2023-01-19"
 
 
 #Checks if the terminal is runing as admin/elevated as Invoke-WebRequest will not run without it.
@@ -90,23 +99,10 @@ $TestPath = Test-Path -Path "$ProgramPath"
 
 if ($TestPath -eq 'True') {
 
-    Throw "$ProgramPathShort is already installed..."
+    Throw "$InstallerName is already installed..."
 
 }
 
-
-#Checks Ethernet Connection/ability to dial out.
-
-Write-Host "Checking network connection..."
-
-$NetworkConnection = Test-NetConnection | Select-Object 'PingSucceeded'
-
-if ($NetworkConnection -match 'True')
-{
-    Write-Host "Network connection confirmed!"
-}else {
-    Throw "Check network connection..."
-}
 
 
 #Check if link is broken.
@@ -125,16 +121,23 @@ if ($InvokeWeb.StatusDescription -eq "OK") {
 
 #Downloads Program via web.
 
-Write-Host "Downloading .msi installer for $ProgramPathShort..."
+Write-Host "Downloading .msi installer for $InstallerName..."
 
 Invoke-WebRequest -URI "$URI" -OutFile "$OutFile"
 
 
-#Install Program from URL.
+#Rename download.
+
+Rename-Item -Path "$OutFile" -NewName "$InstallerName"
+
+Start-Sleep -Seconds 3
+
+
+#Install Program from URI.
 
 Write-Host "Installing $ProgramPathShort..."
 
-msiexec.exe /i "$OutFile" /quiet ENABLE_PSREMOTING=1
+msiexec.exe /i "$OutFileReName" /quiet ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 ADD_PATH=1
 
 
 #Post install TEMP file delete
@@ -142,7 +145,7 @@ msiexec.exe /i "$OutFile" /quiet ENABLE_PSREMOTING=1
 do { 
     $TestPath = Test-Path -Path "$ProgramPath"
     if ($TestPath -ne 'True') {
-        Write-Host "$URIShort installer is running...Please wait"
+        Write-Host "$InstallerName installer is running...Please wait"
         
         Start-Sleep -Seconds 5
 
@@ -150,16 +153,8 @@ do {
 } 
 Until ($TestPath -eq 'True')
 
-Write-Host "$ProgramPathShort installed!"
+Write-Host "$InstallerName installed!"
 
-Remove-Item "$OutFile"
-
-
-
-#LogFile
-
-$Errors = _$
-
-_$ | Out-File -FilePath $OutFile
+Remove-Item "$OutFileReName"
 
 

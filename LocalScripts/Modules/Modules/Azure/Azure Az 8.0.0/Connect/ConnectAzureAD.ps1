@@ -4,11 +4,11 @@
 
     Write-Host "Connecting to Azure A/D..."
 
-    Start-Sleep -Seconds 3
+    Start-Sleep -Seconds 1
     
     Write-Host "Opening browser...Please enter credential and close the browser after authentication"
 
-    Start-Sleep -Seconds 3
+    Start-Sleep -Seconds 1
 
     Connect-AzAccount
 
