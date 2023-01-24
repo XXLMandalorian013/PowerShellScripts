@@ -52,4 +52,8 @@ File.doc
 
 #Script
 
+$ScriptName = ''
 
+
+
+Write-Host "$ScriptName script starting...Written by DAM on 2023-01-23"
