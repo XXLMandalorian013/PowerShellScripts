@@ -57,6 +57,8 @@ $FeatureName =  Get-WindowsOptionalFeature -Online -FeatureName "$OptionalFeatur
 if ("$FeatureState" -match 'Enabled')
 {
     Write-Host "Disabling $FeatureName..."
+
+    Disable-WindowsOptionalFeature -Online -FeatureName "$FeatureName"
     
     Write-Warning "The finish disableing, this PC needs restarted. Restart PC?"
     
