@@ -45,3 +45,4 @@ PSHostVersion         : 7.3.1 or 5.1
 
 
 Disconnect-MgGraph
+
