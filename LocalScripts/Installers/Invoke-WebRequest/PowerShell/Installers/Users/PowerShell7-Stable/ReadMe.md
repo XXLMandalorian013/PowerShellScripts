@@ -1,8 +1,8 @@
-# PS 7 Stable 7.3.1 web installer
+# PS 7 Stable 7.3.2 web installer
     
 ## SYNOPSIS
 
-Downloads and installs PowerShell 7 Stable 7.3.1 if not already installed.
+Downloads and installs PowerShell 7 Stable 7.3.2 if not already installed.
 
 
 ## Notes

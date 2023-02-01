@@ -1,8 +1,8 @@
-# PS 7 Stable 7.3.1 web installer
+# PS 7 Stable 7.3.2 web installer
     
 ## SYNOPSIS
 
-Downloads and installs PowerShell 7 Stable 7.3.1 if not already installed.
+Downloads and installs PowerShell 7 Stable 7.3.2 if not already installed.
 
 
 ## Notes
@@ -32,7 +32,7 @@ System.String,
 PowerShell-7.3.1-win-x64.msi install script starting...Written by DAM on 2023-01-19
 Checking download link...
 Download link good!
-Downloading .msi installer for PowerShell-7.3.1-win-x64.msi...
+Downloading .msi installer for PowerShell-7.3.2-win-x64.msi...
 Installing PowerShell-7.3.1-win-x64.msi...
 PowerShell-7.3.1-win-x64.msi installer is running...Please wait
 PowerShell-7.3.1-win-x64.msi installer is running...Please wait

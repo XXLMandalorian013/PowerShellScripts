@@ -103,7 +103,7 @@ if ($TestPath -eq 'True') {
 
 Write-Host "Checking download link..."
 
-$InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI"
+$InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing
 
 if ($InvokeWeb.StatusDescription -eq "OK") {
     Write-Host "Download link good!"
@@ -117,7 +117,7 @@ if ($InvokeWeb.StatusDescription -eq "OK") {
 
 Write-Host "Downloading .msi installer for $InstallerName..."
 
-Invoke-WebRequest -URI "$URI" -OutFile "$OutFile"
+Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
 
 
 #Install Program from URI.

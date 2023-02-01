@@ -1,37 +1,34 @@
 #ReadMe
 <#
 
-PS 7 Stable 7.3.1 web Uninstaller
+PS 7 LTS 7.2.8 web installer
     
 .SYNOPSIS
 
-Downloads and installs PowerShell 7 Stable 7.3.1 if not already installed.
+Downloads and installs PowerShell 7 LST 7.2.8 if not already installed.
 
-.PARAMETER Name
-        
-Specifies the file name.
 
-    
-.PARAMETER Extension
-        
-Specifies the extension. "Txt" is the default.
+.Notes
 
+Though the installer will say its done and installed, it will take 5 or so seconds for the PC to show the newly installed program via the start menu recently added.
+  
 
 .INPUTS
         
-None. You cannot pipe objects to Add-Extension.
+None.
 
 
 .OUTPUTS
         
 System.String,
 
-PowerShell-7.3.1-win-x64.msi uninstall script starting...Written by DAM on 2023-01-19
+PowerShell-7.2.8-win-x64.msi install script starting...Written by DAM on 2023-01-18
 Checking download link...
 Download link good!
-Downloading .msi installer for PowerShell-7.3.1-win-x64.msi...
-PowerShell-7.3.1-win-x64.msi uninstaller is running...Please wait
-PowerShell-7.3.1-win-x64.msi uninstalled!
+Downloading .msi installer for PowerShell-7.2.8-win-x64.msi...
+Installing PowerShell-7.2.8-win-x64.msi...
+PowerShell-7.2.8-win-x64.msi installer is running...Please wait
+PowerShell-7.2.8-win-x64.msi installed!
 
 
 .LINK
@@ -48,27 +45,40 @@ PowerShell-7.3.1-win-x64.msi uninstalled!
 
 [msiexec](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec)
 
+[Installing PowerShell on Windows] (https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3#msi)
+
 [about_Do](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_do?view=powershell-7.3)
 
 [Remove-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item?view=powershell-7.3)
 
 #>
 
-#Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here. (https://github.com/PowerShell/PowerShell/issues/2138)
+#Script
+
+$ScriptName = 'ESET Endpoint Security installer'
+
+
+
+Write-Host "$ScriptName script starting...Written by DAM on 2023-02-01"
+
+
+
+
+#Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here https://github.com/PowerShell/PowerShell/issues/2138
 
 $ProgressPreference = 'SilentlyContinue'
 
 #Program Path when its installed.
 
-$ProgramPath = "C:\Program Files\PowerShell\7\pwsh.exe"
+$ProgramPath = "C:\Program Files\ESET\ESET Security\egui.exe"
 
 #Download URI
 
-$URI = 'https://github.com/PowerShell/PowerShell/releases/download/v7.3.1/PowerShell-7.3.1-win-x64.msi'
+$URI = 'https://redirector.eset.systems/li-handler/?uuid=epi_win-610c7183-5ef4-4225-9e6c-7baea47e00e6'
 
 #Full name of the installer.
 
-$InstallerName = 'PowerShell-7.3.1-win-x64.msi'
+$InstallerName = 'epi_win_live_installer.exe'
 
 #Out-File location. C:\TEMP is used as C:\ will not grant you access to by default.
 
@@ -76,47 +86,28 @@ $OutFile = "C:\$InstallerName"
 
 
 
-Write-Host "$InstallerName uninstall script starting...Written by DAM on 2023-01-19"
+Write-Host "$InstallerName install script starting...Written by DAM on 2023-01-18"
 
 
-#Checks the PS terminal version this is ran in 5.X.X.
-
-if ($PSVersionTable.PSVersion.Major -eq 5) {
-	
-}else {
-		
-	Throw "This script is running in PowerShell $($PSVersionTable.PSVersion)...Please run this script in PowerShell  Version 5.X.X...Ending Script"
-		
-}
-
-
-#Checks if the terminal is running as admin.
+#Checks if the terminal is runing as admin/elevated as Invoke-WebRequest will not run without it.
 
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     
     Throw "This script requires Administrator rights. To run this script, start PowerShell with the `"Run as administrator`" option."
-
+    
 }
 
 
-#Checks to see if the program is already uinstalled.
+#Checks to see if the program is already installed.
 
 $TestPath = Test-Path -Path "$ProgramPath"
 
-if ($TestPath -eq "False") {
+if ($TestPath -eq 'True') {
 
-}else {
-    Throw "$InstallerName is already uinstalled..."
+    Throw "$InstallerName is already installed..."
+
 }
 
-
-#Test if the .msi is still present, if not it re-downloads it.
-
-$TestPath = Test-Path -Path "$OutFile"
-
-if ($TestPath -eq 'False') {
-
-}else {
 
 
 #Check if link is broken.
@@ -133,29 +124,21 @@ if ($InvokeWeb.StatusDescription -eq "OK") {
 }
 
 
-#Downloads Program via web.
-
-Write-Host "Downloading .msi installer for $ProgramPathShort..."
-
-Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
 
 
-}
+#Install Program from URI.
+
+Write-Host "Installing $InstallerName"
+
+msiexec.exe /i "$OutFile" /quiet ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 ADD_PATH=1 ENABLE_MU=1
 
 
-#Uninstalls the program.
-
-Write-Host "Uninstalling $InstallerName..."
-
-MsiExec.exe /x "$OutFile" /quiet
-
-
-#Uninstall check and TEMP file delete.
+#Ininstall check and TEMP file delete.
 
 do { 
     $TestPath = Test-Path -Path "$ProgramPath"
-    if ($TestPath -eq 'True') {
-        Write-Host "$InstallerName uninstaller is running...Please wait"
+    if ($TestPath -ne 'True') {
+        Write-Host "$InstallerName installer is running...Please wait"
         
         Start-Sleep -Seconds 5
 
@@ -163,9 +146,8 @@ do {
 } 
 Until ($TestPath -eq 'True')
 
-Write-Host "$InstallerName uninstalled!"
+Write-Host "$InstallerName installed!"
 
 Remove-Item "$OutFile"
-
 
 

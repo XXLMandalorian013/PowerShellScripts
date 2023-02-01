@@ -103,7 +103,7 @@ if ($TestPath -eq 'True') {
 
 Write-Host "Checking download link..."
 
-$InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI"
+$InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing
 
 if ($InvokeWeb.StatusDescription -eq "OK") {
     Write-Host "Download link good!"

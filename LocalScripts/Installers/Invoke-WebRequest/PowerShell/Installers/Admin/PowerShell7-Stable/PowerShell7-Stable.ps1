@@ -1,11 +1,11 @@
 #ReadMe
 <#
 
-PS 7 Stable 7.3.1 web installer
+PS 7 Stable 7.3.2 web installer
     
 .SYNOPSIS
 
-Downloads and installs PowerShell 7 Stable 7.3.1 if not already installed.
+Downloads and installs PowerShell 7 Stable 7.3.2 if not already installed.
 
 
 .Notes
@@ -35,7 +35,7 @@ System.String,
 PowerShell-7.3.1-win-x64.msi install script starting...Written by DAM on 2023-01-19
 Checking download link...
 Download link good!
-Downloading .msi installer for PowerShell-7.3.1-win-x64.msi...
+Downloading .msi installer for PowerShell-7.3.2-win-x64.msi...
 Installing PowerShell-7.3.1-win-x64.msi...
 PowerShell-7.3.1-win-x64.msi installer is running...Please wait
 PowerShell-7.3.1-win-x64.msi installer is running...Please wait
@@ -72,7 +72,7 @@ $ProgramPath = "C:\Program Files\PowerShell\7\pwsh.exe"
 
 #Download URI
 
-$URI = 'https://github.com/PowerShell/PowerShell/releases/download/v7.3.1/PowerShell-7.3.1-win-x64.msi'
+$URI = 'https://github.com/PowerShell/PowerShell/releases/download/v7.3.2/PowerShell-7.3.2-win-x64.msi'
 
 #Full name of the installer.
 
@@ -112,7 +112,7 @@ if ($TestPath -eq 'True') {
 
 Write-Host "Checking download link..."
 
-$InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI"
+$InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing
 
 if ($InvokeWeb.StatusDescription -eq "OK") {
     Write-Host "Download link good!"
@@ -126,7 +126,7 @@ if ($InvokeWeb.StatusDescription -eq "OK") {
 
 Write-Host "Downloading .msi installer for $InstallerName..."
 
-Invoke-WebRequest -URI "$URI" -OutFile "$OutFile"
+Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
 
 
 #Install Program from URI.
