@@ -72,7 +72,7 @@ $ProgramPath = "C:\Program Files\PowerShell\7\pwsh.exe"
 
 #Download URI
 
-$URI = 'https://github.com/PowerShell/PowerShell/releases/download/v7.3.1/PowerShell-7.3.1-win-x64.msi'
+$URI = 'https://github.com/PowerShell/PowerShell/releases/download/v7.3.2/PowerShell-7.3.2-win-x64.msi'
 
 #Full name of the installer.
 
@@ -126,7 +126,7 @@ if ($InvokeWeb.StatusDescription -eq "OK") {
 
 Write-Host "Downloading .msi installer for $InstallerName..."
 
-Invoke-WebRequest -URI "$URI" -OutFile "$OutFile"
+Invoke-WebRequest -URI "$URI" -UseBasicParsing -OutFile "$OutFile"
 
 
 #Install Program from URI.
