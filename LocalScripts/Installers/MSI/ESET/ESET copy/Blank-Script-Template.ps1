@@ -124,6 +124,11 @@ if ($InvokeWeb.StatusDescription -eq "OK") {
 }
 
 
+#Downloads Program via web.
+
+Write-Host "Downloading .exe installer for $InstallerName..."
+
+Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
 
 
 #Install Program from URI.
