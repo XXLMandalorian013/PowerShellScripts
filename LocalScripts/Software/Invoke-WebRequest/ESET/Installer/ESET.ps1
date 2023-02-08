@@ -1,16 +1,16 @@
 #ReadMe
 <#
 
-PS 7 LTS 7.2.8 web installer
+ESET Endpoint Security installer
     
 .SYNOPSIS
 
-Downloads and installs PowerShell 7 LST 7.2.8 if not already installed.
+Downloads and installs ESET Endpoint Security installer if not already installed.
 
 
 .Notes
 
-Though the installer will say its done and installed, it will take 5 or so seconds for the PC to show the newly installed program via the start menu recently added.
+This ESET Installer uses the link created in the ESET Cloud Protect SAS. ESET's installers expire, so a new installer may need made and relinked below.
   
 
 .INPUTS
@@ -22,14 +22,14 @@ None.
         
 System.String,
 
-PowerShell-7.2.8-win-x64.msi install script starting...Written by DAM on 2023-01-18
+ESET Endpoint Security installer script starting...Written by DAM on 2023-02-01
+epi_win_live_installer.exe install script starting...Written by DAM on 2023-01-18
 Checking download link...
 Download link good!
-Downloading .msi installer for PowerShell-7.2.8-win-x64.msi...
-Installing PowerShell-7.2.8-win-x64.msi...
-PowerShell-7.2.8-win-x64.msi installer is running...Please wait
-PowerShell-7.2.8-win-x64.msi installed!
-
+Downloading .exe installer for epi_win_live_installer.exe...
+Installing epi_win_live_installer.exe
+epi_win_live_installer.exe installer is running...Please wait
+epi_win_live_installer.exe installed!
 
 .LINK
 
@@ -51,7 +51,11 @@ PowerShell-7.2.8-win-x64.msi installed!
 
 [Remove-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item?view=powershell-7.3)
 
+[ESET Silent Install](https://support.eset.com/en/kb6820-deploy-the-eset-management-agent-and-the-eset-endpoint-product-together-7x)
+
+
 #>
+
 
 #Script
 
@@ -74,7 +78,7 @@ $ProgramPath = "C:\Program Files\ESET\ESET Security\egui.exe"
 
 #Download URI
 
-$URI = 'https://redirector.eset.systems/li-handler/?uuid=epi_win-610c7183-5ef4-4225-9e6c-7baea47e00e6'
+$URI = 'https://www.yourmom.com'
 
 #Full name of the installer.
 
@@ -135,8 +139,7 @@ Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
 
 Write-Host "Installing $InstallerName"
 
-msiexec.exe /i "$OutFile" /quiet ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 ADD_PATH=1 ENABLE_MU=1
-
+Start-Process -FilePath "$OutFile" -ArgumentList "--silent", "--accepteula"
 
 #Ininstall check and TEMP file delete.
 
@@ -153,6 +156,9 @@ Until ($TestPath -eq 'True')
 
 Write-Host "$InstallerName installed!"
 
+Start-Sleep -Seconds 8
+
 Remove-Item "$OutFile"
+
 
 
