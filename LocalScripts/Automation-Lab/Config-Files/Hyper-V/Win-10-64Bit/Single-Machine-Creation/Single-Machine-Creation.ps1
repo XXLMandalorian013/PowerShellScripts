@@ -66,10 +66,10 @@ Function Module-Check {
 
 $ModuleName = 'AutomatedLab'
 
-$ModuelsPath = Get-ChildItem "C:\Users\$env:UserName\Documents\PowerShell\Modules"
+$ModuelsPath = Test-Path -Path "C:\Users\$env:UserName\Documents\PowerShell\Modules\AutomatedLab"
 
     Try{
-            If("$ModuelsPath" -Contains "$ModulesName"){
+            If($ModuelsPath -contains $ModuleName){
 
             }Else{
             Write-Host "$ModuleName module not found, installing..."
@@ -80,8 +80,6 @@ $ModuelsPath = Get-ChildItem "C:\Users\$env:UserName\Documents\PowerShell\Module
         Throw $Error[0]
     }
 }
-
-Module-Check
 
 
 #Import required Module(s).
@@ -99,8 +97,6 @@ $ModuleImport = Import-Module -Name AutomatedLab
         Throw $Error[0]
     }
 }
-
-Module-Import
 
 
 #Config for Automation lab machine.
@@ -146,3 +142,16 @@ $WinOSVer = Read-Host 'Type the iso you wish to use, ie Windows 10 Pro.'
     
     }
 }
+
+
+#Check for required Module(s).
+
+Module-Check
+
+#Import required Module(s).
+
+Module-Import
+
+#Config for Automation lab machine.
+
+Lab-Config
