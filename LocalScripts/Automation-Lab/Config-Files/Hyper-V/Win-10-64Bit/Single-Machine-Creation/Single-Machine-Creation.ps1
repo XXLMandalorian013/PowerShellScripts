@@ -103,9 +103,9 @@ $ModuleImport = Import-Module -Name AutomatedLab
 
 Function Lab-Config {
 
-$LabName = 'Win10-64Bit-Single'
+$LabName = 'Win1064BitSingle'
 
-$LabNetworkIp = Read-Host -AsSecureString 'Type Network Adapters IP address.'
+$LabNetworkIp = Read-Host 'Type Network Adapters IP address.'
 
 $UserName = Read-Host 'Type a username for the Config File.'
 
@@ -115,7 +115,7 @@ $MachineName = Read-Host 'Type the machines name you wish to use, ie Win10ProMac
 
 $MachineRAM = Read-Host 'Type the machines allocation of RAM ie 8GB, 16GB, 24GB. Be sure to add GB after the number.'
 
-$MachineIP = Read-Host -AsSecureString 'Type machine IP address ie 192.168.70.12.'
+$MachineIP = Read-Host 'Type machine IP address ie 192.168.70.12.'
 
 $WinOSVer = Read-Host 'Type the iso you wish to use, ie Windows 10 Pro.'
 
