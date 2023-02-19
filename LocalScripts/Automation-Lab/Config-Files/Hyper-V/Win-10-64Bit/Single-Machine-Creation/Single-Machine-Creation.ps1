@@ -69,7 +69,7 @@ $ModuleName = 'AutomatedLab'
 $ModuelsPath = "Get-ChildItem C:\Users\$env:UserName\Documents\PowerShell\Modules"
 
     Try{
-            If("$ModuleInstallPath" -Contains "$ModulesName"){
+            If("$ModuelsPath" -Contains "$ModulesName"){
 
             }Else{
             Write-Host "$ModuleName module not found, installing..."
