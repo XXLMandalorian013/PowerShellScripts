@@ -66,7 +66,7 @@ Function Module-Check {
 
 $ModuleName = 'AutomatedLab'
 
-$ModuelsPath = "Get-ChildItem C:\Users\$env:UserName\Documents\PowerShell\Modules"
+$ModuelsPath = Get-ChildItem "C:\Users\$env:UserName\Documents\PowerShell\Modules"
 
     Try{
             If("$ModuelsPath" -Contains "$ModulesName"){
