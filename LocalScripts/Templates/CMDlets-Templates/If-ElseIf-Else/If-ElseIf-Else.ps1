@@ -32,8 +32,7 @@ if ( $PS2State -eq 'Enabled' )
     Disable-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2Root
 
     Get-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2Root | Select-Object 'State'
-}
-else
+}else
 {
     Write-Host "PowerShell 2.0 is already disabled."
 }
