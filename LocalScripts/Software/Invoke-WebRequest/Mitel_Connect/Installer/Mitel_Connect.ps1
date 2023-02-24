@@ -60,8 +60,6 @@ epi_win_live_installer.exe installed!
 
 [Remove-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item?view=powershell-7.3)
 
-[ESET Silent Install](https://support.eset.com/en/kb6820-deploy-the-eset-management-agent-and-the-eset-endpoint-product-together-7x)
-
 
 #>
 
@@ -83,7 +81,7 @@ $ProgressPreference = 'SilentlyContinue'
 
 #Program Path when its installed.
 
-$ProgramPath = "C:\Program Files (x86)\Mitel\Connect\Mitel.exe"
+$ProgramPath = "C:\Users\$env:UserName\AppData\Local\Programs\Mitel\Connect"
 
 #Download URI
 
@@ -148,7 +146,8 @@ Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
 
 Write-Host "Installing $InstallerName"
 
-Start-Process -FilePath "$OutFile" -ArgumentList "--silent", "--accepteula"
+Start-Process -FilePath "$OutFile" -ArgumentList "/S", "/V/qn"
+
 
 #Ininstall check and TEMP file delete.
 
