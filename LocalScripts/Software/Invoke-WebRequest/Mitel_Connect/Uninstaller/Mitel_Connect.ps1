@@ -111,13 +111,13 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 #Checks to see if the program is already installed.
 
+
 $TestPath = Test-Path -Path "$ProgramPath"
 
 if ($TestPath -eq 'True') {
 
     Throw "$InstallerName is already installed..."
 }
-
 
 
 #Check if link is broken.
@@ -150,12 +150,12 @@ try {
 }
 
 
-#Install Program from URI.
+#Uninstall Program from URI.
 
 try {
-    Write-Host "Installing $InstallerName"
+    Write-Host "Uninstalling $InstallerName"
 
-    Start-Process -FilePath "$OutFile" -ArgumentList "/S", "/V/qn"
+    Start-Process -FilePath "$OutFile" -ArgumentList "/x","/S", "/V/qn"
 }catch {
     Throw $Error[1]
 }
