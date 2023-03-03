@@ -64,9 +64,15 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 $ExsistingProgramPath = "C:\Users\$env:UserName\AppData\Local\Programs\Mitel\Connect\Mitel.exe"
 
-$InstallerPath = "C:\"
+$TempInstallerPath = "C:\"
 
-$InstallerFolderName = '_Temp MitelConnect Installer'
+$InstallerFolderName = 'Temp MitelConnect Installer'
+
+$LogFileFolderName = "$InstallerFolderName-LogFile"
+
+$InstallerName = 'MitelConnect.exe'
+
+$OutFile = "$TempInstallerPath\$InstallerFolderName"
 
 #Writes to the terminal with this script general info.
 function Write-ScriptBoilerplate {
@@ -81,13 +87,36 @@ function Write-ScriptBoilerplate {
     Write-Verbose -Message "$ScriptBoilerplate" -Verbose
 }
 
+#Creates a Dir for this scripts installer.
+function New-InstallerFolder {
+    Try {
+        Write-Verbose -Message "New-InstallerFolder" -Verbose
+
+        New-Item -Path "$TempInstallerPath" -Name "$InstallerFolderName" -ItemType 'Directory' -ErrorAction STOP
+    }Catch {
+        Write-Error -Message $_
+    }  
+}
+
+#Creates a log folder for this script
+function New-LogFolder {
+    Try {
+        Write-Verbose -Message "New-LogFolder" -Verbose
+
+        New-Item -Path "$TempInstallerPath\$InstallerFolderName" -Name $LogFileFolderName -ItemType 'Directory' -ErrorAction STOP
+    }Catch {
+        Write-Error -Message $_ 
+    }
+}
+
 #Checks to see if the program is already installed.
 function Test-ExsistingProgamPath {
     Try {
-
+        Write-Verbose -Message "Test-ExsistingProgamPath" -Verbose
+        
         $TestPath = Test-Path -Path "$ExsistingProgramPath" -ErrorAction STOP
 
-        if ($TestPath -eq 'True') {
+        If ($TestPath -eq 'True') {
 
             Throw "$InstallerName is already installed..."
         }
@@ -98,65 +127,121 @@ function Test-ExsistingProgamPath {
 
 #Check if the download link is broken.
 function Test-DownloadLink {
-    try {
+    Try {
+        Write-Verbose -Message "Test-DownloadLink" -Verbose
+
         $URI = 'https://upgrade01.sky.shoretel.com/ClientInstall/NonAdmin'
 
-        $InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing
+        $InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing -ErrorAction STOP
     
-        if ($InvokeWeb.StatusDescription -eq "OK") {
+        If ($InvokeWeb.StatusDescription -eq "OK") {
         }
-    }catch {
-    Write-Error -Message $_
-    }
-}
-
-#Creates a Dir for this scripts installer.
-function New-InstallerFolder {
-    try {
-        New-Item -Path "$InstallerPath" -Name "$InstallerFolderName" -ItemType 'Directory' -ErrorAction STOP
-    }catch {
+    }Catch {
         Write-Error -Message $_
-    }   
+    }
 }
 
-#Creates a log folder for this script
-function New-LogFolder {
-    try {
-        $LogFolder = New-Item -Path "$InstallerPath\$InstallerFolderName" -Name "$InstallerFolderNamee-LogFile" -ItemType 'Directory' -ErrorAction STOP
+#Downloads the program installer with Invoke-Webrequest.
+function Get-ProgramDownload {
+    #Downloads Program via web.
 
-        $LogFolder
-    }catch {
-        Write-Error -Message $_ 
+    Try {
+        Write-Verbose -Message "Get-ProgramDownload" -Verbose
+
+        Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing -ErrorAction STOP
+    }Catch {
+        Write-Error -Message $_
     }
+}
+
+#Starts the installer.
+function Start-Installer {
+    Try {
+        Write-Verbose -Message "Start-Installer" -Verbose
+
+        Start-Process -FilePath "$OutFile" -ArgumentList "/S", "/V/qn" -ErrorAction STOP
+        Do { 
+            $TestPath = Test-Path -Path "$ProgramPath"
+            If ($TestPath -ne 'True') {
+                Write-Host "$InstallerName installer is running...Please wait"
+                
+                Start-Sleep -Seconds 5
+            }
+        } 
+        Until ($TestPath -eq 'True')
+    }Catch {
+        Write-Error -Message $_
+    } 
+}
+
+function Remove-InstallerFolder {
+    Try {
+        Write-Verbose "$InstallerName installed!" -Verbose
+
+        Start-Sleep -Seconds 5
+    
+        Remove-Item "$OutFile"
+    }
+    Catch {
+        Write-Error -Message $_
+    }
+    
+    
 }
 
 #Writes to the terminal with this script general info.
-Start-ScriptBoilerplate
+Write-ScriptBoilerplate
 
-#Checks to see if the program is already installed.
-Test-ExsistingProgamPath
+#Runs the New-InstallerFolder Function.
+New-InstallerFolder
+
+#Creates a log folder for this script.
+New-LogFolder
 
 #Check if the download link is broken.
 Test-DownloadLink
 
-#Creates a Dir for this scripts installer.
-New-InstallerFolder
+#Downloads the program installer with Invoke-Webrequest.
+Get-ProgramDownload
 
-#Creates a log folder for this script
-New-LogFolder
+#Starts the installer.
+Start-Installer
 
+#Creates a log file entry if an error occurs.
+function Write-LogFileEntry {
 
+    Try {
+        $Date = Get-Date -Format "dddd MM/dd/yyyy HH:mm K"
 
-
-
-$LogFolder = 
-
-function Write-LogEntry {
-
-    $Entry = (Get-Date).TOString('MM/DD/YYYY HH:mm:ss - ')
-
-    $Entry | Out-File -FilePath $LogFolder
-    
-    Write-Verbose -Message $Entry -Verbose
+        New-Item -Path "$TempInstallerPath\$InstallerFolderName\$LogFileFolderName" -Name "$Date-ScriptError.txt" -ItemType 'File' -Value "$Error" -ErrorAction STOP
+    }
+    Catch {
+        Write-Error -Message $_ 
+    }
 }
+
+
+
+
+#Ininstall check and TEMP file delete.
+Try {
+    Do { 
+        $TestPath = Test-Path -Path "$ProgramPath"
+        If ($TestPath -ne 'True') {
+            Write-Host "$InstallerName installer is running...Please wait"
+            
+            Start-Sleep -Seconds 5
+    
+        }
+    } 
+    Until ($TestPath -eq 'True')
+}Catch {
+    Throw $Error[1]
+}Finally {
+    Start-Sleep -Seconds 8
+
+    
+}
+
+
 
