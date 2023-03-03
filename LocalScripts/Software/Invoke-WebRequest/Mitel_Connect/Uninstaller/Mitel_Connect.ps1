@@ -69,13 +69,9 @@ epi_win_live_installer.exe installed!
 
 
 
-#Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here https://github.com/PowerShell/PowerShell/issues/2138
 
-$ProgressPreference = 'SilentlyContinue'
 
-#Program Path when its installed.
 
-$ProgramPath = "C:\Users\$env:UserName\AppData\Local\Programs\Mitel\Connect\Mitel.exe"
 
 #Download URI
 
@@ -150,6 +146,33 @@ try {
 }
 
 
+#Uninstalls Mitel Teamwork
+    
+function Uninstall-MitelTeamwork {
+    
+    param (
+        $InstallerName = 'MitelConnect.exe',
+        $ProgramName = "Mitel Teamwork.exe",
+        $OutFile = "C:\$InstallerName"
+    )
+
+    #Write Step
+    Write-Verbose -Message "Uninstalling $ProgramName" -Verbose
+    
+    try {
+        Start-Process -FilePath "$OutFile" -ArgumentList "/x","/S", "/V/qn"
+    }catch{
+        Throw $Error[1]
+    }
+}
+    
+
+    
+    
+
+
+
+
 #Uninstall Program from URI.
 
 try {
@@ -159,7 +182,6 @@ try {
 }catch {
     Throw $Error[1]
 }
-
 
 
 

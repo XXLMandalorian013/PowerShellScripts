@@ -52,8 +52,18 @@ File.doc
 
 #Script
 
-$ScriptName = ''
+#letting the user know what is starting.
 
+function Start-ScriptBoilerplate {
+    $ScriptName = "Get-Specific-Running-Task.ps1"
 
+    $ScriptAuthor = "DAM"
 
-Write-Host "$ScriptName script starting...Written by DAM on 2023-01-23"
+    $ModifiedDate = "2023-03-02"
+
+    $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor, last modified on $ModifiedDate"
+    
+    Write-Verbose -Message "$ScriptBoilerplate" -Verbose
+}
+
+Start-ScriptBoilerplate
