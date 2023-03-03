@@ -68,7 +68,7 @@ $InstallerPath = "C:\"
 
 $InstallerFolderName = '_Temp MitelConnect Installer'
 
-#Writes to the terminal with this script info and author.
+#Writes to the terminal with this script general info.
 function Write-ScriptBoilerplate {
     $ScriptName = "Get-Specific-Running-Task.ps1"
 
@@ -96,6 +96,20 @@ function Test-ExsistingProgamPath {
     }
 }
 
+#Check if the download link is broken.
+function Test-DownloadLink {
+    try {
+        $URI = 'https://upgrade01.sky.shoretel.com/ClientInstall/NonAdmin'
+
+        $InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing
+    
+        if ($InvokeWeb.StatusDescription -eq "OK") {
+        }
+    }catch {
+    Write-Error -Message $_
+    }
+}
+
 #Creates a Dir for this scripts installer.
 function New-InstallerFolder {
     try {
@@ -116,17 +130,22 @@ function New-LogFolder {
     }
 }
 
-#Writes to the terminal with this script info and author.
+#Writes to the terminal with this script general info.
 Start-ScriptBoilerplate
 
 #Checks to see if the program is already installed.
 Test-ExsistingProgamPath
+
+#Check if the download link is broken.
+Test-DownloadLink
 
 #Creates a Dir for this scripts installer.
 New-InstallerFolder
 
 #Creates a log folder for this script
 New-LogFolder
+
+
 
 
 
