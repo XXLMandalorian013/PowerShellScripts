@@ -40,6 +40,10 @@ VERBOSE: Add-FixFilesforTrace3D
 
 VERBOSE: Start-Trace700
 
+VERBOSE: Start-Trace3D
+
+VERBOSE: Remove-DownloadedItems
+
 VERBOSE: The script has finished, now remote into the users PC and active the licneses for Trace 3D and 700.
 
 ## LINK

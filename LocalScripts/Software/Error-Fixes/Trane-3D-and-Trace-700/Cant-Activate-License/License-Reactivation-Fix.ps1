@@ -44,7 +44,9 @@ System.Strings, Verbosly stating the function steps it is doing.
 
 [Copy-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/copy-item?view=powershell-7.3)
 
-[Start-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.3) 
+[Start-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.3)
+
+[Remove-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item?view=powershell-7.3)
 
 #>
 
@@ -175,6 +177,19 @@ function Start-Trace3D {
     }
 }
 
+#Deletes the zipped and unzipped files.
+function Remove-DownloadedItems {
+    Try {
+        Write-Verbose -Message "Remove-DownloadedItems" -Verbose
+        $ZippedPath = "C:\CDSActivationHotFix.zip"
+        $UnzipedPath = "C:\CDSActivationHotFix"
+        Remove-Item -Path $ZippedPath -Recurse
+        Remove-Item -Path $UnzipedPath -Recurse
+    }Catch {
+        Write-Error -Message $_
+    }
+}
+
 #States the script has stopped.
 function Stop-Script {
     try {
@@ -212,6 +227,9 @@ Start-Trace700
 
 #Runs Trace 3D
 Start-Trace3D
+
+#Deletes the zipped and unzipped files.
+Remove-DownloadedItems
 
 #States the script has stopped.
 Stop-Script
