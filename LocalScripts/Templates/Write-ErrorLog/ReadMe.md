@@ -22,15 +22,24 @@ None.
 
 Verbose.String, and .txt output of error per try catch
 
+
     Directory: C:\
 
 Mode                 LastWriteTime         Length Name
 
 ---
 
-d----           3/13/2023  4:29 PM                Temp MitelConnect Installer
+d----           3/13/2023  5:07 PM                Temp MitelConnect Installer
 
-VERBOSE: 2023/03/13 16:29 Monday - Get-Buttz is not a know PS CMDLet....script ending...
+Write-ErrorLog:
+
+Line |
+
+   5 |      Write-ErrorLog -Text "Get-Buttz is not a know PS CMDLet."
+
+    |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    | Script error detected...script is ending...
 
 ## LINK
 
