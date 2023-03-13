@@ -1,0 +1,47 @@
+# Write-ErrorLog.ps1
+
+## SYNOPSIS
+
+A function that captures errors in a script and outputs it to a .txt.
+
+## DESCRIPTION
+
+Writes-Error to the console and creates a error log .txt captureing the issue. The script will stop and exit upon getting an error.
+
+Write everything in a Try/Catch and or Finally CMDLet to capture the error output.
+
+## Notes
+
+Works in 7.X.X.
+
+## INPUTS
+
+None.
+
+## OUTPUTS
+
+Verbose.String, and .txt output of error per try catch
+
+    Directory: C:\
+
+Mode                 LastWriteTime         Length Name
+
+---
+
+d----           3/13/2023  4:29 PM                Temp MitelConnect Installer
+
+VERBOSE: 2023/03/13 16:29 Monday - Get-Buttz is not a know PS CMDLet....script ending...
+
+## LINK
+
+[about_Functions](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions?view=powershell-7.3)
+
+[Approved Verbs for PowerShell Commands](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands?view=powershell-7.3)
+
+[New-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/new-item?view=powershell-7.3)
+
+[Get-Date](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-date?view=powershell-7.3)
+
+[Write-Error](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-error?view=powershell-7.3)
+
+[Out-File](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/out-file?view=powershell-7.3)
