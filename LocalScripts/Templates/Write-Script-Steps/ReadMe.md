@@ -1,12 +1,12 @@
-# Write-ErrorLog.ps1
+# Write-Script-Steps.ps1
 
 ## SYNOPSIS
 
-A function that captures errors in a script and outputs it to a .txt.
+A function that captures each part of a scripts steps by outputs it to a .txt.
 
 ## DESCRIPTION
 
-Writes-Error to the console and creates a error log .txt captureing the issue. The script will stop and exit upon getting an error.
+Writes verbosly to the console and creates a error log .txt captureing each compleated step of a script.
 
 Write everything in a Try/Catch and or Finally CMDLet to capture the error output.
 
@@ -20,19 +20,13 @@ None.
 
 ## OUTPUTS
 
-Verbose.String, and .txt output of error per try catch
+Verbose.String, and .txt output of error per try catch.
 
-    Directory: C:\
+VERBOSE: Logging Compleated Step
 
-Mode                 LastWriteTime         Length Name
+VERBOSE: Logging Compleated Step
 
----
-
-d----           3/13/2023  4:29 PM                Temp MitelConnect Installer
-
-VERBOSE: 2023/03/13 16:29 Monday - Get-Buttz is not a know PS CMDLet....script ending...
-
-## LINK
+# LINK
 
 [about_Functions](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions?view=powershell-7.3)
 
@@ -42,6 +36,10 @@ VERBOSE: 2023/03/13 16:29 Monday - Get-Buttz is not a know PS CMDLet....script e
 
 [Get-Date](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-date?view=powershell-7.3)
 
-[Write-Error](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-error?view=powershell-7.3)
+[Add-Content](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/add-content?view=powershell-7.3)
+
+[about_If](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_if?view=powershell-7.3)
 
 [Out-File](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/out-file?view=powershell-7.3)
+
+[Write-Verbose](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-verbose?view=powershell-7.3)
