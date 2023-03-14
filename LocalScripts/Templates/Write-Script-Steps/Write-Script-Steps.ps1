@@ -61,6 +61,7 @@ $InstallerFolderName = 'Temp MitelConnect Installer'
 
 $OutFile = "$TempInstallerPath\$InstallerFolderName"
 
+#A function to log the steps of a script.
 function Write-ScriptStep {
     [CmdletBinding ()]
     param (
