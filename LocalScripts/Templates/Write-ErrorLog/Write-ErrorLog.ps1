@@ -64,6 +64,7 @@ $InstallerFolderName = 'Temp MitelConnect Installer'
 
 $OutFile = "$TempInstallerPath\$InstallerFolderName"
 
+#A function to stop the sctipt and create a .txt with a log file of the error.
 function Write-ErrorLog {
     [CmdletBinding ()]
     param (
