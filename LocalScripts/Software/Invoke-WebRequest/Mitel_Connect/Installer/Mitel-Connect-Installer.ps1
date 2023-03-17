@@ -79,8 +79,6 @@ $TempInstallerPath = "C:\"
 
 $InstallerFolderName = 'Temp-MitelConnect-Installer'
 
-$ExsistingProgramPath = "C:\Users\$env:UserName\AppData\Local\Programs\Mitel\Connect\Mitel.exe"
-
 $InstallerName = 'MitelConnect.exe'
 
 #Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here https://github.com/PowerShell/PowerShell/issues/2138
@@ -90,7 +88,7 @@ $URI = 'https://upgrade01.sky.shoretel.com/ClientInstall/NonAdmin'
 
 $OutFile = "$TempInstallerPath\$InstallerFolderName"
 
-$ProgramPath = "C:\Users\HUA\AppData\Local\Programs\Mitel\Connect\Mitel.exe"
+$ProgramPath = "C:\Users\$env:UserName\AppData\Local\Programs\Mitel\Connect\Mitel.exe"
 
 #Checks if the terminal is runing as admin/elevated as Invoke-WebRequest will not run without it.
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
