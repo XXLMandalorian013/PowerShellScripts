@@ -22,6 +22,19 @@ None.
 
 .OUTPUTS
 
+VERBOSE: $ScriptName script starting...written by $ScriptAuthor, last modified on $ModifiedDate
+VERBOSE: Logging Compleated Step
+VERBOSE: Test-ExsistingProgamPath
+VERBOSE: Test-DownloadLink
+VERBOSE: Logging Compleated Step
+VERBOSE: Get-ProgramDownload#Starts the installer.
+VERBOSE: Logging Compleated Step
+VERBOSE:Start-Installer
+VERBOSE: Logging Compleated Step
+Remove-InstallerFolder
+VERBOSE: Logging Compleated Step
+VERBOSE:$ScriptName has finished successfully...Script Ending...
+
 Write-ScriptStep function.
 
     Verbose.String, and .txt output of error per try catch.
@@ -73,6 +86,10 @@ Write-ErrorLog function.
 
 #Gloabal Variables
 
+$ScriptAuthor = "DAM"
+
+$ModifiedDate = "2023-03-16"
+
 $ScriptName = "Mitel-Connect-Installer.ps1"
 
 $TempInstallerPath = "C:\"
@@ -81,14 +98,16 @@ $InstallerFolderName = 'Temp-MitelConnect-Installer'
 
 $InstallerName = 'MitelConnect.exe'
 
-#Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here https://github.com/PowerShell/PowerShell/issues/2138
+$ProgramPath = "C:\Users\$env:UserName\AppData\Local\Programs\Mitel\Connect\Mitel.exe"
+
+#Disabled Invove-WebReqests progress bar speeding up the download for 5.1 and fixing the bar sticking in 7.X. Bug seen here https://github.com/PowerShell/PowerShell/issues/2138
 $ProgressPreference = 'SilentlyContinue'
 
 $URI = 'https://upgrade01.sky.shoretel.com/ClientInstall/NonAdmin'
 
 $OutFile = "$TempInstallerPath\$InstallerFolderName"
 
-$ProgramPath = "C:\Users\$env:UserName\AppData\Local\Programs\Mitel\Connect\Mitel.exe"
+$InstallerType = "msiexec"
 
 #Checks if the terminal is runing as admin/elevated as Invoke-WebRequest will not run without it.
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -107,7 +126,7 @@ function Write-ScriptStep {
 
     if ("$ExsitingStep" -eq 'False') {
         
-        New-Item -Path "$TempInstallerPath" -Name "$InstallerFolderName" -ItemType 'Directory' -ErrorAction SilentlyContinue
+        New-Item -Path "$TempInstallerPath" -Name "$InstallerFolderName" -ItemType 'Directory' | Out-Null -ErrorAction SilentlyContinue
 
         $Entry = (Get-Date -Format "yyyy/MM/dd HH:mm dddd - ") + $Text
 
@@ -147,12 +166,6 @@ function Write-ErrorLog {
 function Write-ScriptBoilerplate {
     try {
 
-        $ScriptName = "Mitel_Connect.ps1 installer"
-
-        $ScriptAuthor = "DAM"
-
-        $ModifiedDate = "2023-03-16"
-
         $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor, last modified on $ModifiedDate"
 
         Write-Verbose -Message "$ScriptBoilerplate" -Verbose
@@ -172,7 +185,7 @@ function Test-ExsistingProgramPath {
 
         Write-Verbose -Message "Test-ExsistingProgamPath" -Verbose
 
-        $TestPath = Test-Path -Path "$ProgramPath" -ErrorAction STOP
+        $TestPath = Test-Path -Path "$ProgramPath"
 
         If ($TestPath -eq 'True') {
 
@@ -193,9 +206,10 @@ function Test-ExsistingProgramPath {
 #Check if the download link is broken.
 function Test-DownloadLink {
     Try {
+
         Write-Verbose -Message "Test-DownloadLink" -Verbose
 
-        $InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing -ErrorAction STOP
+        $InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing
 
         If ($InvokeWeb.StatusDescription -eq "OK") {
 
@@ -214,9 +228,10 @@ function Get-ProgramDownload {
 
         Write-Verbose -Message "Get-ProgramDownload" -Verbose
 
-        Invoke-WebRequest -URI "$URI" -OutFile "$OutFile\$InstallerName" -UseBasicParsing -ErrorAction STOP
+        Invoke-WebRequest -URI "$URI" -OutFile "$OutFile\$InstallerName" -UseBasicParsing
 
         Write-ScriptStep -Text "Get-ProgramDownload completed"
+
     }Catch {
 
         Write-ErrorLog -Text "Get-ProgramDownload failed...Check download link...$Error[0]"
@@ -230,19 +245,21 @@ function Start-Installer {
 
         Write-Verbose -Message "Start-Installer" -Verbose
 
-        Start-Process -FilePath "$OutFile\$InstallerName" -ArgumentList "/S", "/V/qn" -ErrorAction STOP
+        Start-Process -FilePath "$OutFile\$InstallerName" -ArgumentList "/S", "/V/qn"
 
         Do { 
-            $TestPath = Test-Path -Path "$ProgramPath"
+            $InstallerRunning = Get-Process -ProcessName "$InstallerType"
 
-            If ($TestPath -ne 'True') {
+            Start-Sleep -Seconds 15
+
+            If ($InstallerRunning -eq 'True') {
 
                 Write-Information -MessageData "$InstallerName installer is running...Please wait" -InformationAction Continue
 
-                Start-Sleep -Seconds 15
+                Start-Sleep -Seconds 5
 
             }
-        }Until ($TestPath -eq 'True')
+        }Until ($InstallerRunning -eq 'False')
 
         Write-ScriptStep -Text "Start-Installer completed"
 
@@ -259,23 +276,13 @@ function Remove-InstallerFolder {
 
         Write-Verbose -Message "Remove-InstallerFolder" -Verbose
 
-        Do { 
+        Remove-Item -Path "$OutFile" -Recurse
 
-            $TestPath = Test-Path -Path "$ProgramPath"
-
-            If ($TestPath -ne 'True') {
-
-                Start-Sleep -Seconds 5
-            }
-        }Until ($TestPath -eq 'True')
-
-        Remove-Item $InstallerFolderName -Recurse
-
-        Write-ScriptStep -Text "Start-Installer completed"
+        Write-ScriptStep -Text "Remove-InstallerFolder completed"
 
     }Catch {
 
-        Write-ErrorLog -Text "Start-Installer...Check installer peramiters...$Error[0]"
+        Write-ErrorLog -Text "Remove-InstallerFolder...Check installer peramiters...$Error[0]"
 
     }Finally {
 

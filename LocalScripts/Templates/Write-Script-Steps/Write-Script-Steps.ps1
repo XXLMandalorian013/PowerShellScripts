@@ -88,30 +88,42 @@ function Write-ScriptStep {
     }
 }
 
-#Test Try/Catch for steps log function handling.
-try {
-    Get-Process -ErrorAction Stop
-    Write-ScriptStep -Text "Step 1 complete"
-}
-catch {
-    Write-Error -Message "Check the above try syntax."
-}
-
-#Test Try/Catch for error log function handling.
-try {
-    Get-Process -ErrorAction Stop
-    Write-ScriptStep -Text "Step 2 complete"
-}
-catch {
-    Write-Error -Message "Check the above try syntax."
+function Test-Function1 {
+    #Test Try/Catch for error log function handling.
+    try     {
+        Get-Process -ErrorAction Stop
+        Write-ScriptStep -Text "Step 1 complete"
+    }
+    catch {
+        Write-Error -Message "Check the above try syntax."
+    }
 }
 
-#Test Try/Catch for error log function handling.
-try {
-    Get-Process -ErrorAction Stop
-    Write-ScriptStep -Text "Step 3 complete"
+function Test-Function2 {
+    #Test Try/Catch for error log function handling.
+    try     {
+        Get-Process -ErrorAction Stop
+        Write-ScriptStep -Text "Step 2 complete"
+    }
+    catch {
+        Write-Error -Message "Check the above try syntax."
+    }
 }
-catch {
-    Write-Error -Message "Check the above try syntax."
+
+function Test-Function3 {
+    #Test Try/Catch for error log function handling.
+    try     {
+        Get-Process -ErrorAction Stop
+        Write-ScriptStep -Text "Step 3 complete"
+    }
+    catch {
+        Write-Error -Message "Check the above try syntax."
+    }
 }
+
+Test-Function1
+
+Test-Function2
+
+Test-Function3
 
