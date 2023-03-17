@@ -81,8 +81,6 @@ function Write-ScriptStep {
         Write-Verbose -Message "Logging Compleated Step" -Verbose
 
     }else {
-        
-        $Entry = (Get-Date -Format "yyyy/MM/dd HH:mm dddd - ") + $Text
 
         Add-Content -Path "$OutFile\$ScriptName-Log-File.txt" -Value "$Text"
 
@@ -103,6 +101,15 @@ catch {
 try {
     Get-Process -ErrorAction Stop
     Write-ScriptStep -Text "Step 2 complete"
+}
+catch {
+    Write-Error -Message "Check the above try syntax."
+}
+
+#Test Try/Catch for error log function handling.
+try {
+    Get-Process -ErrorAction Stop
+    Write-ScriptStep -Text "Step 3 complete"
 }
 catch {
     Write-Error -Message "Check the above try syntax."
