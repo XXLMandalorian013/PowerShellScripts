@@ -286,11 +286,11 @@ function Remove-InstallerFolder {
 
     }Finally {
 
+        Write-ScriptStep -Text "$ScriptName has finished successfully...Script Ending..."
+
         Write-Verbose -Message "$ScriptName has finished successfully...Script Ending..." -Verbose
 
         Start-Sleep -Seconds 5
-
-        Write-ScriptStep -Text "$ScriptName has finished successfully...Script Ending..."
 
         Exit
     }
