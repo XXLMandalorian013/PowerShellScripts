@@ -133,7 +133,7 @@ Invoke-WebRequest -URI "$URI" -UseBasicParsing -OutFile "$OutFile"
 
 Write-Host "Installing $InstallerName..."
 
-msiexec.exe /i "$OutFile" /quiet ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 ADD_PATH=1
+msiexec.exe /i "$OutFile" /quiet ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 ADD_PATH=1 ENABLE_MU=1
 
 
 #Ininstall check and TEMP file delete.
