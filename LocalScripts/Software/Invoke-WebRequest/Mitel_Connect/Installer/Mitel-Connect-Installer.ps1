@@ -109,6 +109,7 @@ $OutFile = "$TempInstallerPath\$InstallerFolderName"
 
 $InstallerType = "C:\Users\HUA\AppData\Local\Programs\teamwork\Mitel Teamwork.exe"
 
+
 #Checks if the terminal is runing as admin/elevated as Invoke-WebRequest will not run without it.
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
 
