@@ -1,4 +1,5 @@
-#ReadMe
+#Region - ReadMe-Start
+
 <#
 
 Write-ErrorLog.ps1
@@ -79,10 +80,11 @@ Write-ErrorLog function.
 
 [about_If](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_if?view=powershell-7.3)
 
-
 #>
 
-#Script-Start
+#EndRegion ReadMe-Stop
+
+#Region - Script-Start
 
 #Gloabal Variables
 
@@ -107,7 +109,8 @@ $URI = 'https://upgrade01.sky.shoretel.com/ClientInstall/NonAdmin'
 
 $OutFile = "$TempInstallerPath\$InstallerFolderName"
 
-$InstallerType = "C:\Users\HUA\AppData\Local\Programs\teamwork\Mitel Teamwork.exe"
+$InstallerFinishEvent = "C:\Users\$env:UserName\AppData\Local\Programs\teamwork\Mitel Teamwork.exe"
+
 
 
 #Checks if the terminal is runing as admin/elevated as Invoke-WebRequest will not run without it.
@@ -139,7 +142,7 @@ function Write-ScriptStep {
 
         Add-Content -Path "$OutFile\$ScriptName-Log-File.txt" -Value "$Text"
 
-        Write-Verbose -Message "Logging Compleated Step" -Verbose
+        Write-Verbose -Message "Logging Compleated Step" -Verbose 
     }
 }
 
@@ -176,7 +179,7 @@ function Write-ScriptBoilerplate {
     }
     catch {
 
-        Write-ErrorLog -Text "Write-ScriptBoilerplate failed.$Error[0]"
+        Write-ErrorLog -Text "Write-ScriptBoilerplate failed.$Error[1]"
     }  
 }
 
@@ -186,7 +189,7 @@ function Test-ExsistingProgramPath {
 
         Write-Verbose -Message "Test-ExsistingProgamPath" -Verbose
 
-        $TestPath = Test-Path -Path "$ProgramPath"
+        $TestPath = Test-Path -Path "$ProgramPath" -ErrorAction Stop
 
         If ($TestPath -eq 'True') {
 
@@ -200,7 +203,7 @@ function Test-ExsistingProgramPath {
         }
     }Catch {
 
-        Write-ErrorLog -Text "Test-ExsistingProgramPath failed...$Error[0]"
+        Write-ErrorLog -Text "Test-ExsistingProgramPath failed...$Error[1]"
     }
 }
 
@@ -210,7 +213,7 @@ function Test-DownloadLink {
 
         Write-Verbose -Message "Test-DownloadLink" -Verbose
 
-        $InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing
+        $InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing -ErrorAction Stop
 
         If ($InvokeWeb.StatusDescription -eq "OK") {
 
@@ -218,7 +221,7 @@ function Test-DownloadLink {
         }
     }Catch {
 
-        Write-ErrorLog -Text "Test-ExsistingProgramPath failed...Check download link...$Error[0]"
+        Write-ErrorLog -Text "Test-ExsistingProgramPath failed...Check download link...$Error[1]"
     }
 }
 
@@ -229,13 +232,13 @@ function Get-ProgramDownload {
 
         Write-Verbose -Message "Get-ProgramDownload" -Verbose
 
-        Invoke-WebRequest -URI "$URI" -OutFile "$OutFile\$InstallerName" -UseBasicParsing
+        Invoke-WebRequest -URI "$URI" -OutFile "$OutFile\$InstallerName" -UseBasicParsing -ErrorAction Stop
 
         Write-ScriptStep -Text "Get-ProgramDownload completed"
 
     }Catch {
 
-        Write-ErrorLog -Text "Get-ProgramDownload failed...Check download link...$Error[0]"
+        Write-ErrorLog -Text "Get-ProgramDownload failed...Check download link...$Error[1]"
 
     }
 }
@@ -246,27 +249,28 @@ function Start-Installer {
 
         Write-Verbose -Message "Start-Installer" -Verbose
 
-        Start-Process -FilePath "$OutFile\$InstallerName" -ArgumentList "/S", "/V/qn"
+        Start-Process -FilePath "$OutFile\$InstallerName" -ArgumentList "/S", "/V/qn" -ErrorAction Stop
 
-        Do { 
-            $InstallerRunning = Get-Process -ProcessName "$InstallerType"
+        Do {
 
-            Start-Sleep -Seconds 15
+            $InstallerFinished = Test-Path -Path "$InstallerFinishEvent"
 
-            If ($InstallerRunning -eq 'True') {
+            If ($InstallerFinished -ne 'True') {
 
                 Write-Information -MessageData "$InstallerName installer is running...Please wait" -InformationAction Continue
 
-                Start-Sleep -Seconds 5
+                Start-Sleep -Seconds 15
 
             }
-        }Until ($InstallerRunning -eq 'False')
+        }Until ($InstallerFinished -eq 'True')
 
         Write-ScriptStep -Text "Start-Installer completed"
 
+        Start-Sleep -Seconds 45
+
     }Catch {
 
-        Write-ErrorLog -Text "Start-Installer...Check installer peramiters...$Error[0]"
+        Write-ErrorLog -Text "Check installer peramiters...$Error[1]"
 
     } 
 }
@@ -277,13 +281,13 @@ function Remove-InstallerFolder {
 
         Write-Verbose -Message "Remove-InstallerFolder" -Verbose
 
-        Remove-Item -Path "$OutFile" -Recurse
+        Remove-Item -Path "$OutFile" -Recurse -Force -ErrorAction STOP
 
         Write-ScriptStep -Text "Remove-InstallerFolder completed"
 
     }Catch {
 
-        Write-ErrorLog -Text "Remove-InstallerFolder...Check installer peramiters...$Error[0]"
+        Write-ErrorLog -Text "Remove-InstallerFolder...Check installer peramiters...$Error[1]"
 
     }Finally {
 
@@ -315,4 +319,5 @@ Start-Installer
 #Checks if the program installed, if so it deletes the temp folder is made.
 Remove-InstallerFolder
 
-#Script-Stop
+#EndRegion Script-Stop
+
