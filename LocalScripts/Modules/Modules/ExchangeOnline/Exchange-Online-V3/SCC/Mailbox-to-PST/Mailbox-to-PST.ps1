@@ -34,7 +34,7 @@ EXLocation: email@domain.com
 
 
 .OUTPUTS
-        
+
 System.String.
 
 This script is running in 7.2.6.
@@ -110,9 +110,7 @@ if ($PSVersionTable.PSVersion.Major -eq 7) {
 		
 	Write-Host "This script is running in $($PSVersionTable.PSVersion)."
 	
-} 
-
-else {
+}else {
 	
     Write-Warning "This script is running in PowerShell $($PSVersionTable.PSVersion)...Please run this script in PowerShell  Version 7.X.X...Ending Script" -WarningAction Inquire
 		
@@ -129,8 +127,7 @@ $PSSessionsName = Get-ConnectionInformation | Select-Object -Property "Name"
 if ("$PSSessionsName" -match 'ExchangeOnline') 
 {
 
-}   
-else
+}else
 {
     Write-Host "Your are not connected to ExchangeOnline...Connecting"
     
@@ -145,8 +142,7 @@ $SCCConnection = Get-PSSession | Select-Object -Property "ConnectionURI"
 if ("$SCCConnection" -match 'compliance.protection') 
 {
     
-}   
-else
+}else
 {
     Write-Host "Your are not connected to the SCC...Connecting"
 
@@ -174,8 +170,7 @@ do {
     if ($CSStatus -ne "Completed") {
         Write-Output "Gathering users data for $SearchName is $CSStatus...Please wait. Checking again in 3 minutes..."
     }
-} 
-Until ($CSStatus -eq "Completed")
+}Until ($CSStatus -eq "Completed")
 
 Write-Output "ComplianceSearch $SearchName completed...Starting Export"
 
@@ -198,8 +193,7 @@ do {
         Write-Host "Scheduling for $SearchName is $CAStatus...Please wait. Checking again in 3 minutes..."
 
     }
-} 
-Until ($CAStatus -eq "Completed")
+}Until ($CAStatus -eq "Completed")
 
 Write-Host "Scheduling for $SearchName is $CAStatus, and the export key has been generated...Getting the download ready."
 
@@ -218,8 +212,7 @@ do {
         Write-Host 'Export data is being prepared for download...Please wait.  Checking again in 5 minute...'
         
     }
-}
-Until ($CASJobEndTime -match "$TodaysDate")
+}Until ($CASJobEndTime -match "$TodaysDate")
 
 Start-Sleep -Seconds 10
 
