@@ -73,21 +73,6 @@ if(-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdenti
     Throw "This script requires Administrator rights. To run this script, start PowerShell with the `"Run as administrator`" option."  
 }
 
-#Writes to the terminal with this script general info.
-function Write-ScriptBoilerplate {
-    try{
-
-        $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor, last modified on $ModifiedDate"
-
-        Write-Verbose -Message "$ScriptBoilerplate" -Verbose
-
-        Write-ScriptStep -Text "$ScriptBoilerplate"
-
-    }catch {
-
-    }  
-}
-
 #A function to log the steps of a script.
 function Write-ScriptStep {
     [CmdletBinding ()]
@@ -115,6 +100,21 @@ function Write-ScriptStep {
     }
 }
 
+#Writes to the terminal with this script general info.
+function Write-ScriptBoilerplate {
+    try{
+
+        $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor, last modified on $ModifiedDate"
+
+        Write-Verbose -Message "$ScriptBoilerplate" -Verbose
+
+        Write-ScriptStep -Text "$ScriptBoilerplate"
+
+    }catch {
+
+    }  
+}
+
 #Checks to see if the program is already installed.
 function Test-ExsistingProgramPath {
     Try{
@@ -128,6 +128,12 @@ function Test-ExsistingProgramPath {
             Write-ScriptStep -Text "$InstallerName is already installed...Ending script..."
 
             Write-Verbose -Message "$InstallerName is already installed...Ending script..." -Verbose
+
+            Write-ScriptStep -Text "Remove-InstallerFolder completed"
+
+            Write-Verbose -Message "Remove-InstallerFolder" -Verbose
+
+            Remove-Item -Path "$global:TempInstallerPath\$global:InstallerFolderName" -Recurse -Force -ErrorAction STOP
 
             Start-Sleep -Seconds 5
 
@@ -249,113 +255,6 @@ Start-Installer
 #Checks if the program installed, if so it deletes the temp folder is made.
 Remove-InstallerFolder
 
-
-
-
-##################################################################################################
-
-
-
-$ScriptName = 'ESET Endpoint Security installer'
-
-
-
-Write-Host "$ScriptName script starting...Written by DAM on 2023-02-01"
-
-
-
-
-#Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here https://github.com/PowerShell/PowerShell/issues/2138
-
-$ProgressPreference = 'SilentlyContinue'
-
-#Program Path when its installed.
-
-$ProgramPath = "C:\Program Files\ESET\ESET Security\egui.exe"
-
-#Download URI
-
-$URI = 'https://www.yourmom.com'
-
-#Full name of the installer.
-
-$InstallerName = 'epi_win_live_installer.exe'
-
-#Out-File location. C:\TEMP is used as C:\ will not grant you access to by default.
-
-$OutFile = "C:\$InstallerName"
-
-
-
-Write-Host "$InstallerName install script starting...Written by DAM on 2023-01-18"
-
-
-#Checks if the terminal is runing as admin/elevated as Invoke-WebRequest will not run without it.
-
-if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    
-    Throw "This script requires Administrator rights. To run this script, start PowerShell with the `"Run as administrator`" option."
-    
-}
-
-
-#Checks to see if the program is already installed.
-
-$TestPath = Test-Path -Path "$ProgramPath"
-
-if ($TestPath -eq 'True') {
-
-    Throw "$InstallerName is already installed..."
-
-}
-
-
-
-#Check if link is broken.
-
-Write-Host "Checking download link..."
-
-$InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing
-
-if ($InvokeWeb.StatusDescription -eq "OK") {
-    Write-Host "Download link good!"
-}else
-{
-    Throw "Check download link..."
-}
-
-
-#Downloads Program via web.
-
-Write-Host "Downloading .exe installer for $InstallerName..."
-
-Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
-
-
-#Install Program from URI.
-
-Write-Host "Installing $InstallerName"
-
-Start-Process -FilePath "$OutFile" -ArgumentList "--silent", "--accepteula"
-
-#Ininstall check and TEMP file delete.
-
-do { 
-    $TestPath = Test-Path -Path "$ProgramPath"
-    if ($TestPath -ne 'True') {
-        Write-Host "$InstallerName installer is running...Please wait"
-        
-        Start-Sleep -Seconds 5
-
-    }
-} 
-Until ($TestPath -eq 'True')
-
-Write-Host "$InstallerName installed!"
-
-Start-Sleep -Seconds 8
-
-Remove-Item "$OutFile"
 
 
 
