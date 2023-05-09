@@ -1,5 +1,5 @@
-#ReadMe
-<#
+
+<# ReadMe
 
 ESET Endpoint Security installer
     
@@ -39,7 +39,7 @@ epi_win_live_installer.exe installed!
 
 #>
 
-#Script
+#Region Start-Script
 
 #Global Variables
 
@@ -62,7 +62,7 @@ $global:ProgressPreference = 'SilentlyContinue'
 
 $global:URI = 'https://download.mozilla.org/?product=firefox-stub&os=win&lang=en-US'
 
-$global:OutFile = "$TempInstallerPath\$InstallerFolderName"
+$global:OutFile = "$global:TempInstallerPath\$global:InstallerFolderName"
 
 $global:InstallerFinishEvent = "C:\Program Files\Mozilla Firefox\firefox.exe"
 
@@ -80,21 +80,21 @@ function Write-ScriptStep {
         [string]$Text
     )
 
-    $ExsitingStep = Test-Path -Path "$OutFile\$ScriptName-Log-File.txt"
+    $ExsitingStep = Test-Path -Path "$global:OutFile\$global:ScriptName-Log-File.txt"
 
     if("$ExsitingStep" -eq 'False') {
         
-        New-Item -Path "$TempInstallerPath" -Name "$InstallerFolderName" -ItemType 'Directory' | Out-Null -ErrorAction SilentlyContinue
+        New-Item -Path "$global:TempInstallerPath" -Name "$global:InstallerFolderName" -ItemType 'Directory' | Out-Null -ErrorAction SilentlyContinue
 
         $Entry = (Get-Date -Format "yyyy/MM/dd HH:mm dddd - ") + $Text
 
-        $Entry | Out-File -Path "$OutFile\$ScriptName-Log-File.txt"
+        $Entry | Out-File -Path "$OutFile\$global:ScriptName-Log-File.txt"
 
         Write-Verbose -Message "Logging Compleated Step" -Verbose
 
     }else {
 
-        Add-Content -Path "$OutFile\$ScriptName-Log-File.txt" -Value "$Text"
+        Add-Content -Path "$OutFile\$global:ScriptName-Log-File.txt" -Value "$Text"
 
         Write-Verbose -Message "Logging Compleated Step" -Verbose 
     }
@@ -104,7 +104,7 @@ function Write-ScriptStep {
 function Write-ScriptBoilerplate {
     try{
 
-        $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor, last modified on $ModifiedDate"
+        $ScriptBoilerplate = "$global:ScriptName script starting...written by $global:ScriptAuthor, last modified on $global:ModifiedDate"
 
         Write-Verbose -Message "$ScriptBoilerplate" -Verbose
 
@@ -121,13 +121,13 @@ function Test-ExsistingProgramPath {
 
         Write-Verbose -Message "Test-ExsistingProgamPath" -Verbose
 
-        $TestPath = Test-Path -Path "$ProgramPath" -ErrorAction Stop
+        $TestPath = Test-Path -Path "$global:ProgramPath" -ErrorAction Stop
 
         If($TestPath -eq 'True') {
 
-            Write-ScriptStep -Text "$InstallerName is already installed...Ending script..."
+            Write-ScriptStep -Text "$global:InstallerName is already installed...Ending script..."
 
-            Write-Verbose -Message "$InstallerName is already installed...Ending script..." -Verbose
+            Write-Verbose -Message "$global:InstallerName is already installed...Ending script..." -Verbose
 
             Write-ScriptStep -Text "Remove-InstallerFolder completed"
 
@@ -139,9 +139,9 @@ function Test-ExsistingProgramPath {
 
             Exit
         }else {
-            Write-Verbose -Message "$InstallerName not installed...Continuing script" -Verbose
+            Write-Verbose -Message "$global:InstallerName not installed...Continuing script" -Verbose
 
-            Write-ScriptStep -Text "$InstallerName not installed...Continuing script"
+            Write-ScriptStep -Text "$global:InstallerName not installed...Continuing script"
         }
     }Catch {
 
@@ -154,7 +154,7 @@ function Test-DownloadLink {
 
         Write-Verbose -Message "Test-DownloadLink" -Verbose
 
-        $InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing -ErrorAction Stop
+        $InvokeWeb = Invoke-WebRequest -Method Head -URI "$global:URI" -UseBasicParsing -ErrorAction Stop
 
         If($InvokeWeb.StatusDescription -eq "OK") {
 
@@ -172,7 +172,7 @@ function Get-ProgramDownload {
 
         Write-Verbose -Message "Get-ProgramDownload" -Verbose
 
-        Invoke-WebRequest -URI "$URI" -OutFile "$OutFile\$InstallerName" -UseBasicParsing -ErrorAction Stop
+        Invoke-WebRequest -URI "$global:URI" -OutFile "$OutFile\$global:InstallerName" -UseBasicParsing -ErrorAction Stop
 
         Write-ScriptStep -Text "Get-ProgramDownload completed"
 
@@ -187,15 +187,15 @@ function Start-Installer {
 
         Write-Verbose -Message "Start-Installer" -Verbose
 
-        Start-Process -FilePath "$OutFile\$InstallerName" -ArgumentList "/q" -ErrorAction Stop
+        Start-Process -FilePath "$OutFile\$global:InstallerName" -ArgumentList "/q" -ErrorAction Stop
 
         Do{
 
-            $InstallerFinished = Test-Path -Path "$InstallerFinishEvent"
+            $InstallerFinished = Test-Path -Path "$global:InstallerFinishEvent"
 
             If($InstallerFinished -ne 'True') {
 
-                Write-Information -MessageData "$InstallerName installer is running...Please wait" -InformationAction Continue
+                Write-Information -MessageData "$global:InstallerName installer is running...Please wait" -InformationAction Continue
 
                 Start-Sleep -Seconds 15
 
@@ -227,9 +227,9 @@ function Remove-InstallerFolder {
 
         Remove-Item -Path "$OutFile" -Recurse -Force -ErrorAction STOP
 
-        Write-ScriptStep -Text "$ScriptName has finished successfully...Script Ending..."
+        Write-ScriptStep -Text "$global:ScriptName has finished successfully...Script Ending..."
 
-        Write-Verbose -Message "$ScriptName has finished successfully...Script Ending..." -Verbose
+        Write-Verbose -Message "$global:ScriptName has finished successfully...Script Ending..." -Verbose
 
         Start-Sleep -Seconds 5
 
@@ -255,6 +255,6 @@ Start-Installer
 #Checks if the program installed, if so it deletes the temp folder is made.
 Remove-InstallerFolder
 
-
+#EndRegion
 
 
