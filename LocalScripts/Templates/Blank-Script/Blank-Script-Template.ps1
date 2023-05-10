@@ -50,10 +50,13 @@ File.doc
 
 #>
 
-#Script
+#Region Start-Script
 
-#letting the user know what is starting.
+#Global Variables
 
+
+
+#Letting the user know what is starting.
 function Start-ScriptBoilerplate {
     $ScriptName = "Get-Specific-Running-Task.ps1"
 
@@ -67,3 +70,7 @@ function Start-ScriptBoilerplate {
 }
 
 Start-ScriptBoilerplate
+
+
+
+#EndRegion
