@@ -61,8 +61,13 @@ $global:ScriptName = "AutomatedLab Single-Machine-Creation.ps1"
 
 $global:ModuleName = 'AutomatedLab'
 
-#VM install location.
-$global:VMDrive = 'I:\LabSources\ISOs'
+#Lab Sources location.
+$global:LabSources = 'I:\LabSources\ISOs'
+
+#VMs install location.
+$global:VmPath = 'I:'
+
+
 
 #Checks if the terminal is runing as admin/elevated.
 if(-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -108,13 +113,13 @@ Function Start-LabConfig {
     Try{
 
         #Defines the Labs location. Cannot have the LabSource folder on multiple drives.
-        New-LabSourcesFolder
+        New-LabSourcesFolder -DriveLetter "$global:LabSources"
 
-        New-LabDefinition -Name Win10 -DefaultVirtualizationEngine HyperV -VmPath $global:VMDrive
+        New-LabDefinition -Name Win10 -DefaultVirtualizationEngine HyperV -VmPath $global:VmPath
 
         Add-LabVirtualNetworkDefinition -Name 'New Virtual Switch' -HyperVProperties @{ SwitchType = 'External'; AdapterName = 'Ethernet' }
         
-        Add-LabMachineDefinition -Name 'Win10VMTest7' -Memory '8GB' -OperatingSystem 'Windows 10 Pro' -Network 'New Virtual Switch'
+        Add-LabMachineDefinition -Name 'Win10VMTest8' -Memory '8GB' -OperatingSystem 'Windows 10 Pro' -Network 'New Virtual Switch'
         
         Install-Lab
 
@@ -189,3 +194,13 @@ Add-LabMachineDefinition -Name S1DC1 `
     -ToolsPath $labSources\Tools `
 
     -OperatingSystem ‘Windows Server 2012 R2 SERVERDATACENTER’
+
+
+
+
+
+
+
+    New-LabDefinition -Name $labName -DefaultVirtualizationEngine HyperV -VmPath D:\AutomatedLab-VMs
+
+

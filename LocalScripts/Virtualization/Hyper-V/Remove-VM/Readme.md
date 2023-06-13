@@ -1,0 +1,1 @@
+Deletes a designated VM from the Hyper-V Manager but does not delete its files and folders.
