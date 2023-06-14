@@ -44,7 +44,7 @@ $Global:VMName = "Win10VM-Test-4"
 $Global:Path = 'I:\HyperV\VMs\'
 
 #Specifies what server/PC the VM's are hoosted on.
-$Global:ServerName = 'CX3700-06'
+$Global:ServerName = 'PCName-007'
 
 #New-VM's hashtable splatting for it paramiters.
 $NewVMParams = @{
