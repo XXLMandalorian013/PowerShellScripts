@@ -44,7 +44,7 @@ $Global:VMName = "Win10VM-Test-4"
 $Global:Path = 'I:\HyperV\VMs\'
 
 #Specifies what server/PC the VM's are hoosted on.
-$Global:ServerName = 'CX3700-06'
+$Global:ServerName = 'PCName-007'
 
 #Creates a new VM with a new VHBX.
 function New-VMNewVHDX {
@@ -80,11 +80,26 @@ function New-VMNewVHDX {
 
 }
 
-#Creates a new VM with a new VHBX.
-New-VMNewVHDX
+#Sets it to first boot to a DVD/.iso.
+function Set-IsoBoot {
 
-#Adds a DVD Drive, loads a .iso, sets it to first boot to a DVD/.iso, connects to the VM's GUI, starts the VM, and changes it to boot from a vhdx every other time.
-function Initialize-VM {
+    #Set-VMFirmware DVD's hashtable splatting for it paramiters.
+    $VMFirmwareDVD = @{
+
+        #VM's Name
+        VMName = "$Global:VMName"
+
+        #Specifies where the ISO is located.
+        FirstBootDevice = $(Get-VMDvdDrive -VMName "$Global:VMNamee")
+    }
+
+    #Sets the boot order. In this case from the DVDDrive to install an OS from an .iso.
+    Set-VMFirmware @VMFirmwareDVD
+
+}
+
+#Adds a DVD Drive, loads a .iso, connects to the VM's GUI, starts the VM.
+function Initialize-VM {    
 
     #Add-VMDvdDrive's hashtable splatting for it paramiters.
     $VMDVDDrive = @{
@@ -103,30 +118,6 @@ function Initialize-VM {
 
     }
 
-    #Set-VMFirmware VHDX's hashtable splatting for it paramiters.
-    $VMFirmwareVHDX = @{
-
-        #VM's Name
-        VMName = "$Global:VMName"
-
-        #Specifies where the ISO is located.
-        FirstBootDevice = $(Get-VMDvdDrive -VMName "$VMName")
-    }
-
-
-    #Set-VMFirmware DVD's hashtable splatting for it paramiters.
-    $VMFirmwareDVD = @{
-
-        #VM's Name
-        VMName = "$Global:VMName"
-
-        #Specifies where the ISO is located.
-        FirstBootDevice = $(Get-VMDvdDrive -VMName "$VMName")
-    }
-
-    #Sets the boot order. In this case from the DVDDrive to install an OS from an .iso.
-    Set-VMFirmware @VMFirmwareDVD
-
     #As this script creates a VHDX, you must add a virtual disk drive and provies the .iso path to run to install an OS. 
     Add-VMDvdDrive @VMDVDDrive
 
@@ -136,14 +127,16 @@ function Initialize-VM {
     #Starts the VM.
     Start-VM @StartVM
 
-    #Sets the boot order. In this case from the DVDDrive back to the VHDX.
-    Set-VMFirmware @VMFirmwareVHDX
-
 }
 
-#Adds a DVD Drive, loads a .iso, sets it to first boot to a DVD/.iso, connects to the VM's GUI, starts the VM, and changes it to boot from a vhdx every other time.
+#Creates a new VM with a new VHBX.
+New-VMNewVHDX
+
+#Sets it to first boot to a DVD/.iso.
+Set-IsoBoot
+
+#Adds a DVD Drive, loads a .iso, connects to the VM's GUI, starts the VM.
 Initialize-VM
 
+
 #EndRegion
-
-
