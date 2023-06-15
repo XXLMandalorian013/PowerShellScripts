@@ -1,0 +1,1 @@
+Forcefully shuts down a VM.

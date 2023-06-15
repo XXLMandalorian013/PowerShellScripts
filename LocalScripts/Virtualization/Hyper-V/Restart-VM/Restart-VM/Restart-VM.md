@@ -1,0 +1,1 @@
+Forcefully restarts a VM.
