@@ -72,6 +72,16 @@ $NewVMParams = @{
 
 }
 
+#Set-VMFirmware DVD's hashtable splatting for it paramiters.
+$VMFirmwareDVD = @{
+
+    #VM's Name
+    VMName = "$Global:VMName"
+
+    #Specifies where the ISO is located.
+    FirstBootDevice = $(Get-VMDvdDrive -VMName "$VMName")
+}
+
 #Add-VMDvdDrive's hashtable splatting for it paramiters.
 $VMDVDDrive = @{
 
@@ -89,17 +99,33 @@ $StartVM = @{
 
 }
 
+#Set-VMFirmware VHDX's hashtable splatting for it paramiters.
+$VMFirmwareVHDX = @{
+
+    #VM's Name
+    VMName = "$Global:VMName"
+
+    #Specifies where the ISO is located.
+    FirstBootDevice = $(Get-VMDvdDrive -VMName "$VMName")
+}
+
 #As this script creates a VHDX, you must add a virtual disk drive and provies the .iso path to run to install an OS.
 New-VM @NewVMParams
+
+#Sets the boot order. In this case from the DVDDrive to install an OS from an .iso.
+Set-VMFirmware @VMFirmwareDVD
 
 #As this script creates a VHDX, you must add a virtual disk drive and provies the .iso path to run to install an OS. 
 Add-VMDvdDrive @VMDVDDrive
 
+#Connects to the VM's GUI. Not able to splat vmconnect.exe due to its syntax.
+vmconnect.exe $Global:ServerName $Global:VMName
+
 #Starts the VM.
 Start-VM @StartVM
 
-#Connects to the VM's GUI. Not able to splat vmconnect.exe due to its syntax.
-vmconnect.exe $Global:ServerName $Global:VMName
+#Sets the boot order. In this case from the DVDDrive back to the VHDX.
+Set-VMFirmware @VMFirmwareVHDX
 
 #EndRegion
 
