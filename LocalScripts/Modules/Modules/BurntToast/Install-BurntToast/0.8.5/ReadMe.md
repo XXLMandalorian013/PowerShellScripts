@@ -1,0 +1,1 @@
+Installs and imports the Burnt Toast module.

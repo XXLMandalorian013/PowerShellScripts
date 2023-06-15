@@ -1,1 +1,0 @@
-This script installs the BurntToast Module. If ran in PS V 7.X this script just installs BurntToast. When running this script via PS V 5.X, BurntToast requires Nuget and is installed.
