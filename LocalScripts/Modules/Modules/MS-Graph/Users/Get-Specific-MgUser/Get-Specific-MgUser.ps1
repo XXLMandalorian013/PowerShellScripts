@@ -38,11 +38,6 @@ UserPrincipalName : user.name_domain.com#EXT#@namehere23523123238.onmicrosoft.co
 
 #Gets all Mg users.
 
-# Parameter help description
-[Parameter(AttributeValues)]
-[ParameterType]
-$ParameterName
+$user = Get-MgUser -Filter "displayName eq 'Megan S. Bowen'"
 
-$user = Get-MgUser -Filter "displayName eq 'Megan Bowen'"
-
-Get-MgUser -All | Format-List  ID, DisplayName, Mail, UserPrincipalName
+$user | Format-List  ID, DisplayName, Mail, UserPrincipalName
