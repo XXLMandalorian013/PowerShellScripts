@@ -1,34 +1,31 @@
-    #ReadMe
-<#
+# Disk-Warnings-7-Days
 
-Disk-Warning
-
-.DESCRIPTION
+## DESCRIPTION
 
 Adds a file name extension to a supplied name.  
 
-.Notes
+## Notes
 
 Notes here.
 
-.PARAMETER Name
+## PARAMETER Name
 
 Specifies the file name.
 
 
-.PARAMETER Extension
+## PARAMETER Extension
 
 Specifies the extension. "Txt" is the default.
 
-.INPUTS
+## INPUTS
 
 None.
 
-.OUTPUTS
+## OUTPUTS
 
 System.String. Disk warnings outputs over the span of a week.
 
-.EXAMPLE
+## EXAMPLE
 
 PS C:\Users\DAM> Get-EventLog -LogName "System" -Source "disk" -After $Begin -Before $End
 
@@ -60,7 +57,7 @@ UserName           :
 
 VERBOSE: The current time and date is 07/20/2023 11:01:05
 
-.LINK
+## LINK
 
 [about_Functions](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions?view=powershell-7.3)
 
@@ -71,41 +68,3 @@ VERBOSE: The current time and date is 07/20/2023 11:01:05
 [Get-Date](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-date?view=powershell-7.3S)
 
 [Format-List](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/format-list?view=powershell-7.3)
-
-#>
-
-#Region Start-Script
-
-#Letting the user know what is starting.
-function Start-ScriptBoilerplate {
-    $ScriptName = "Disk-Warning.ps1"
-
-    $ScriptAuthor = "DAM"
-
-    $ModifiedDate = "2023-07-20"
-
-    $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor, last modified on $ModifiedDate"
-    
-    Write-Verbose -Message "$ScriptBoilerplate" -Verbose
-}
-
-#Grabs disk warnings over the span of a week.
-function Get-DiskWarnings {
-    $Today = Get-Date
-
-    $Begin = $Date
-
-    $End = $Today.AddDays(-7)
-
-    Get-EventLog -LogName "System" -EntryType "Warning" -Source "disk" -After $Begin -Before $End | Format-List
-
-    Write-Verbose -Message "The current time and date is $Today" -Verbose
-
-}
-
-Start-ScriptBoilerplate
-
-Get-DiskWarnings
-
-#EndRegion
-
