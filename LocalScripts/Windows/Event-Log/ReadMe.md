@@ -1,1 +1,0 @@
-A place for my event log scripts.
