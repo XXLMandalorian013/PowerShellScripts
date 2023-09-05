@@ -1,8 +1,30 @@
 
+    #ReadMe
+<#
 
-################################################################################################################################################
+New-MailboxRestoreRequest-Deligated.ps1
+    
 
-#A breakdown of the Process to restore a softdeleted mailbox. 
+.DESCRIPTION
+        
+#A breakdown of the Process to restore a soft deleted mailbox.  
+
+
+.LINK
+        
+[Connect-ExchangeOnline](https://learn.microsoft.com/en-us/powershell/module/exchange/connect-exchangeonline?view=exchange-ps)
+
+[Get-Mailbox](https://learn.microsoft.com/en-us/powershell/module/exchange/get-mailbox?view=exchange-ps)
+
+[Get-RetentionPolicy](https://learn.microsoft.com/en-us/powershell/module/exchange/get-retentionpolicy?view=exchange-ps)
+
+[New-Mailbox](https://learn.microsoft.com/en-us/powershell/module/exchange/new-mailbox?view=exchange-ps)
+
+[New-MailboxRestoreRequest](https://learn.microsoft.com/en-us/powershell/module/exchange/new-mailboxrestorerequest?view=exchange-ps)
+
+#>
+
+#Region Start-Script
 
 #The -DelegatedOrganization switch must be used, ensuring we are on their tenant they deligated to us.
 Connect-ExchangeOnline -DelegatedOrganization DemaskHoldings.onmicrosoft.com
@@ -78,6 +100,9 @@ Get-MailboxRestoreRequest -TargetMailbox TargetMailbox
 #----           ------------- ------
 #MailboxRestore Darthp     Completed
 
-################################################################################################################################################
+#When the restore is done, be sure to disconnect from exchange online.
+Disconnect-ExchangeOnline
+
+#EndRegion
 
 
