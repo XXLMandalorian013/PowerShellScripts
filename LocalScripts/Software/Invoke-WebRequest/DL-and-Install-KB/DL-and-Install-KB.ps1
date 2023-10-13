@@ -1,147 +1,105 @@
-#ReadMe
-<#
-
-DL-and-Install-KB
-    
-.SYNOPSIS
-
-Downloads and installs PowerShell 7 LST 7.2.8 if not already installed.
-
-
-.Notes
-
-Though the installer will say its done and installed, it will take 5 or so seconds for the PC to show the newly installed program via the start menu recently added.
-  
-
-.INPUTS
-        
-None.
-
-
-.OUTPUTS
-        
-System.String,
-
-PowerShell-7.2.8-win-x64.msi install script starting...Written by DAM on 2023-01-18
-Checking download link...
-Download link good!
-Downloading .msi installer for PowerShell-7.2.8-win-x64.msi...
-Installing PowerShell-7.2.8-win-x64.msi...
-PowerShell-7.2.8-win-x64.msi installer is running...Please wait
-PowerShell-7.2.8-win-x64.msi installed!
-
-
-.LINK
-
-[Write-Host](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-host?view=powershell-7.3)
-
-[about_If](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_if?view=powershell-7.3)
-
-[about_Operators](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.3)
- 
-[about_Throw](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_throw?view=powershell-7.3)
-
-[Invoke-WebRequest](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-webrequest?view=powershell-7.3)
-
-[msiexec](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec)
-
-[Installing PowerShell on Windows] (https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3#msi)
-
-[about_Do](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_do?view=powershell-7.3)
-
-[Remove-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item?view=powershell-7.3)
-
-#>
+#Global Variabels
 
 #Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here https://github.com/PowerShell/PowerShell/issues/2138
 
 $ProgressPreference = 'SilentlyContinue'
 
-#Program Path when its installed.
-
-$ProgramPath = "C:\Program Files\PowerShell\7\pwsh.exe"
-
 #Download URI
 
-$URI = 'https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2023/07/windows11.0-kb5028948-x64_f0a16634fec67620f8d861dd3ef0b43e81e1a9ab.msu'
+$Global:URI = 'https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2021/01/windows10.0-kb4589210-v2-x64_bbbf54336d6e22da5de8d63891401d8f6077d2ce.msu'
 
 #Full name of the installer.
 
-$InstallerName = 'windows11.0-kb5028948-x64_f0a16634fec67620f8d861dd3ef0b43e81e1a9ab'
+$Global:MSUName = 'windows10.0-kb4589210-v2-x64_bbbf54336d6e22da5de8d63891401d8f6077d2ce.msu'
 
-#Out-File location. C:\TEMP is used as C:\ will not grant you access to by default.
+#Out-File location.
 
-$OutFile = "C:\$InstallerName"
+$Global:OutFile = "C:\$MSUName"
 
+$Global:ExpandLocation = "C:\"
 
+$Global:CABName = 'Windows10.0-KB4589210-v2-x64.cab'
 
-Write-Host "$InstallerName install script starting...Written by DAM on 2023-01-18"
-
-
-#Checks if the terminal is runing as admin/elevated as Invoke-WebRequest will not run without it.
-
-if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    
-    Throw "This script requires Administrator rights. To run this script, start PowerShell with the `"Run as administrator`" option."
-    
-}
+$Global:CABLocation = "C:\$Global:CABName"
 
 
-#Checks to see if the program is already installed.
+$TestPath = Test-Path -Path "$Global:OutFile"
 
-$TestPath = Test-Path -Path "$ProgramPath"
+if ($TestPath -ne "True") {
+    try {
 
-if ($TestPath -eq 'True') {
+        #Checks if link is broken.
 
-    Throw "$InstallerName is already installed..."
+        Write-Verbose -Message "Checking download link..." -Verbose
 
-}
+        $InvokeWeb = Invoke-WebRequest -Method Head -URI "$Global:URI" -UseBasicParsing
 
+        if ($InvokeWeb.StatusDescription -eq "OK") {
+            Write-Verbose -Message "Download link good!" -Verbose
+        }else
+        {
+            Throw "Check download link..."
+        }
 
+        #Downloads Program via web.
 
-#Check if link is broken.
+        Write-Verbose -Message "Downloading .msi installer for $Global:MSUName..." -Verbose
 
-Write-Host "Checking download link..."
+        Invoke-WebRequest -URI "$Global:URI" -OutFile "$Global:OutFile" -UseBasicParsing
 
-$InvokeWeb = Invoke-WebRequest -Method Head -URI "$URI" -UseBasicParsing
+        #Checks if the file downloaded.
 
-if ($InvokeWeb.StatusDescription -eq "OK") {
-    Write-Host "Download link good!"
-}else
-{
-    Throw "Check download link..."
-}
-
-
-#Downloads Program via web.
-
-Write-Host "Downloading .msi installer for $InstallerName..."
-
-Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
-
-
-#Install Program from URI.
-
-Write-Host "Installing $ProgramPathShort..."
-
-msiexec.exe /i "$OutFile" /quiet ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 ADD_PATH=1 ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1 ENABLE_MU=1
-
-
-#Ininstall check and TEMP file delete.
-
-do { 
-    $TestPath = Test-Path -Path "$ProgramPath"
-    if ($TestPath -ne 'True') {
-        Write-Host "$InstallerName installer is running...Please wait"
+        do { 
+            $TestPath = Test-Path -Path "$Global:OutFile"
+            if ($TestPath -ne 'True') {
+                Write-Verbose -Message "Downloading $Global:MSUName...Please wait" -Verbose
         
-        Start-Sleep -Seconds 5
+                Start-Sleep -Seconds 5
 
+            }
+        }Until ($TestPath -eq 'True')
+
+            Write-Verbose -Message "$Global:MSUName downloaded!" -Verbose
+        }
+    catch {
+        Write-Verbose -Message "Failed install...$Error"    
     }
-} 
-Until ($TestPath -eq 'True')
+}else {
 
-Write-Host "$InstallerName installed!"
+    #Install Program from URI.
 
-Remove-Item "$OutFile"
+    try {
+        Write-Verbose -Message "$Global:MSUName is already downloaded...Installing...Please wait..." -Verbose
 
+        dism.exe /online /add-package /packagepath:"$Global:OutFile"
+
+        Dism /Add-Package /PackagePath:$Global:OutFile
+
+        Add-WindowsPackage -Online -PackagePath "$Global:OutFile"
+
+        expand -f:* "$Global:OutFile" $Global:ExpandLocation
+
+        Add-WindowsPackage -Online -PackagePath "c:\packages\package.cab"
+
+        dism.exe /online /add-package /packagepath:"$Global:CABLocation"
+    }catch {
+        Write-Verbose -Message "Install error for , see C:\Windows\Logs\DISM for more info." -Verbose
+    }
+
+    #Install check and TEMP file delete.
+
+    do { 
+        $TestPath = Test-Path -Path "$ProgramPath"
+        if ($TestPath -ne 'True') {
+            Write-Host "$Global:MSUName installer is running...Please wait"
+        
+            Start-Sleep -Seconds 5
+
+        }
+    }Until ($TestPath -eq 'True')
+
+    Write-Host "$Global:MSUName installed!"
+
+    Remove-Item "$OutFile"
+}
 
