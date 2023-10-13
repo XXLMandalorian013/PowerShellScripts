@@ -81,7 +81,7 @@ $InstallerName = 'DiscoveryAgent.msi'
 #Out-File location.
 $OutFile = "C:\$InstallerName"
 
-#Client Specifiy install key.
+#Client Specific install key.
 $InstallKey = '1234-acvd-1234-asdf-1q2w3e4r5t'
 
 #Client Name.
