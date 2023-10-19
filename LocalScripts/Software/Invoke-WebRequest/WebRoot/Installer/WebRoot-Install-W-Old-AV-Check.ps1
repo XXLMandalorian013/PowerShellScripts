@@ -1,6 +1,6 @@
 #ReadMe
 <#
-Demask-Holdings Windows MSI WebRoot Agent Installer.
+Windows MSI WebRoot Agent Installer.
 .SYNOPSIS
 Downloads and installs Windows MSI WebRoot Agent Installer if not already installed. It also will make sure another AV is not already installed.
 That AV must be defined in the Install-WebRoot finction paramater.
@@ -15,18 +15,13 @@ None.
 
 System.String,
 
-VERBOSE: VS Windows MSI VulScan Discovery Agent Installer: Written by VS-DAM on 2023-10-12
+VERBOSE: VS Windows MSI WebRoot Agent Installer: Written by VS-DAM on 2023-10-12
 VERBOSE: Checking download link...
 VERBOSE: Download link good!
-VERBOSE: Downloading .exe installer for DiscoveryAgent.msi...
-VERBOSE: Installing DiscoveryAgent.msi
-VERBOSE: DiscoveryAgent.msi installed!
-Configuring with the following ID: AGT-73YYCJ
-Forcing an update to the lastest. This will run outside this installer.
-If you see the services go up and down it is due to the forced update.
-Creating location file...
-Success.
-Configuration complete.
+VERBOSE: Downloading .exe installer for wsasme.msi...
+VERBOSE: Installing wsasme.msi
+VERBOSE: wsasme.msi installed!
+VERBOSE: wsasme.msi removed
 
 .LINK
 
@@ -65,12 +60,13 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 
 function Start-ScriptBoilerPlate {
-    #Script Name
-    [Parameter]
-        [string[]]$ScriptName = 'VS Windows MSI VulScan Discovery Agent Installer:',
-    #Script Author
-    [Parameter]
-    [string[]]$ScriptAuthor = 'Written by VS-DAM on 2023-10-12'
+    [CmdletBinding()]
+    param (
+        #Script Name
+        $ScriptName = 'VS Windows MSI WebRoot Agent Installer:',
+        #Script Author
+        $ScriptAuthor = 'Written by VS-DAM on 2023-10-12'
+    )
     #Script Introduction
     Write-Verbose -Message "$ScriptName $ScriptAuthor" -Verbose 
 }
@@ -78,24 +74,17 @@ function Start-ScriptBoilerPlate {
 function Install-WebRoot {
     param(
         #Program Path when its installed.
-        [Parameter]
-        [string[]]$ProgramPath = 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Webroot SecureAnywhere',
+        $ProgramPath = 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Webroot SecureAnywhere',
         #Download Link
-        [Parameter]
-        [string[]]$URI = 'https://anywhere.webrootcloudav.com/zerol/wsasme.msi',
+        $URI = 'https://anywhere.webrootcloudav.com/zerol/wsasme.msi',
         #Full name of the installer.
-        [Parameter()]
-        [string]$InstallerName = 'wsasme.msi',
+        $InstallerName = 'wsasme.msi',
         #Out-File location.
-        [Parameter()]
-        [string]$OutFile = "C:\$InstallerName",
+        $OutFile = "C:\$InstallerName",
         #Client Specific install key.
-        [Parameter()]
-        [string]$InstallKey = '1234-acvd-1234-asdf-1q2w3e4r5t',
+        $InstallKey = '123-456-789-123-456',
         #Other AV's install location.
-        [Parameter()]
-        [string]$OldAV = 'C:\Program Files\Sophos\Sophos Endpoint Agent'
-        
+        $OldAV = 'C:\Program Files\Sophos\Sophos Endpoint Agent'
     )
     #Checks if another AV is already installed.
     $TestPath = Test-Path -Path "$OldAV"
@@ -122,17 +111,15 @@ function Install-WebRoot {
         $ProgressPreference = 'SilentlyContinue'
         Write-Verbose -Message "Downloading .exe installer for $InstallerName..." -Verbose
         Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
-    }
-    catch {
+    }catch {
         Throw "Error[0]"
     }
     #Installs the Program from URI.
     try {
         Write-Verbose -Message "Installing $InstallerName" -Verbose
-        $arguments = "/i wsasme.msi GUILIC=$InstallKey CMDLINE=SME,quiet /qn"
+        $arguments = "/i $OutFile GUILIC=$InstallKey CMDLINE=SME,quiet /qn"
         Start-Process msiexec.exe -ArgumentList $arguments -Wait
-    }
-    catch {
+    }catch {
         Throw "Error[0]"
     }
     #Ininstall check and TEMP file delete.
@@ -148,8 +135,7 @@ function Install-WebRoot {
             Start-Sleep -Seconds 5
             Write-Verbose -Message "$InstallerName removed" -Verbose
             Remove-Item "$OutFile"
-    }
-    catch {
+    }catch {
         Throw "Error[0]"
     }
 }
