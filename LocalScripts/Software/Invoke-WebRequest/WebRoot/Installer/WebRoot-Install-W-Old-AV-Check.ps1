@@ -85,16 +85,16 @@ function Install-WebRoot {
         [string[]]$URI = 'https://anywhere.webrootcloudav.com/zerol/wsasme.msi',
         #Full name of the installer.
         [Parameter()]
-        [switch]$InstallerName = 'wsasme.msi',
+        [string]$InstallerName = 'wsasme.msi',
         #Out-File location.
         [Parameter()]
-        [switch]$OutFile = "C:\$InstallerName",
+        [string]$OutFile = "C:\$InstallerName",
         #Client Specific install key.
         [Parameter()]
-        [switch]$InstallKey = '1234-acvd-1234-asdf-1q2w3e4r5t',
+        [string]$InstallKey = '1234-acvd-1234-asdf-1q2w3e4r5t',
         #Other AV's install location.
         [Parameter()]
-        [switch]$OldAV = 'C:\Program Files\Sophos\Sophos Endpoint Agent'
+        [string]$OldAV = 'C:\Program Files\Sophos\Sophos Endpoint Agent'
         
     )
     #Checks if another AV is already installed.
