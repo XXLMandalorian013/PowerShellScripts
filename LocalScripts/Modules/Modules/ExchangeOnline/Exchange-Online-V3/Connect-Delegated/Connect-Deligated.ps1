@@ -1,3 +1,3 @@
-$Global:OrgName = 'DemaskHoldings'
+$OrgName = 'DemaskHoldings'
 
-Connect-ExchangeOnline -DelegatedOrganization $Global:OrgName.onmicrosoft.com
+Connect-ExchangeOnline -DelegatedOrganization $OrgName.onmicrosoft.com

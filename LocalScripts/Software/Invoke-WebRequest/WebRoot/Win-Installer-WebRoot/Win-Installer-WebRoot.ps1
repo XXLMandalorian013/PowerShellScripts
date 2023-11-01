@@ -112,7 +112,7 @@ function Install-WebRoot {
         Write-Verbose -Message "Downloading .exe installer for $InstallerName..." -Verbose
         Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
     }catch {
-        Throw "Error[0]"
+        Throw "$Error[0]"
     }
     #Installs the Program from URI.
     try {
@@ -120,7 +120,7 @@ function Install-WebRoot {
         $arguments = "/i $OutFile GUILIC=$InstallKey CMDLINE=SME,quiet /qn"
         Start-Process msiexec.exe -ArgumentList $arguments -Wait
     }catch {
-        Throw "Error[0]"
+        Throw "$Error[0]"
     }
     #Ininstall check and TEMP file delete.
     try {
@@ -136,7 +136,7 @@ function Install-WebRoot {
             Write-Verbose -Message "$InstallerName removed" -Verbose
             Remove-Item "$OutFile"
     }catch {
-        Throw "Error[0]"
+        Throw "$Error[0]"
     }
 }
 
