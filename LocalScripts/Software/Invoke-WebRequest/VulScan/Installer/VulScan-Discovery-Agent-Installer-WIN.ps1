@@ -87,14 +87,11 @@ $InstallKey = '1234-acvd-1234-asdf-1q2w3e4r5t'
 #Client Name.
 $CompanyName = 'VS'
 
-#Define computer host type: Physical or Hypervisor name ie VCD, Hyper-V.
-$HostType = 'Physical'
+#Lable Var. Do not change this var, only $CompanyName & $HyperVisorName shouldbe changed above.
+$Lable = "$CompanyName-$env:computername-VulScan-Descov-Agent"
 
 #Lable Var. Do not change this var, only $CompanyName & $HyperVisorName shouldbe changed above.
-$Lable = "$CompanyName-$HostType-$env:computername-VulScan-Descov-Agent"
-
-#Lable Var. Do not change this var, only $CompanyName & $HyperVisorName shouldbe changed above.
-$Comment = "$CompanyName-$HostType-$env:computername-VulScan-Descov-Agent"
+$Comment = "$CompanyName-$env:computername-VulScan-Descov-Agent"
 
 #Script Introduction
 Write-Verbose -Message "$ScriptName $ScriptAuthor" -Verbose
