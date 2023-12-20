@@ -1,0 +1,1 @@
+Get-FileHash 'C:\Program Files\Google\Chrome\Application\chrome.exe' -Algorithm 'MD5' | Format-List
