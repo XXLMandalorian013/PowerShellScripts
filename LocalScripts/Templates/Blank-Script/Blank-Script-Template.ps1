@@ -51,26 +51,14 @@ File.doc
 #>
 
 #Region Start-Script
-
-#Global Variables
-
-
-
 #Letting the user know what is starting.
 function Start-ScriptBoilerplate {
-    $ScriptName = "Get-Specific-Running-Task.ps1"
-
+    $ScriptName = "VulScan-Discovery-Agent-Uninstall.ps1"
     $ScriptAuthor = "DAM"
-
-    $ModifiedDate = "2023-03-02"
-
+    $ModifiedDate = "2024-02-08"
     $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor, last modified on $ModifiedDate"
-    
     Write-Verbose -Message "$ScriptBoilerplate" -Verbose
 }
-
+#Letting the user know what is starting.
 Start-ScriptBoilerplate
-
-
-
 #EndRegion
