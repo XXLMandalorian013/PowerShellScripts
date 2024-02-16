@@ -1,0 +1,1 @@
+Get-InboxRule -Mailbox email@domain.com

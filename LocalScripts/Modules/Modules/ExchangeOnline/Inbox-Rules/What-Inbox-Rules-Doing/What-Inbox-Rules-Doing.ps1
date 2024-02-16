@@ -1,0 +1,1 @@
+Get-InboxRule -Mailbox username@domaint.com | fl
