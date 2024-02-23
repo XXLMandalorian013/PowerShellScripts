@@ -84,6 +84,7 @@ function Uninstall-SophosInterceptX {
 
         Set-Location -Path "$ProgramPath"
         Start-Process -FilePath "$UninstallerName" -ArgumentList "--quiet"
+        Start-Sleep -Seconds 600
 
     }
     catch {
