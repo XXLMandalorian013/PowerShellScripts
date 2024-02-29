@@ -5,9 +5,11 @@ Win-Uninstaller-Sophos-Intercept-X
 
 .SYNOPSIS
 
-Uinstalls Uninstall Sophos Interceptor X if not already uninstalled.
+Uinstalls Sophos Interceptor X if not already uninstalled.
 
 .Notes
+
+Not all uninstalls are cleanly done and may required a second pass of this script or manual removal.
 
 .INPUTS
 
@@ -17,9 +19,7 @@ None.
 
 System.String,
 
-VERBOSE: VS Windows Sophos Interceptor X Installer: Written by VS-DAM on 2023-10-16
-VERBOSE: Uninstalling SophosUninstall.exe
-VERBOSE: SophosUninstall.exe uninstalled!
+
 
 .LINK
 
@@ -46,80 +46,120 @@ VERBOSE: SophosUninstall.exe uninstalled!
 #>
 
 #Script
-
-#Script Name
-$ScriptName = 'VS Windows Sophos Interceptor X Installer:'
-
-#Script Author
-$ScriptAuthor = 'Written by VS-DAM on 2023-10-16'
-
-#Program Path when its installed.
-$ProgramPath = 'C:\Program Files\Sophos\Sophos Endpoint Agent'
-
-#Full name of the installer.
-$UninstallerName = 'SophosUninstall.exe'
-
-#Script Introduction
-Write-Verbose -Message "$ScriptName $ScriptAuthor" -Verbose
-
+#Region Start-Script
+#Letting the user know what is starting.
+function Start-ScriptBoilerplate {
+    $ScriptName = "Windows Sophos Interceptor X Installer:.ps1"
+    $ScriptAuthor = "DAM"
+    $WrittenDate = "2023-10-16"
+    $ModifiedDate = "2024-02-29"
+    $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor on $WrittenDate, last modified on $ModifiedDate"
+    Write-Verbose -Message "$ScriptBoilerplate" -Verbose
+}
 #Checks if the terminal is runing as admin/elevated as Invoke-WebRequest will not run without it.
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    
     Throw "This script requires Administrator rights. To run this script, start PowerShell with the `"Run as administrator`" option."
 }
-
-function Uninstall-SophosInterceptX {
-    
-    #Checks to see if the program is already uninstalled.
-    $TestPath = Test-Path -Path "$ProgramPath"
-
-    if ($TestPath -match 'False') {
-
-        Throw "$UninstallerName is already uninstalled..."
-    }
-
-    #Uninstalls the Program.
-    try {
-        Write-Verbose -Message "Uninstalling $UninstallerName" -Verbose
-
-        Set-Location -Path "$ProgramPath"
-        Start-Process -FilePath "$UninstallerName" -ArgumentList "--quiet"
-        Start-Sleep -Seconds 600
-
-    }
-    catch {
-        Throw "Error[0]"
-    }
-
-    #Uninstall check.
-    try {
-        do { 
-            $TestPath = Test-Path -Path "$ProgramPath"
-            if ($TestPath -eq 'True') {
-                Write-Verbose -Message "$UninstallerName unistaller is running...Please wait" -Verbose
-            
-                Start-Sleep -Seconds 5
-    
+#Uninstalls the newset AV.
+function Uninstall-SophosInterceptXNew {
+    param (
+        #Program Path when its installed (newer insaller).
+        $ProgramPath = 'C:\Program Files\Sophos\Sophos Endpoint Agent',
+        #Full name of the installer (newer insaller).
+        $UninstallerName = 'SophosUninstall.exe',
+        #Full path of the uninstallers (new installer).
+        $UninstallersFullPath = "$ProgramPath\$UninstallerName"
+    )
+    #Checks to see if the program is installed.
+    $TestPath = Test-Path -Path "$UninstallersFullpath"
+    if ($TestPath -match 'True') {
+        #Uninstalls the Program.
+        try {
+            Write-Verbose -Message "Uninstalling $UninstallerName" -Verbose
+            Set-Location -Path "$ProgramPath"
+            Start-Process -FilePath "$UninstallerName" -ArgumentList "--quiet"
+            Start-Sleep -Seconds 600
+            #Uninstall check.
+            try {
+                do { 
+                    $TestPath = Test-Path -Path "$ProgramPath"
+                    if ($TestPath -eq 'True') {
+                        Write-Verbose -Message "$UninstallerName unistaller is running...Please wait" -Verbose
+                        Start-Sleep -Seconds 5
+                    }
+                } 
+                Until ($TestPath -ne 'True')
+                Write-Verbose -Message "$UninstallerName uninstalled!" -Verbose
+                #Reboot device for uninstall cleanup
+                try {
+                    Write-Verbose -Message "Forcing Computer Restart..." -Verbose
+                    Restart-Computer -Force
+                }catch {
+                    Write-Verbose -Message "Could not reboot, check to make sure this script is running elevated" -Verbose
+                }
+            }catch {
+                Write-Verbose -Message "Error[0]" -Verbose
             }
-        } 
-        Until ($TestPath -ne 'True')
-    
-        Write-Verbose -Message "$UninstallerName uninstalled!" -Verbose
-    
-    }
-    catch {
-        Throw "Error[0]"
-    }
-    #Reboot device for uninstall cleanup
-    try {
-        Write-Verbose -Message "Forcing Computer Restart..."
-        Restart-Computer -Force
-    }
-    catch {
-        Write-Verbose -Message "Check to make sure this script is running elevated"
+        }catch {
+            Write-Verbose -Message "Error[0]" -Verbose
+        }
+    }else {
+        Write-Verbose -Message "$UninstallerName not found and could already be uninstalled...Checking old lcation at $UninstallerNameOld" -Verbose
+        Get-ChildItem -Path "$ProgramPath"
     }
 }
-
-Uninstall-SophosInterceptX
-
+#Uninstalls the older AV.
+function Uninstall-SophosInterceptXOld {
+    param (
+        #Program Path when its installed (Older Install).
+        $ProgramPathOld = 'C:\Program Files\Sophos\Sophos Endpoint Agent',
+        #Full name of the installer (older insaller).
+        $UninstallerNameOld = 'uninstallcli.exe',
+        #Full path of the uninstallers (old installer).
+        $UninstallersFullPath = "$ProgramPathOld\$UninstallerNameOld"
+    )
+    #Checks to see if the program is already uninstalled.
+    $TestPath = Test-Path -Path "$ProgramPathOld"
+    if ($TestPath -match 'True') {
+        #Uninstalls the Program.
+        try {
+            Write-Verbose -Message "Uninstalling $UninstallerNameOld" -Verbose
+            Set-Location -Path "$ProgramPathOld"
+            Start-Process -FilePath "$UninstallerNameOld"
+            Start-Sleep -Seconds 600
+            #Uninstall check.
+            try {
+                do { 
+                    $TestPath = Test-Path -Path "$ProgramPathOld"
+                    if ($TestPath -eq 'True') {
+                        Write-Verbose -Message "$UninstallerNameOld unistaller is running...Please wait" -Verbose
+                        Start-Sleep -Seconds 5
+                    }
+                }Until ($TestPath -ne 'True')
+                Write-Verbose -Message "$UninstallerNameOld uninstalled!" -Verbose
+                #Reboot device for uninstall cleanup
+                try {
+                    Write-Verbose -Message "Forcing Computer Restart..." -Verbose
+                    Restart-Computer -Force
+                }catch {
+                    Write-Verbose -Message "Check to make sure this script is running elevated" -Verbose
+                }
+            }catch {
+                Write-Verbose -Message "Error[0]" -Verbose
+            }
+        }catch {
+            Write-Verbose -Message "Error[0]" -Verbose
+        }
+        }else {
+            Write-Verbose -Message "$UninstallerNameOld not found and could already be uninstalled...the uninstall may have been currupt...Displaying posible uninstall paths to check" -Verbose
+            Get-ChildItem -Path "$ProgramPathOld"
+        }
+}
+#Letting the user know what is starting.
+Start-ScriptBoilerplate
+#Uninstalls the newset AV.
+Uninstall-SophosInterceptXNew
+#Uninstalls the older AV.
+Uninstall-SophosInterceptXOld
+#EndRegion
 

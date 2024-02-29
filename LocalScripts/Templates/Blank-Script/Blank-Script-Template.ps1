@@ -55,8 +55,9 @@ File.doc
 function Start-ScriptBoilerplate {
     $ScriptName = "VulScan-Discovery-Agent-Uninstall.ps1"
     $ScriptAuthor = "DAM"
+    $WrittenDate = "2023-10-16"
     $ModifiedDate = "2024-02-08"
-    $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor, last modified on $ModifiedDate"
+    $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor on $WrittenDate, last modified on $ModifiedDate"
     Write-Verbose -Message "$ScriptBoilerplate" -Verbose
 }
 #Letting the user know what is starting.
