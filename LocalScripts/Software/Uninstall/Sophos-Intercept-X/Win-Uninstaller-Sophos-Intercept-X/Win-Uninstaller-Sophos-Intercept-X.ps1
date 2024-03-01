@@ -167,8 +167,7 @@ function Uninstall-SophosInterceptXOld {
         }
         }else {
             Write-Verbose -Message "$UninstallerNameOld not found and could already be uninstalled...the uninstall may have been currupt...Displaying posible uninstall paths to check" -Verbose
-            Get-ChildItem -Path "$ProgramPathOld"
-            Get-ChildItem -Path "$ProgramPath"
+            Get-ChildItem -Path "$SophosBasePath"
         }
 }
 #Letting the user know what is starting.
