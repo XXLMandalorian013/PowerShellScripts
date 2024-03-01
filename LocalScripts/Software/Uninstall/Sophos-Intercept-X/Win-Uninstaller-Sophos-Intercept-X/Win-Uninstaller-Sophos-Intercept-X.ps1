@@ -19,7 +19,13 @@ None.
 
 System.String,
 
-
+WIN Sophos Interceptor X Removal
+VERBOSE: Windows Sophos Interceptor X Installer:.ps1 script starting...written 
+by DAM on 2023-10-16, last modified on 2024-02-29
+VERBOSE: Uninstalling SophosUninstall.exe
+VERBOSE: SophosUninstall.exe uninstalled!
+Get-ChildItem : Cannot find path 'C:\Program Files\Sophos' because it does not exist.
+VERBOSE: Forcing Computer Restart...
 
 .LINK
 
@@ -68,7 +74,9 @@ function Uninstall-SophosInterceptXNew {
         #Full name of the installer (newer insaller).
         $UninstallerName = 'SophosUninstall.exe',
         #Full path of the uninstallers (new installer).
-        $UninstallersFullPath = "$ProgramPath\$UninstallerName"
+        $UninstallersFullPath = "$ProgramPath\$UninstallerName",
+        #The base folder for any sophos instlled software
+        $SophosBasePath = 'C:\Program Files\Sophos'
     )
     #Checks to see if the program is installed.
     $TestPath = Test-Path -Path "$UninstallersFullpath"
@@ -90,6 +98,8 @@ function Uninstall-SophosInterceptXNew {
                 } 
                 Until ($TestPath -ne 'True')
                 Write-Verbose -Message "$UninstallerName uninstalled!" -Verbose
+                Write-Verbose -Message "Checking to see if anything was left behind..."
+                Get-ChildItem -Path "$SophosBasePath"
                 #Reboot device for uninstall cleanup
                 try {
                     Write-Verbose -Message "Forcing Computer Restart..." -Verbose
@@ -105,7 +115,6 @@ function Uninstall-SophosInterceptXNew {
         }
     }else {
         Write-Verbose -Message "$UninstallerName not found and could already be uninstalled...Checking old lcation at $UninstallerNameOld" -Verbose
-        Get-ChildItem -Path "$ProgramPath"
     }
 }
 #Uninstalls the older AV.
@@ -116,7 +125,11 @@ function Uninstall-SophosInterceptXOld {
         #Full name of the installer (older insaller).
         $UninstallerNameOld = 'uninstallcli.exe',
         #Full path of the uninstallers (old installer).
-        $UninstallersFullPath = "$ProgramPathOld\$UninstallerNameOld"
+        $UninstallersFullPath = "$ProgramPathOld\$UninstallerNameOld",
+        #Program Path when its installed (newer insaller).
+        $ProgramPath = 'C:\Program Files\Sophos\Sophos Endpoint Agent',
+        #The base folder for any sophos instlled software
+        $SophosBasePath = 'C:\Program Files\Sophos'
     )
     #Checks to see if the program is already uninstalled.
     $TestPath = Test-Path -Path "$ProgramPathOld"
@@ -137,6 +150,8 @@ function Uninstall-SophosInterceptXOld {
                     }
                 }Until ($TestPath -ne 'True')
                 Write-Verbose -Message "$UninstallerNameOld uninstalled!" -Verbose
+                Write-Verbose -Message "Checking to see if anything was left behind..."
+                Get-ChildItem -Path "$SophosBasePath"
                 #Reboot device for uninstall cleanup
                 try {
                     Write-Verbose -Message "Forcing Computer Restart..." -Verbose
@@ -153,6 +168,7 @@ function Uninstall-SophosInterceptXOld {
         }else {
             Write-Verbose -Message "$UninstallerNameOld not found and could already be uninstalled...the uninstall may have been currupt...Displaying posible uninstall paths to check" -Verbose
             Get-ChildItem -Path "$ProgramPathOld"
+            Get-ChildItem -Path "$ProgramPath"
         }
 }
 #Letting the user know what is starting.
