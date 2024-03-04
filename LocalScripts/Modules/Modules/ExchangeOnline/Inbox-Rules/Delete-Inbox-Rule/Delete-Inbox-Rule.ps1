@@ -1,0 +1,1 @@
+Remove-InboxRule -Mailbox email@domain.com -Identity "RuleNameHere"
