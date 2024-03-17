@@ -1,11 +1,11 @@
 #ReadMe
 <#
 
-7-Zip-64Bit-23.01.ps1
+Power-Toys-.79-64Bit-Machine.ps1
 
 .SYNOPSIS
 
-Installs 7-Zip 64Bit verstion 23.01.
+Installs PowerToys ver .79 64-Bit Machine wide.
 
 .Notes
 
@@ -25,16 +25,16 @@ Exception:
 Line |
   15 |          Throw "$InstallerName is already installed..."
      |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     | 7z2301-x64.msi is already installed...
+     | PowerToysUserSetup-0.79.0-x64.exe is already installed...
 
 or
 
-VERBOSE: 7-Zip-64Bit-23.01.ps1 script starting...written by DAM 2024-03-17, last modified Never
+VERBOSE: Power-Toys-.79-64Bit-Machine.ps1 script starting...written by DAM 2024-03-17, last modified Never
 VERBOSE: The terminal is running as an Administrator...Continuing script...
 VERBOSE: The PowerSHell version is grater than 3.0...Continuing script...
-VERBOSE: Downloading 7z2301-x64.msi...
-VERBOSE: Installing 7z2301-x64.msi
-VERBOSE: 7z2301-x64.msi Installed!
+VERBOSE: Downloading PowerToysUserSetup-0.79.0-x64.exe...
+VERBOSE: Installing PowerToysUserSetup-0.79.0-x64.exe
+VERBOSE: PowerToysUserSetup-0.79.0-x64.exe Installed!
 
 .LINK
 
@@ -56,11 +56,9 @@ VERBOSE: 7z2301-x64.msi Installed!
 
 [Start-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.4)
 
-[msi exec](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec)
+[GIT Download Site/URLs](https://git-scm.com/download/win)
 
-[7-Zip DL page](https://www.7-zip.org/download.html)
-
-[7-Zip Switchs](https://7-zip.org/faq.html)
+[GIT Installer Switches](https://github.com/git-for-windows/git/wiki/Silent-or-Unattended-Installation)
 
 #>
 
@@ -69,7 +67,7 @@ VERBOSE: 7z2301-x64.msi Installed!
 #Letting the user know what is starting.
 function Start-ScriptBoilerplate {
     param (
-        $ScriptName = "7-Zip-64Bit-23.01.ps1",
+        $ScriptName = "Power-Toys-.79-64Bit-Machine.ps1",
         $ScriptAuthor = "DAM",
         $WrittenDate = "2024-03-17",
         $ModifiedDate = "Never",
@@ -91,24 +89,32 @@ function Test-TerminalElevation {
 function Install-Software {
     param (
         #Program Path when its installed.
-        $ProgramPath = "C:\Program Files\7-Zip",
+        $ProgramPath = "C:\Program Files\Git",
         #Download Link
-        $URI = 'https://www.7-zip.org/a/7z2301-x64.msi',
+        $URI = 'https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-64-bit.exe',
         #Full name of the installer.
-        $InstallerName = '7z2301-x64.msi',
+        $InstallerName = 'Git-2.44.0-64-bit.exe',
         #Out-File location.
         $OutFile = "C:\$InstallerName"
     )
     #Checks to see if the program is already installed.
     $TestPath = Test-Path -Path "$ProgramPath"
     if ($TestPath -match 'True') {
-        Throw "$InstallerName is already installed..."
+        Throw "Another version of GIT is already installed..."
     }else {
         #Ensures PowerShell 3.0 and higher is being used. Invoke-WebRequest is only able to run on PowerShell ver 3.0 and higher.
         if ($PSVersionTable.PSVersion.Major -ge "3") {
             Write-Verbose -Message "The PowerSHell version is grater than 3.0...Continuing script..." -Verbose
         }else {
             Throw "This scripts Invoke-WebRequest is only able to run on PowerShell ver 3.0 and higher."
+        }
+        #Checks to see if Visual Studio Code is already install as the GIT Config below requires it per its EditorOption=VisualStudioCode.
+        #Checks for the default install path for VSCode
+        $TestPath2 = Test-Path -Path 'C:\Program Files\Microsoft VS Code'
+        if ($TestPath2 -match "True") {
+            Write-Verbose -Message "VSCode is already installed...Continuing script..." -Verbose
+        }else {
+            Throw "Visual Studio Code is not install... This script GIT Config below requires it per its EditorOption=VisualStudioCode...Please installer it first..."
         }
         #Downloads the latest exe.
         try {
@@ -120,13 +126,42 @@ function Install-Software {
             Write-Verbose -Message"$Error[0]" -Verbose
             Write-Verbose -Message"$InstallerName may not match what is being download anymore?" -Verbose
         }
+        #Creates the configuration files for the install.
+        try {
+            #Creates the config file.
+            New-Item -Path "C:\" -Name "git_options.ini" -ItemType "file"
+            #Adds the Git's config settings to the file.
+            #Adds the require [Setup] header. 
+            Add-Content -Path "C:\git_options.ini" -Value "[Setup]"
+            #Windows Comonents to install.
+            Add-Content -Path "C:\git_options.ini" -Value "Components=gitlfs,assoc,assoc_sh,windowsterminal"
+            #Makes VSCode the default editor.
+            Add-Content -Path "C:\git_options.ini" -Value "EditorOption=VisualStudioCode"
+            #Adjusting the name of the initial branch in new repos - Overrites the default branch name for new repos as main.
+            Add-Content -Path "C:\git_options.ini" -Value "DefaultBranchOption=main"
+            #Adjusting your PATH enviroment - Git from the cmd line and also from 3rd-pary software.
+            Add-Content -Path "C:\git_options.ini" -Value "PathOption=Cmd"
+            #Choosing the SSH executable - Uses external OpenSSH.
+            Add-Content -Path "C:\git_options.ini" -Value "SSHOption=OpenSSH"
+            #Choosing HTTPS transport backend - Use the OpenSSL library.
+            Add-Content -Path "C:\git_options.ini" -Value "CURLOption=OpenSSL"
+            #Configure the line ending converstions - Checkout Windows-style, commit Unix-style line endings.
+            Add-Content -Path "C:\git_options.ini" -Value "CRLFOption=LFOnly"
+            #Configure the termianl emulator to use with git bach - Uses the Windows' default console window.
+            Add-Content -Path "C:\git_options.ini" -Value "BashTerminalOption=ConHost"
+            #Default behavior of git pull - fast-forward or merger.
+            Add-Content -Path "C:\git_options.ini" -Value "GitPullBehaviorOption=Merge"
+            #Chose a credential helper - Git Cred Manager.
+            Add-Content -Path "C:\git_options.ini" -Value "UseCredentialManager=Enabled"
+            #Configurating extra options - Enable File system caching.
+            Add-Content -Path "C:\git_options.ini" -Value "PerformanceTweaksFSCache=Enabled"
+        }catch {
+            Write-Verbose -Message "Error[0]" -Verbose
+        }
         #Installs the Program.
         try {
             Write-Verbose -Message "Installing $InstallerName" -Verbose
-            $ArgumentList = @(
-            "/q"
-            )
-            Start-Process -FilePath "$OutFile" -ArgumentList "$ArgumentList"
+            Start-Process -FilePath "$OutFile" -ArgumentList "/VERYSILENT", "/NORESTART", "/LOADINF=git_options.ini"
             Start-Sleep -Seconds 10
             #Install check.
             try {
@@ -141,6 +176,7 @@ function Install-Software {
                 Start-Sleep -Seconds 8
                 Write-Verbose -Message "$InstallerName Installed!" -Verbose
                 Remove-Item -Path "$OutFile"
+                Remove-Item -Path "C:\git_options.ini"
             }catch {
                 Write-Verbose -Message "Error[0]" -Verbose
             }

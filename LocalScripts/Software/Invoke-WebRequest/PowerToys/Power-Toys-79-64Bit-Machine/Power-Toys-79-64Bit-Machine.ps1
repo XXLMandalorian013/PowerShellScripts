@@ -133,6 +133,7 @@ function Install-PowerToys64Bit {
                 Until ($TestPath -match 'True')
                 Start-Sleep -Seconds 8
                 Write-Verbose -Message "$InstallerName Installed!" -Verbose
+                Remove-Item -Path "$OutFile"
             }catch {
                 Write-Verbose -Message "Error[0]" -Verbose
             }

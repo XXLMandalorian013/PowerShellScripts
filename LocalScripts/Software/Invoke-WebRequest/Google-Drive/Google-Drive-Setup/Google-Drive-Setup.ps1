@@ -1,11 +1,11 @@
 #ReadMe
 <#
 
-7-Zip-64Bit-23.01.ps1
+Google-Drive-Setup.ps1
 
 .SYNOPSIS
 
-Installs 7-Zip 64Bit verstion 23.01.
+Installs PowerToys ver .79 64-Bit Machine wide.
 
 .Notes
 
@@ -25,16 +25,16 @@ Exception:
 Line |
   15 |          Throw "$InstallerName is already installed..."
      |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     | 7z2301-x64.msi is already installed...
+     | PowerToysUserSetup-0.79.0-x64.exe is already installed...
 
 or
 
-VERBOSE: 7-Zip-64Bit-23.01.ps1 script starting...written by DAM 2024-03-17, last modified Never
+VERBOSE: Power-Toys-.79-64Bit-Machine.ps1 script starting...written by DAM 2024-03-17, last modified Never
 VERBOSE: The terminal is running as an Administrator...Continuing script...
 VERBOSE: The PowerSHell version is grater than 3.0...Continuing script...
-VERBOSE: Downloading 7z2301-x64.msi...
-VERBOSE: Installing 7z2301-x64.msi
-VERBOSE: 7z2301-x64.msi Installed!
+VERBOSE: Downloading PowerToysUserSetup-0.79.0-x64.exe...
+VERBOSE: Installing PowerToysUserSetup-0.79.0-x64.exe
+VERBOSE: PowerToysUserSetup-0.79.0-x64.exe Installed!
 
 .LINK
 
@@ -56,11 +56,9 @@ VERBOSE: 7z2301-x64.msi Installed!
 
 [Start-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.4)
 
-[msi exec](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec)
+[GoogleDrive Download Site/URLs](https://www.google.com/drive/download/)
 
-[7-Zip DL page](https://www.7-zip.org/download.html)
-
-[7-Zip Switchs](https://7-zip.org/faq.html)
+[GoogleDrive Switches](https://support.google.com/a/answer/7491144?hl=en#zippy=%2Cwindows)
 
 #>
 
@@ -69,7 +67,7 @@ VERBOSE: 7z2301-x64.msi Installed!
 #Letting the user know what is starting.
 function Start-ScriptBoilerplate {
     param (
-        $ScriptName = "7-Zip-64Bit-23.01.ps1",
+        $ScriptName = "Google-Drive-Setup.ps1",
         $ScriptAuthor = "DAM",
         $WrittenDate = "2024-03-17",
         $ModifiedDate = "Never",
@@ -91,11 +89,11 @@ function Test-TerminalElevation {
 function Install-Software {
     param (
         #Program Path when its installed.
-        $ProgramPath = "C:\Program Files\7-Zip",
+        $ProgramPath = "C:\Program Files\Google\Drive File Stream",
         #Download Link
-        $URI = 'https://www.7-zip.org/a/7z2301-x64.msi',
+        $URI = 'https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe',
         #Full name of the installer.
-        $InstallerName = '7z2301-x64.msi',
+        $InstallerName = 'GoogleDriveSetup.exe',
         #Out-File location.
         $OutFile = "C:\$InstallerName"
     )
@@ -123,10 +121,7 @@ function Install-Software {
         #Installs the Program.
         try {
             Write-Verbose -Message "Installing $InstallerName" -Verbose
-            $ArgumentList = @(
-            "/q"
-            )
-            Start-Process -FilePath "$OutFile" -ArgumentList "$ArgumentList"
+            Start-Process -FilePath "$OutFile" -ArgumentList "--silent", "--skip_launch_new", "--gsuite_shortcuts=false"
             Start-Sleep -Seconds 10
             #Install check.
             try {

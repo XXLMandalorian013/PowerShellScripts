@@ -1,11 +1,11 @@
 #ReadMe
 <#
 
-7-Zip-64Bit-23.01.ps1
+VSCode-x64-Machine-1.87.2.ps1
 
 .SYNOPSIS
 
-Installs 7-Zip 64Bit verstion 23.01.
+Installs PowerToys ver .79 64-Bit Machine wide.
 
 .Notes
 
@@ -25,16 +25,16 @@ Exception:
 Line |
   15 |          Throw "$InstallerName is already installed..."
      |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     | 7z2301-x64.msi is already installed...
+     | PowerToysUserSetup-0.79.0-x64.exe is already installed...
 
 or
 
-VERBOSE: 7-Zip-64Bit-23.01.ps1 script starting...written by DAM 2024-03-17, last modified Never
+VERBOSE: Power-Toys-.79-64Bit-Machine.ps1 script starting...written by DAM 2024-03-17, last modified Never
 VERBOSE: The terminal is running as an Administrator...Continuing script...
 VERBOSE: The PowerSHell version is grater than 3.0...Continuing script...
-VERBOSE: Downloading 7z2301-x64.msi...
-VERBOSE: Installing 7z2301-x64.msi
-VERBOSE: 7z2301-x64.msi Installed!
+VERBOSE: Downloading PowerToysUserSetup-0.79.0-x64.exe...
+VERBOSE: Installing PowerToysUserSetup-0.79.0-x64.exe
+VERBOSE: PowerToysUserSetup-0.79.0-x64.exe Installed!
 
 .LINK
 
@@ -56,11 +56,10 @@ VERBOSE: 7z2301-x64.msi Installed!
 
 [Start-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.4)
 
-[msi exec](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec)
+[VSCode Download Site/URLs](https://code.visualstudio.com/download#) Note, click on the ver you want do dl and once you do you will be taken to its Dl 
+splash page, click its direct DL link to get the actual dl url.
 
-[7-Zip DL page](https://www.7-zip.org/download.html)
-
-[7-Zip Switchs](https://7-zip.org/faq.html)
+[VSCode Installer Switches](https://stackoverflow.com/questions/42582230/how-to-install-visual-studio-code-silently-without-auto-open-when-installation)
 
 #>
 
@@ -69,7 +68,7 @@ VERBOSE: 7z2301-x64.msi Installed!
 #Letting the user know what is starting.
 function Start-ScriptBoilerplate {
     param (
-        $ScriptName = "7-Zip-64Bit-23.01.ps1",
+        $ScriptName = "VSCode-x64-Machine-1.87.2.ps1",
         $ScriptAuthor = "DAM",
         $WrittenDate = "2024-03-17",
         $ModifiedDate = "Never",
@@ -91,11 +90,11 @@ function Test-TerminalElevation {
 function Install-Software {
     param (
         #Program Path when its installed.
-        $ProgramPath = "C:\Program Files\7-Zip",
+        $ProgramPath = 'C:\Program Files\Microsoft VS Code',
         #Download Link
-        $URI = 'https://www.7-zip.org/a/7z2301-x64.msi',
+        $URI = 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64',
         #Full name of the installer.
-        $InstallerName = '7z2301-x64.msi',
+        $InstallerName = 'VSCodeSetup-x64-1.87.2.exe',
         #Out-File location.
         $OutFile = "C:\$InstallerName"
     )
@@ -123,10 +122,7 @@ function Install-Software {
         #Installs the Program.
         try {
             Write-Verbose -Message "Installing $InstallerName" -Verbose
-            $ArgumentList = @(
-            "/q"
-            )
-            Start-Process -FilePath "$OutFile" -ArgumentList "$ArgumentList"
+            Start-Process -FilePath "$OutFile" -ArgumentList "/VERYSILENT", "/MERGETASKS=!runcode"
             Start-Sleep -Seconds 10
             #Install check.
             try {
