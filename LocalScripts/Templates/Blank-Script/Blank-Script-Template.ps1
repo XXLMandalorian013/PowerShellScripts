@@ -53,13 +53,26 @@ File.doc
 #Region Start-Script
 #Letting the user know what is starting.
 function Start-ScriptBoilerplate {
-    $ScriptName = "VulScan-Discovery-Agent-Uninstall.ps1"
-    $ScriptAuthor = "DAM"
-    $WrittenDate = "2023-10-16"
-    $ModifiedDate = "2024-02-08"
-    $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor on $WrittenDate, last modified on $ModifiedDate"
+    param (
+        $ScriptName = "Power-Toys-.79-64Bit-Machine.ps1",
+        $ScriptAuthor = "DAM",
+        $WrittenDate = "2024-03-17",
+        $ModifiedDate = "Never",
+        $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor $WrittenDate, last modified $ModifiedDate"
+    )
     Write-Verbose -Message "$ScriptBoilerplate" -Verbose
+}
+#Checks to see if the terminal is running as an administrator.
+function Test-TerminalElevation {
+    #Checks if the terminal is runing as admin/elevated as Invoke-WebRequest will not run without it.
+    if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+        Throw "This script requires Administrator rights. To run this script, start PowerShell with the `"Run as administrator`" option."
+    }else {
+        Write-Verbose -Message "The terminal is running as an Administrator...Continuing script..." -Verbose
+    }
 }
 #Letting the user know what is starting.
 Start-ScriptBoilerplate
+#Checks to see if the terminal is running as an administrator.
+Test-TerminalElevation
 #EndRegion
