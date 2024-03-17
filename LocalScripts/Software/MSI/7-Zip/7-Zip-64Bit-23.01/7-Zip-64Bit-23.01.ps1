@@ -1,11 +1,11 @@
 #ReadMe
 <#
 
-Power-Toys-.79-64Bit-Machine.ps1
+7-Zip-64Bit-23.01.ps1
 
 .SYNOPSIS
 
-Installs PowerToys ver .79 64-Bit Machine wide.
+Installs 7-Zip 64Bit verstion 23.01.
 
 .Notes
 
@@ -25,16 +25,16 @@ Exception:
 Line |
   15 |          Throw "$InstallerName is already installed..."
      |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     | PowerToysUserSetup-0.79.0-x64.exe is already installed...
+     | 7z2301-x64.msi is already installed...
 
 or
 
-VERBOSE: Power-Toys-.79-64Bit-Machine.ps1 script starting...written by DAM 2024-03-17, last modified Never
+VERBOSE: 7-Zip-64Bit-23.01.ps1 script starting...written by DAM 2024-03-17, last modified Never
 VERBOSE: The terminal is running as an Administrator...Continuing script...
 VERBOSE: The PowerSHell version is grater than 3.0...Continuing script...
-VERBOSE: Downloading PowerToysUserSetup-0.79.0-x64.exe...
-VERBOSE: Installing PowerToysUserSetup-0.79.0-x64.exe
-VERBOSE: PowerToysUserSetup-0.79.0-x64.exe Installed!
+VERBOSE: Downloading 7z2301-x64.msi...
+VERBOSE: Installing 7z2301-x64.msi
+VERBOSE: 7z2301-x64.msi Installed!
 
 .LINK
 
@@ -54,9 +54,13 @@ VERBOSE: PowerToysUserSetup-0.79.0-x64.exe Installed!
 
 [about_Do](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_do?view=powershell-7.3)
 
-[PowerToys Download Site/URLs](https://github.com/microsoft/PowerToys/releases/tag/v0.79.0)
+[Start-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.4)
 
-[PowerToys Installer Switches](https://learn.microsoft.com/en-us/windows/powertoys/install)
+[msi exec](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec)
+
+[7-Zip DL page](https://www.7-zip.org/download.html)
+
+[7-Zip Switchs](https://7-zip.org/faq.html)
 
 #>
 
@@ -65,11 +69,11 @@ VERBOSE: PowerToysUserSetup-0.79.0-x64.exe Installed!
 #Letting the user know what is starting.
 function Start-ScriptBoilerplate {
     param (
-        $ScriptName = "Power-Toys-.79-64Bit-Machine.ps1",
+        $ScriptName = "7-Zip-64Bit-23.01.ps1",
         $ScriptAuthor = "DAM",
         $WrittenDate = "2024-03-17",
         $ModifiedDate = "Never",
-        $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor $WrittenDate, last modified $ModifiedDate"
+        $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor $WrittenDate, last modified $ModifiedDate."
     )
     Write-Verbose -Message "$ScriptBoilerplate" -Verbose
 }
@@ -84,14 +88,14 @@ function Test-TerminalElevation {
     }
 }
 #Checks to see if the software is already installed, if not, it installs it.
-function Install-PowerToys64Bit {
+function Install-Software {
     param (
         #Program Path when its installed.
-        $ProgramPath = 'C:\Program Files\PowerToys',
+        $ProgramPath = "C:\Program Files\7-Zip",
         #Download Link
-        $URI = 'https://github.com/microsoft/PowerToys/releases/download/v0.79.0/PowerToysSetup-0.79.0-x64.exe',
+        $URI = 'https://www.7-zip.org/a/7z2301-x64.msi',
         #Full name of the installer.
-        $InstallerName = 'PowerToysUserSetup-0.79.0-x64.exe',
+        $InstallerName = '7z2301-x64.msi',
         #Out-File location.
         $OutFile = "C:\$InstallerName"
     )
@@ -119,7 +123,10 @@ function Install-PowerToys64Bit {
         #Installs the Program.
         try {
             Write-Verbose -Message "Installing $InstallerName" -Verbose
-            Start-Process -FilePath "$OutFile" -ArgumentList "/quiet"
+            $ArgumentList = @(
+            "/q"
+            )
+            Start-Process -FilePath "$OutFile" -ArgumentList "$ArgumentList"
             Start-Sleep -Seconds 10
             #Install check.
             try {
@@ -146,7 +153,7 @@ Start-ScriptBoilerplate
 #Checks to see if the terminal is running as an administrator.
 Test-TerminalElevation
 #Checks to see if the software is already installed, if not, it installs it.
-Install-PowerToys64Bit
+Install-Software
 
 #EndRegion
 

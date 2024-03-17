@@ -58,7 +58,7 @@ function Start-ScriptBoilerplate {
         $ScriptAuthor = "DAM",
         $WrittenDate = "2024-03-17",
         $ModifiedDate = "Never",
-        $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor $WrittenDate, last modified $ModifiedDate"
+        $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor $WrittenDate, last modified $ModifiedDate."
     )
     Write-Verbose -Message "$ScriptBoilerplate" -Verbose
 }

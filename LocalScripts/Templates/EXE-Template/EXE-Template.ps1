@@ -54,6 +54,8 @@ VERBOSE: PowerToysUserSetup-0.79.0-x64.exe Installed!
 
 [about_Do](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_do?view=powershell-7.3)
 
+[Start-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.4)
+
 [PowerToys Download Site/URLs](https://github.com/microsoft/PowerToys/releases/tag/v0.79.0)
 
 [PowerToys Installer Switches](https://learn.microsoft.com/en-us/windows/powertoys/install)
@@ -69,7 +71,7 @@ function Start-ScriptBoilerplate {
         $ScriptAuthor = "DAM",
         $WrittenDate = "2024-03-17",
         $ModifiedDate = "Never",
-        $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor $WrittenDate, last modified $ModifiedDate"
+        $ScriptBoilerplate = "$ScriptName script starting...written by $ScriptAuthor $WrittenDate, last modified $ModifiedDate."
     )
     Write-Verbose -Message "$ScriptBoilerplate" -Verbose
 }
@@ -84,7 +86,7 @@ function Test-TerminalElevation {
     }
 }
 #Checks to see if the software is already installed, if not, it installs it.
-function Install-PowerToys64Bit {
+function Install-Software {
     param (
         #Program Path when its installed.
         $ProgramPath = 'C:\Program Files\PowerToys',
@@ -146,7 +148,7 @@ Start-ScriptBoilerplate
 #Checks to see if the terminal is running as an administrator.
 Test-TerminalElevation
 #Checks to see if the software is already installed, if not, it installs it.
-Install-PowerToys64Bit
+Install-Software
 
 #EndRegion
 
