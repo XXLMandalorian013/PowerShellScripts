@@ -82,7 +82,7 @@ function Start-ScriptBoilerPlate {
 function Uninstall-AccentDesktop {
     param(
         #Program Path when its installed.
-        $ProgramPath = 'C:\Program Files\Zultys\Accent',
+        $ProgramPath = 'C:\Program Files\Accent\Accent.exe',
         #Download Link
         $URI = 'https://accentdesktop-release.s3.us-east-2.amazonaws.com/Accent+2.0.1.msi',
         #Full name of the installer.
