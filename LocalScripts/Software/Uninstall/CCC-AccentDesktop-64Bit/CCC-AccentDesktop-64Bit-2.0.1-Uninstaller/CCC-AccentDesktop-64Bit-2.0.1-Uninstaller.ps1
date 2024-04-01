@@ -91,7 +91,7 @@ function Uninstall-AccentDesktop {
         $OutFile = "C:\$UninstallerName"
     )
     $ExsistingInsatll = Test-Path -Path "$ProgramPath"
-    if ($ExsistingInsatll -eq 'True') {
+    if ($ExsistingInsatll -match 'False') {
         Write-Verbose -Message "$UninstallerName is already uninstalled...$ProgramPath" -Verbose
     }
     else {
@@ -111,16 +111,16 @@ function Uninstall-AccentDesktop {
             Write-Verbose -Message "Installing $UninstallerName" -Verbose
             #Stops any of the programs services from running to uninstall it.
             taskkill /f /im accent.exe
-            msiexec.exe /x "$OutFile"
+            msiexec.exe /x "$OutFile" /quiet
             #Ininstall check and TEMP file delete.
             try {
                 do { 
                     $TestPath = Test-Path -Path "$ProgramPath"
-                    if ($TestPath -ne 'True') {
+                    if ($TestPath -match 'True') {
                         Write-Verbose -Message "$UninstallerName uninstaller is running...Please wait" -Verbose
                         Start-Sleep -Seconds 5
                     }
-                }Until ($TestPath -eq 'True')
+                }Until ($TestPath -ne 'True')
                     Write-Verbose -Message "$UninstallerName uninstalled!" -Verbose
                     Start-Sleep -Seconds 5
                     Write-Verbose -Message "$UninstallerName removed" -Verbose
