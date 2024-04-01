@@ -26,7 +26,7 @@ VERBOSE: MXReport-4.2.1.25.exe removed
 
 or
 
-VERBOSE: ZAC_x86-8.4.34.exe is already uninstalled...
+VERBOSE: MXReport-4.2.1.25.exe is already uninstalled...
 
 .LINK
 

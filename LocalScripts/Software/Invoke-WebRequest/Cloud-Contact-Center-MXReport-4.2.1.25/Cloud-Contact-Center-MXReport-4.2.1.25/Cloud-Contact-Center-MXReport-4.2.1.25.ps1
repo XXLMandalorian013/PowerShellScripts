@@ -19,17 +19,16 @@ System.String,
 Start-ScriptBoilerPlate
 VERBOSE: Cloud-Contact-Center-ZAC-Installer.ps1 Written by DAM on 2024-03-05
 
-Install-CCCZac
-VERBOSE: Downloading .exe installer for ZAC_x86-8.4.34.exe...
-VERBOSE: Installing ZAC_x86-8.4.34.exe
-VERBOSE: ZAC_x86-8.4.34.exe installer is running...Please wait
-VERBOSE: ZAC_x86-8.4.34.exe installer is running...Please wait
-VERBOSE: ZAC_x86-8.4.34.exe installed!
-VERBOSE: ZAC_x86-8.4.34.exe removed
+Install-MXReport
+VERBOSE: Downloading .exe installer for MXReport-4.2.1.25.exe...
+VERBOSE: Installing MXReport-4.2.1.25.exe
+VERBOSE: MXReport-4.2.1.25.exe installer is running...Please wait
+VERBOSE: MXReport-4.2.1.25.exe installed!
+VERBOSE: MXReport-4.2.1.25.exe removed
 
 or
 
-ZAC_x86-8.4.34.exe is already installed...C:\Program Files (x86)\Zultys\ZAC
+MXReport-4.2.1.25.exe is already installed...C:\Program Files (x86)\Zultys\ZAC
 
 .LINK
 
