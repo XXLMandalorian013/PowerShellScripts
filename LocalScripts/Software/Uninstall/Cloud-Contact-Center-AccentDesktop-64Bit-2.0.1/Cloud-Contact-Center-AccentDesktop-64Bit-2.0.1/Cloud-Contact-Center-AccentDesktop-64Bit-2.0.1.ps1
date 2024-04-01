@@ -91,7 +91,7 @@ function Uninstall-AccentDesktop {
         $OutFile = "C:\$InstallerName"
     )
     $ExsistingInsatll = Test-Path -Path "$ProgramPath"
-    if ($ExsistingInsatll -match 'False') {
+    if ($ExsistingInsatll -match 'True') {
         Write-Verbose -Message "$InstallerName is already uninstalled...$ProgramPath" -Verbose
     }
     else {
