@@ -88,7 +88,7 @@ function Uninstall-MXReport {
         $OutFile = "C:\$InstallerName"
     )
     $ExsistingInsatll = Test-Path -Path "$ProgramPath"
-    if ($ExsistingInsatll -match 'True') {
+    if ($ExsistingInsatll -match 'False') {
         Write-Verbose -Message "$InstallerName is already uninstalled..." -Verbose
     }else {
         #Downloads the latest exe.
