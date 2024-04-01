@@ -19,16 +19,19 @@ System.String,
 Start-ScriptBoilerPlate
 VERBOSE: Cloud-Contact-Center-ZAC-Installer.ps1 Written by DAM on 2024-03-05
 
-Install-MXReport
-VERBOSE: Downloading .exe installer for MXReport-4.2.1.25.exe...
-VERBOSE: Installing MXReport-4.2.1.25.exe
-VERBOSE: MXReport-4.2.1.25.exe installer is running...Please wait
-VERBOSE: MXReport-4.2.1.25.exe installed!
-VERBOSE: MXReport-4.2.1.25.exe removed
+Install-AccentDesktop
+VERBOSE: Downloading .exe installer for Accent+2.0.1.msi...
+VERBOSE: Installing Accent+2.0.1.msi
+VERBOSE: Accent+2.0.1.msi installer is running...Please wait
+VERBOSE: Accent+2.0.1.msi installer is running...Please wait
+VERBOSE: Accent+2.0.1.msi installer is running...Please wait
+VERBOSE: Accent+2.0.1.msi installer is running...Please wait
+VERBOSE: Accent+2.0.1.msi installed!
+VERBOSE: Accent+2.0.1.msi removed
 
 or
 
-MXReport-4.2.1.25.exe is already installed...C:\Program Files (x86)\Zultys\ZAC
+AccentDesktop-4.2.1.25.exe is already installed...
 
 .LINK
 
@@ -120,7 +123,7 @@ function Install-AccentDesktop {
                     }
                 }Until ($TestPath -eq 'True')
                     Write-Verbose -Message "$InstallerName installed!" -Verbose
-                    Start-Sleep -Seconds 10
+                    Start-Sleep -Seconds 15
                     Write-Verbose -Message "$InstallerName removed" -Verbose
                     Remove-Item "$OutFile"
             }catch {
