@@ -55,7 +55,7 @@ ZAC_x86-8.4.34.exe is already installed...C:\Program Files (x86)\Zultys\ZAC
 
 [Remove-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item?view=powershell-7.3)
 
-[Accent's Cloud-Contact-Center-ZAC-Installer download URL](https://www.accentvoice.com/downloads/)
+[Accent's URL](Reach out to Accent as they provied the DL link and it seems not publically available)
 
 #>
 
@@ -78,7 +78,7 @@ function Start-ScriptBoilerPlate {
     #Script Introduction
     Write-Verbose -Message "$ScriptName $ScriptAuthor" -Verbose 
 }
-#Installs Accent's Cloud Contact Center ZAC
+#Installs the Program from URI.
 function Install-MXReport {
     param(
         #Program Path when its installed.
@@ -101,6 +101,15 @@ function Install-MXReport {
             $ProgressPreference = 'SilentlyContinue'
             Write-Verbose -Message "Downloading .exe installer for $InstallerName..." -Verbose
             Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
+        }catch {
+            Write-Verbose -Message"$Error[0]" -Verbose
+            Write-Verbose -Message"$InstallerName may not match what is being download anymore?" -Verbose
+            Write-Verbose -Message"Invoke-WebRequest is not supported on Win 7..." -Verbose
+        }
+        #Installs the Program from URI.
+        try {
+            Write-Verbose -Message "Installing $InstallerName" -Verbose
+            Start-Process -FilePath "$OutFile" -ArgumentList "/S /v/qn -Install"
             #Ininstall check and TEMP file delete.
             try {
                 do { 
@@ -118,22 +127,13 @@ function Install-MXReport {
                 Write-Verbose -Message "$Error[0]" -Verbose
             }
         }catch {
-            Write-Verbose -Message"$Error[0]" -Verbose
-            Write-Verbose -Message"$InstallerName may not match what is being download anymore?" -Verbose
-            Write-Verbose -Message"Invoke-WebRequest is not supported on Win 7..." -Verbose
-        }
-        #Installs the Program from URI.
-        try {
-            Write-Verbose -Message "Installing $InstallerName" -Verbose
-            Start-Process -FilePath "$OutFile" -ArgumentList "/S /v/qn -Install"
-        }catch {
             Write-Verbose -Message "$Error[0]" -Verbose
         }
     }
 }
-
+#Script Boilerplate
 Start-ScriptBoilerPlate
-
+#Installs the Program from URI.
 Install-MXReport
 
 

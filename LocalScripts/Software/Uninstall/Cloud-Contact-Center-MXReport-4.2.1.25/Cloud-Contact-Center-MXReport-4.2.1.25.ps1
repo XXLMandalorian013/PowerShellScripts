@@ -17,13 +17,12 @@ None.
 System.String,
 
 Start-ScriptBoilerPlate
-VERBOSE: Cloud-Contact-Center-ZAC-Installer.ps1 Written by DAM on 2024-03-05
+VERBOSE: Cloud-Contact-Center-MXReport-4.2.1.25.ps1 Written by DAM on 2024-03-05
 
-Uninstall-CCCZac
-VERBOSE: Downloading uninstaller ZAC_x86-8.4.34.exe...
-VERBOSE: Uninstalling ZAC_x86-8.4.34.exe
-VERBOSE: ZAC_x86-8.4.34.exe uninstalled!
-VERBOSE: ZAC_x86-8.4.34.exe removed
+VERBOSE: Downloading uninstaller MXReport-4.2.1.25.exe...
+VERBOSE: Uninstalling MXReport-4.2.1.25.exe
+VERBOSE: MXReport-4.2.1.25.exe uninstalled!
+VERBOSE: MXReport-4.2.1.25.exe removed
 
 or
 
@@ -53,7 +52,7 @@ VERBOSE: ZAC_x86-8.4.34.exe is already uninstalled...
 
 [Remove-Item](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item?view=powershell-7.3)
 
-[Accent's Cloud-Contact-Center-ZAC-Installer download URL](https://www.accentvoice.com/downloads/)
+[Accent's URL](Reach out to Accent as they provied the DL link and it seems not publically available)
 
 #>
 
@@ -76,8 +75,8 @@ function Start-ScriptBoilerPlate {
     #Script Introduction
     Write-Verbose -Message "$ScriptName $ScriptAuthor" -Verbose 
 }
-#Installs Accent's Cloud Contact Center ZAC
-function Uninstall-CCCZac {
+#Uninstalls the Program from URI.
+function Uninstall-MXReport {
     param(
         #Program Path when its installed.
         $ProgramPath = 'C:\Program Files (x86)\Zultys\MXReport',
@@ -129,9 +128,9 @@ function Uninstall-CCCZac {
         }
     }
 }
-
+#Script Boilerplate
 Start-ScriptBoilerPlate
-
-Uninstall-CCCZac
+#Unistalls the Program from URI.
+Uninstall-MXReport
 
 
