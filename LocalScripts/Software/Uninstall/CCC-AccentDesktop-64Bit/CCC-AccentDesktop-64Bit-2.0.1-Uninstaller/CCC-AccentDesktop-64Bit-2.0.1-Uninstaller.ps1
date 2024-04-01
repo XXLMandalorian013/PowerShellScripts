@@ -88,11 +88,11 @@ function Uninstall-AccentDesktop {
         #Full name of the installer.
         $UninstallerName = 'Accent+2.0.1.msi',
         #Out-File location.
-        $OutFile = "C:\$InstallerName"
+        $OutFile = "C:\$UninstallerName"
     )
     $ExsistingInsatll = Test-Path -Path "$ProgramPath"
     if ($ExsistingInsatll -eq 'False') {
-        Write-Verbose -Message "$InstallerName is already uninstalled...$ProgramPath" -Verbose
+        Write-Verbose -Message "$UninstallerName is already uninstalled...$ProgramPath" -Verbose
     }
     else {
         #Downloads the latest msi.
