@@ -82,7 +82,7 @@ function Start-ScriptBoilerPlate {
 function Install-AccentDesktop {
     param(
         #Program Path when its installed.
-        $ProgramPath = 'C:\Program Files\Zultys\Accent',
+        $ProgramPath = 'C:\Program Files\Accent\Accent.exe',
         #Download Link
         $URI = 'https://accentdesktop-release.s3.us-east-2.amazonaws.com/Accent+2.0.1.msi',
         #Full name of the installer.
@@ -116,11 +116,11 @@ function Install-AccentDesktop {
                     $TestPath = Test-Path -Path "$ProgramPath"
                     if ($TestPath -ne 'True') {
                         Write-Verbose -Message "$InstallerName installer is running...Please wait" -Verbose
-                        Start-Sleep -Seconds 5
+                        Start-Sleep -Seconds 10
                     }
                 }Until ($TestPath -eq 'True')
                     Write-Verbose -Message "$InstallerName installed!" -Verbose
-                    Start-Sleep -Seconds 5
+                    Start-Sleep -Seconds 10
                     Write-Verbose -Message "$InstallerName removed" -Verbose
                     Remove-Item "$OutFile"
             }catch {
