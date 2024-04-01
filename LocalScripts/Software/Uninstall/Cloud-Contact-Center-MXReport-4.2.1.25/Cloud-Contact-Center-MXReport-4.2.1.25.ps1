@@ -79,7 +79,7 @@ function Start-ScriptBoilerPlate {
 function Uninstall-MXReport {
     param(
         #Program Path when its installed.
-        $ProgramPath = 'C:\Program Files (x86)\Zultys\MXReport',
+        $ProgramPath = "C:\Program Files (x86)\Zultys\MXreport\MXreport.exe",
         #Download Link
         $URI = 'https://mirror.zultys.biz/mxreports/MXReport-4.2.1.25.exe',
         #Full name of the installer.
