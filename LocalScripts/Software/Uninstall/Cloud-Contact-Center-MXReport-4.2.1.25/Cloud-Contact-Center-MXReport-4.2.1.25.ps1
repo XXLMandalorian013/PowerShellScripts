@@ -1,6 +1,6 @@
 #ReadMe
 <#
-Cloud-Contact-Center-MXReport-4.2.1.25.ps1
+Cloud-Contact-Center-ZAC-Uninstaller.ps1
 
 .SYNOPSIS
 Downloads and installs Windows MSI WebRoot Agent Installer if not already installed. It also will make sure another AV is not already installed.
@@ -19,17 +19,15 @@ System.String,
 Start-ScriptBoilerPlate
 VERBOSE: Cloud-Contact-Center-ZAC-Installer.ps1 Written by DAM on 2024-03-05
 
-Install-CCCZac
-VERBOSE: Downloading .exe installer for ZAC_x86-8.4.34.exe...
-VERBOSE: Installing ZAC_x86-8.4.34.exe
-VERBOSE: ZAC_x86-8.4.34.exe installer is running...Please wait
-VERBOSE: ZAC_x86-8.4.34.exe installer is running...Please wait
-VERBOSE: ZAC_x86-8.4.34.exe installed!
+Uninstall-CCCZac
+VERBOSE: Downloading uninstaller ZAC_x86-8.4.34.exe...
+VERBOSE: Uninstalling ZAC_x86-8.4.34.exe
+VERBOSE: ZAC_x86-8.4.34.exe uninstalled!
 VERBOSE: ZAC_x86-8.4.34.exe removed
 
 or
 
-ZAC_x86-8.4.34.exe is already installed...C:\Program Files (x86)\Zultys\ZAC
+VERBOSE: ZAC_x86-8.4.34.exe is already uninstalled...
 
 .LINK
 
@@ -79,7 +77,7 @@ function Start-ScriptBoilerPlate {
     Write-Verbose -Message "$ScriptName $ScriptAuthor" -Verbose 
 }
 #Installs Accent's Cloud Contact Center ZAC
-function Install-MXReport {
+function Uninstall-CCCZac {
     param(
         #Program Path when its installed.
         $ProgramPath = 'C:\Program Files (x86)\Zultys\MXReport',
@@ -91,32 +89,15 @@ function Install-MXReport {
         $OutFile = "C:\$InstallerName"
     )
     $ExsistingInsatll = Test-Path -Path "$ProgramPath"
-    if ($ExsistingInsatll -match 'True') {
-        Write-Verbose -Message "$InstallerName is already installed...$ProgramPath" -Verbose
-    }
-    else {
-        #Downloads the latest msi.
+    if ($ExsistingInsatll -match 'False') {
+        Write-Verbose -Message "$InstallerName is already uninstalled..." -Verbose
+    }else {
+        #Downloads the latest exe.
         try {
             #Disabled Invove-WebReqests progress bar speeding up the download. Bug seen here https://github.com/PowerShell/PowerShell/issues/2138
             $ProgressPreference = 'SilentlyContinue'
-            Write-Verbose -Message "Downloading .exe installer for $InstallerName..." -Verbose
+            Write-Verbose -Message "Downloading uninstaller $InstallerName..." -Verbose
             Invoke-WebRequest -URI "$URI" -OutFile "$OutFile" -UseBasicParsing
-            #Ininstall check and TEMP file delete.
-            try {
-                do { 
-                    $TestPath = Test-Path -Path "$ProgramPath"
-                    if ($TestPath -ne 'True') {
-                        Write-Verbose -Message "$InstallerName installer is running...Please wait" -Verbose
-                        Start-Sleep -Seconds 5
-                    }
-                }Until ($TestPath -eq 'True')
-                    Write-Verbose -Message "$InstallerName installed!" -Verbose
-                    Start-Sleep -Seconds 5
-                    Write-Verbose -Message "$InstallerName removed" -Verbose
-                    Remove-Item "$OutFile"
-            }catch {
-                Write-Verbose -Message "$Error[0]" -Verbose
-            }
         }catch {
             Write-Verbose -Message"$Error[0]" -Verbose
             Write-Verbose -Message"$InstallerName may not match what is being download anymore?" -Verbose
@@ -124,8 +105,25 @@ function Install-MXReport {
         }
         #Installs the Program from URI.
         try {
-            Write-Verbose -Message "Installing $InstallerName" -Verbose
-            Start-Process -FilePath "$OutFile" -ArgumentList "/S /v/qn -Install"
+            Write-Verbose -Message "Uninstalling $InstallerName" -Verbose
+            Start-Process -FilePath "$OutFile" -ArgumentList "/S /x /v/qn"
+            Start-Sleep -Seconds 120
+            #Ininstall check and TEMP file delete.
+            try {
+                do { 
+                    $TestPath = Test-Path -Path "$ProgramPath"
+                    if ($TestPath -match 'True') {
+                        Write-Verbose -Message "$InstallerName uninstaller is running...Please wait" -Verbose
+                        Start-Sleep -Seconds 5
+                    }
+                }Until ($TestPath -match 'False')
+                    Write-Verbose -Message "$InstallerName uninstalled!" -Verbose
+                    Start-Sleep -Seconds 5
+                    Write-Verbose -Message "$InstallerName removed" -Verbose
+                    Remove-Item "$OutFile"
+            }catch {
+                Write-Verbose -Message "$Error[0]" -Verbose
+            }
         }catch {
             Write-Verbose -Message "$Error[0]" -Verbose
         }
@@ -134,6 +132,6 @@ function Install-MXReport {
 
 Start-ScriptBoilerPlate
 
-Install-MXReport
+Uninstall-CCCZac
 
 
