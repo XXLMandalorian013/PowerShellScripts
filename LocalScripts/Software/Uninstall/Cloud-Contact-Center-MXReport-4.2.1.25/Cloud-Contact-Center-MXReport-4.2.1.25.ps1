@@ -115,7 +115,7 @@ function Uninstall-MXReport {
                         Write-Verbose -Message "$InstallerName uninstaller is running...Please wait" -Verbose
                         Start-Sleep -Seconds 5
                     }
-                }Until ($TestPath -match 'False')
+                }Until ($TestPath -ne 'True')
                     Write-Verbose -Message "$InstallerName uninstalled!" -Verbose
                     Start-Sleep -Seconds 5
                     Write-Verbose -Message "$InstallerName removed" -Verbose
