@@ -112,6 +112,8 @@ function Uninstall-AccentDesktop {
             $ArgumentList = @(
             "/x"
             )
+            #Stops any of the programs services from running to uninstall it.
+            taskkill /f /im accent.exe
             Start-Process -FilePath "$OutFile" -ArgumentList "$ArgumentList"
             #Ininstall check and TEMP file delete.
             try {
