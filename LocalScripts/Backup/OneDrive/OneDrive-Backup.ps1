@@ -19,22 +19,47 @@ None.
 
 System.String,
 
-VERBOSE: Power-Toys-.79-64Bit-Machine.ps1 script starting...written by DAM 2024-03-17, last modified Never
+VERBOSE: OneDrive-Backup.ps1 script starting...written by DAM 2024-04-13, last modified Never.
 VERBOSE: The terminal is running as an Administrator...Continuing script...
-Exception:
-Line |
-  15 |          Throw "$InstallerName is already installed..."
-     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     | 7z2301-x64.msi is already installed...
+VERBOSE: Script starting...
+VERBOSE: No current backup folder found...Creating a backup folder C:\Test\04-13-2024.
+
+    Directory: C:\Test
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           4/13/2024  3:12 PM                04-13-2024
+VERBOSE: Copying files...please wait.
+
+ Log File : C:\Test\04-13-2024\RoboCopyLog.log
+VERBOSE: OneDrive backup has finished!
+
+    Directory: C:\Test\04-13-2024
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/19/2023  6:15 AM                Apps
+d----           11/4/2022  3:43 PM                Backups
+d-r--          11/13/2022  1:44 PM                Desktop
+d-r--           3/16/2024  3:33 PM                Documents
+d----           11/4/2022  3:43 PM                Email attachments
+d----           8/13/2023  8:13 AM                Microsoft Edge Drop Files
+d----           11/4/2022  3:43 PM                OneNoteBooks
+d-r--           12/2/2022  2:53 PM                Pictures
+d----           11/4/2022  3:43 PM                Public
+d----            4/5/2023  5:12 PM                Shared
+d----          11/13/2022  1:47 PM                Videos
+-a---           4/13/2024 12:12 PM           1140 Personal Vault.lnk
+-a---           4/13/2024  3:12 PM          19456 RoboCopyLog.log
+VERBOSE: This script has finished running...
+
+PS C:\Users\XXLMandalorian> #EndRegion
 
 or
 
-VERBOSE: 7-Zip-64Bit-23.01.ps1 script starting...written by DAM 2024-03-17, last modified Never
-VERBOSE: The terminal is running as an Administrator...Continuing script...
-VERBOSE: The PowerSHell version is grater than 3.0...Continuing script...
-VERBOSE: Downloading 7z2301-x64.msi...
-VERBOSE: Installing 7z2301-x64.msi
-VERBOSE: 7z2301-x64.msi Installed!
+VERBOSE: Script starting...
+VERBOSE: A positional parameter cannot be found that accepts argument 'C:\Test\04-13-2024...the backup has already ran today...exiting...'.[0]
+VERBOSE: This script has finished running...
 
 .LINK
 
@@ -44,23 +69,9 @@ VERBOSE: 7z2301-x64.msi Installed!
 
 [about_Functions](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions?view=powershell-7.3)
 
-[about_Try_Catch_Finally](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_try_catch_finally?view=powershell-7.3)
-
 [Approved Verbs for PowerShell Commands](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands?view=powershell-7.3)
 
 [about_Operators](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.3)
-
-[about_Throw](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_throw?view=powershell-7.3)
-
-[about_Do](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_do?view=powershell-7.3)
-
-[Start-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.4)
-
-[msi exec](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec)
-
-[7-Zip DL page](https://www.7-zip.org/download.html)
-
-[7-Zip Switchs](https://7-zip.org/faq.html)
 
 #>
 
@@ -111,7 +122,6 @@ function Backup-OneDrive {
                 Get-ChildItem -Path "$FinalDestinationPath"
             }else {
                 Write-Verbose -Message "Backup folder found "$FinalDestinationPath"...the backup has already ran today...exiting..." -Verbose
-                Exit
             }
         }catch {
             Write-Verbose -Message "$Error[0]" -Verbose
