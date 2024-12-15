@@ -1,0 +1,1 @@
+Get-CimInstance -ClassName Win32_UserAccount -Filter "LocalAccount=True" | Select-Object Name, FullName, Disabled, Status
