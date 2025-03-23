@@ -1,0 +1,1 @@
+Get-ADDomainController -Filter * | Select-Object Name, IPv4Address, Site, OperatingSystem
