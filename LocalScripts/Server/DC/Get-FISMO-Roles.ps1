@@ -1,0 +1,1 @@
+Get-ADDomain | Select-Object PDCEmulator, RIDMaster, InfrastructureMaster
