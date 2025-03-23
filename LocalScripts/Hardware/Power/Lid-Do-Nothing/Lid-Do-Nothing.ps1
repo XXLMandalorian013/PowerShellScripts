@@ -1,0 +1,2 @@
+powercfg /setACvalueIndex scheme_current sub_buttons lidAction 0
+powercfg /setDCvalueIndex scheme_current sub_buttons lidAction 0
