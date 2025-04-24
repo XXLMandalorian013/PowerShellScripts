@@ -1,3 +1,5 @@
+# Works in PS 7+
+
 #Detects to see if the mouse is moving on a PC.
 
 #https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms?view=windowsdesktop-6.0
