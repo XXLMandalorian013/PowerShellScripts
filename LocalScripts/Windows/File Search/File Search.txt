@@ -1,1 +1,1 @@
-Get-Childitem –Path C:\ -Include *FILE NAME HERE NO EXTENTION REQUIRED* -Recurse -ErrorAction SilentlyContinue
+Get-ChildItem -Path "C:\Windows\TEMP" -Recurse -File | Where-Object {$_.Name -eq "069e"}
