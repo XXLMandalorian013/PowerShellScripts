@@ -1,0 +1,1 @@
+slmgr.vbs /ipk XXXXX-XXXXX-XXXXX-XXXXX-XXXXX

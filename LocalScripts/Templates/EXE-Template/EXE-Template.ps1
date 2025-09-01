@@ -1,11 +1,11 @@
 #ReadMe
 <#
 
-Power-Toys-.79-64Bit-Machine.ps1
+Win-Installer-CytracomDesktop.ps1
 
 .SYNOPSIS
 
-Installs PowerToys ver .79 64-Bit Machine wide.
+Installs CytracomDesktop if not already uninstalled.
 
 .Notes
 
@@ -19,51 +19,22 @@ None.
 
 System.String,
 
-VERBOSE: Power-Toys-.79-64Bit-Machine.ps1 script starting...written by DAM 2024-03-17, last modified Never
-VERBOSE: The terminal is running as an Administrator...Continuing script...
-Exception:
-Line |
-  15 |          Throw "$InstallerName is already installed..."
-     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     | PowerToysUserSetup-0.79.0-x64.exe is already installed...
-
-or
-
-VERBOSE: Power-Toys-.79-64Bit-Machine.ps1 script starting...written by DAM 2024-03-17, last modified Never
-VERBOSE: The terminal is running as an Administrator...Continuing script...
-VERBOSE: The PowerSHell version is grater than 3.0...Continuing script...
-VERBOSE: Downloading PowerToysUserSetup-0.79.0-x64.exe...
-VERBOSE: Installing PowerToysUserSetup-0.79.0-x64.exe
-VERBOSE: PowerToysUserSetup-0.79.0-x64.exe Installed!
-
-.LINK
-
-[Write-Verbose](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-verbose?view=powershell-7.3)
-
-[about_If](https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.4)
-
-[about_Functions](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions?view=powershell-7.3)
-
-[about_Try_Catch_Finally](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_try_catch_finally?view=powershell-7.3)
-
-[Approved Verbs for PowerShell Commands](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands?view=powershell-7.3)
-
-[about_Operators](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.3)
-
-[about_Throw](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_throw?view=powershell-7.3)
-
-[about_Do](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_do?view=powershell-7.3)
-
-[Start-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.4)
-
-[PowerToys Download Site/URLs](https://github.com/microsoft/PowerToys/releases/tag/v0.79.0)
-
-[PowerToys Installer Switches](https://learn.microsoft.com/en-us/windows/powertoys/install)
-
 #>
-
 #Script
 #Region Start-Script
+#Vars
+#TMP install folder location.
+$TMPInstallerFolderLocation = "C:"
+#TMP install folder.
+$TempInstallFolder = "TMP-Installer-99"
+#Program Path when its installed.
+$ProgramPath = "C:\Users\$env:UserName\AppData\Local\Programs\Cytracom Desktop\Cytracom Desktop.exe"
+#Download Link
+$URI = "https://cdn.cytracom.com/cdesktop/cdesktop-win.exe"
+#Full name of the installer.
+$InstallerName = "cdesktop-win.execdesktop-win.exe"
+#Out-File location.
+$OutFile = "$TMPInstallerFolderLocation\$TempInstallFolder\$InstallerName"
 #Letting the user know what is starting.
 function Start-ScriptBoilerplate {
     param (
@@ -85,18 +56,18 @@ function Test-TerminalElevation {
         Write-Verbose -Message "The terminal is running as an Administrator...Continuing script..." -Verbose
     }
 }
+#Creates the TMP folder if it does not already exsist.
+function New-TMPFolder {
+    #Creates the TMP folder if it does not already exsist.
+    if (Test-Path -Path "$TMPInstallerFolderLocation\$TempInstallFolder") {
+        Write-Verbose -Message "'$TMPInstallerFolderLocation\$TempInstallFolder' exsist...continuing script..." -Verbose
+    }else {
+        Write-Verbose -Message "'$TMPInstallerFolderLocation\$TempInstallFolder' does not exsist...creating temp folder..." -Verbose
+        New-Item -Path "$TMPInstallerFolderLocation\$TempInstallFolder" -ItemType "Directory"
+    }
+}
 #Checks to see if the software is already installed, if not, it installs it.
 function Install-Software {
-    param (
-        #Program Path when its installed.
-        $ProgramPath = 'C:\Program Files\PowerToys',
-        #Download Link
-        $URI = 'https://github.com/microsoft/PowerToys/releases/download/v0.79.0/PowerToysSetup-0.79.0-x64.exe',
-        #Full name of the installer.
-        $InstallerName = 'PowerToysUserSetup-0.79.0-x64.exe',
-        #Out-File location.
-        $OutFile = "C:\$InstallerName"
-    )
     #Checks to see if the program is already installed.
     $TestPath = Test-Path -Path "$ProgramPath"
     if ($TestPath -match 'True') {
@@ -121,21 +92,20 @@ function Install-Software {
         #Installs the Program.
         try {
             Write-Verbose -Message "Installing $InstallerName" -Verbose
-            Start-Process -FilePath "$OutFile" -ArgumentList "/quiet"
+            Start-Process -FilePath "$OutFile" -ArgumentList "/S"
             Start-Sleep -Seconds 10
             #Install check.
             try {
-                do { 
+                do {
                     $TestPath = Test-Path -Path "$ProgramPath"
-                    if ($TestPath -ne 'True') {
+                    if (-not $TestPath) {
                         Write-Verbose -Message "$InstallerName installer is running...Please wait" -Verbose
                         Start-Sleep -Seconds 8
                     }
-                } 
-                Until ($TestPath -match 'True')
-                Start-Sleep -Seconds 8
-                Write-Verbose -Message "$InstallerName Installed!" -Verbose
-                Remove-Item -Path "$OutFile"
+                } until ($TestPath)
+                    Start-Sleep -Seconds 8
+                    Write-Verbose -Message "$InstallerName Installed!" -Verbose
+                Remove-Item -Path "$OutFile" -Force
             }catch {
                 Write-Verbose -Message "Error[0]" -Verbose
             }
@@ -148,8 +118,10 @@ function Install-Software {
 Start-ScriptBoilerplate
 #Checks to see if the terminal is running as an administrator.
 Test-TerminalElevation
+#Creates the TMP folder if it does not already exsist.
+New-TMPFolder
 #Checks to see if the software is already installed, if not, it installs it.
 Install-Software
-
 #EndRegion
+
 
