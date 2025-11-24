@@ -1,10 +1,10 @@
 $RegValue = Get-ItemProperty -Path "HKLM:\SOFTWARE\DNSFilter\Agent"
 
-Write-verbose -Message "Grabbing the devices ProductGUID..." -Verbose
+Write-verbose -Message "Grabbing the devices ProductGUID...$RegValue" -Verbose
 
 $GUID = $RegValue.ProductGUID
 
-Write-verbose -Message "Running the uninstaller..." -Verbose
+Write-verbose -Message "Running the uninstaller...$GUID" -Verbose
 
 msiexec /X{$GUID} REGCLEAN=true
 
