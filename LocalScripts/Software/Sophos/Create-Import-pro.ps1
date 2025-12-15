@@ -1,6 +1,6 @@
 $BaseDirPath = "C:"
 $DirName = "\Program Files (x86)\Sophos\Connect\import"
-$FileName = "FST-SCONNECT.PRO"
+$FileName = "FileName-SCONNECT.PRO"
 #PS Array to add data/cmds to a file. Note the ' ' must be at the start and end of the code.
 # Note the display name and gateway should be the same IP of the FW the VPN user are accessing. user_portal_port may need changed.
     $data = @(
